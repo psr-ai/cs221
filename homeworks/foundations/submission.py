@@ -140,12 +140,10 @@ def computeLongestPalindromeLength(text):
                     possibilities.append(side + c + c + side[::-1])
                 else:
                     possibilities += sub_possibilities
+                break
             else:
                 possibilities.append(side + c + side[::-1])
-
         return possibilities
     palindromes = find_palindromes(text, '')
     return len(max(palindromes, key=len)) if len(palindromes) > 0 else 0
     # END_YOUR_CODE
-
-print(computeLongestPalindromeLength('d a b b d d e a c a b c a a d c b c e a e d b a e b a a e d e d c e b c e d e c d a b b a b a b d b b b b e d d a d a b e d c d e d b a b b b e e b d b e c b b c b c e b b e c a a a d d c a b e c e e a d d c b d a c c e e b c a e e b d d a d c d c a b a e e e b a e e a c a d d a c c b e c b c d b b e d c c a b b c b b a d b e e a b d b a e c c d e a a c c c d d e a c b e b a c c b b e c e c a e e e e e a c b c a b e b d c c e e c d a b e c c d a c c e a e a a c d b a e b c d c c c e b d b b d b b d a c e e a b b e e e b a e d d e d a e b d e a a a c b d d b d b c e e a c b a d d b d c c a a e e c e c a a b e d e e b b a d e c d a e e e e e a d b e e e e b d a e e b e c b d b a a b e e b d b e c e a e a e b a c d b d c b c b d a e c d d d b a d b b e d b b c c b a c e d e d b c a b c c d c'))
