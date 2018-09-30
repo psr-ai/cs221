@@ -146,15 +146,22 @@ Minimum cost to reach point $(i, j)$ is can be defined as \\
 c_{min}(i, j) = v(i, j) + \min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)
 \end{align*}
 where $\min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)$ is the minimum of the cost between reaching point $(i-1, j)$ and $(i, j-1)$. \\
-Let \lstinline{cost_matrix} be a matrix consisting of costs at all the points. Algorithm to compute this efficiently would be a recursive function \lstinline{min_cost}, defined as follows\\
-\begin{lstlisting}
-def min_cost(i, j):
-	if i == 0 and j == 0:
-		return cost_matrix[0][0]
-	else:
-		return cost_matrix[i][j] + min(min_cost(i-1, j), min_cost(i, j-1))
+Let \lstinline{cost_matrix} be a matrix consisting of costs at all the points. Algorithm to compute this efficiently is defined as follows\\
+\begin{lstlisting}[basicstyle=\small]
+def min_cost(i, j, cost_matrix):
+	total_cost_matrix = cost_matrix
+	
+	for m in range(1, i+1):
+		total_cost_matrix[m][0] = total_cost_matrix[m-1][0] + total_cost_matrix[m][0]
+	for n in range(1, j+1):
+		total_cost_matrix[0][j] = total_cost_matrix[0][n-1] + total_cost_matrix[0][n]
+		
+	for m in range(1, i+1):
+		for n in range(1, j+1):
+			total_cost_matrix[i][j] = min(total_cost_matrix[i-1][j], total_cost_matrix[i][j-1]) 
+							+ total_cost_matrix[i][j]
 \end{lstlisting}
-The runtime of the function is $O(n^2)$.\\
+Since there are two nested loops for each dimension, the runtime of the function is $O(n^2)$.\\
 \linebreak
 \textbf{Solution 2c.} Total number of ways to reach to the top can be calculated by counting the number of ways the person can select a step on moving forward towards his way to the top, given that he has to land on the final step. \\
 \linebreak
