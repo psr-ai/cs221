@@ -23,7 +23,7 @@ Differentiating $g(\theta)$, we get
 \begin{equation}
 \frac{dg(\theta)}{d\theta} = \sum_{i=1}^{n} w_i \\
 \end{equation}
-Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f''(\theta) > 0$, which shows that the graph of this quadratic function is concave up and minima exists at value of $\theta$ when $f'(\theta) = 0$.
+Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f''(\theta) > 0$, which proves that the graph of this quadratic function is convex and minima exists at value of $\theta$ when $f'(\theta) = 0$.
 \begin{equation*}\
 \begin{split}
 \frac{df(\theta)}{d\theta} & =  \sum_{i=1}^{n} w_i(\theta - x_i)\\
@@ -32,17 +32,15 @@ Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f'
 \end{split}
 \end{equation*}
 Therefore, the value of $\theta$ which minimizes $f(\theta)$ is $ \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}$.
-If some of the $w_i$'s are negative, then from equation (1), it's not necessary that $f''(\theta)$ is always positive.If $f''(\theta)<0$, the function may not have any defined minima, since it will be concave downwards. And if a point of inflection exists ($f''(\theta) = 0$), then again, there would be local minima and maxima but no defined global minima for the function. \\
+If some of the $w_i$'s are negative, then from equation (1), it's not necessary that $f''(\theta)$ is always positive.If $f''(\theta)<0$, the function will be a concave function and minima will not be defined. And if a point of inflection exists ($f''(\theta) = 0$), then the function would be a straight line and minima won't be defined. \\
 \linebreak
-\textbf{Solution 1b.} Let $n$ vectors out of $x_i, .... x_d$ be negative where $n <= d$. Let sum of negative vectors be $-\beta$ and sum of positive vectors be $\alpha$, where $\alpha$ and $\beta$ are both positive vectors.
+\textbf{Solution 1b.} Let $n$ vectors out of $x_i, .... x_d$ be negative where $n <= d$. Let sum of negative vectors be $-\beta$ and sum of positive vectors be $\alpha$, where $\alpha$ and $\beta$ are both positive.
 Evaluating $f(x)$,
-\begin{equation*}\
-\begin{split}
+\begin{align*}
 f(x) & = \sum_{i=1}^{d} max_{s\epsilon\{1,-1\}} sx_i \\
 & =  max_{s\epsilon\{1,-1\}} s(\alpha) + max_{s\epsilon\{1,-1\}} s(-\beta)\\
-& =  \alpha + \beta\\
-\end{split}
-\end{equation*}
+& =  \alpha + \beta && \text{$max_{s\epsilon\{1,-1\}}$ is 1 for $\alpha$ and -1 for $\beta$)}\\
+\end{align*}
 \linebreak
 Evaluating $g(x)$,
 \begin{equation*}\
@@ -95,29 +93,25 @@ p & = \frac{4}{7}
 In order to check if it's a maxima or a minima at $ p = \frac{4}{7}$, let's check the sign on substituting p in $L''(p)$ \\
 \begin{equation*}
 \begin{split}
-\frac{d \log L(p)}{d p} & = p^3 (1-p)^2 (1-7p)\\
-\frac{d^2 \log L(p)}{d p} & = - \frac{4}{p^2} + \frac{3}{(1-p)^2}\\
+\frac{d L(p)}{d p} & = 4x^3(1-x)^3 - 3x^4(1-x)^2 \\
+\frac{d^2 L(p)}{d p^2} & = (1-x)^2(12x^2 - 28x^3) - 2(1-x)(4x^3 - 7x^4) \\
 \end{split}
 \end{equation*}
-Substituting $p= \frac{4}{7}$ we get a negative number, therefore, the function has a maxima at this point.\\
-Intuitively, the maximum probability of an event occurring is equivalent to the number of times the desired result came up divided by the total number of events. \\
+Substituting $p= \frac{4}{7}$ we get an approximate value of $-0.238$, therefore, the function has a maxima at this point.\\
+Intuitively, the maximum probability would be when $p$ is equivalent to the number of times the desired result came up divided by the total number of events. \\
 \linebreak
 \textbf{Solution 1e.} \\
 \begin{align*}
 f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||_2^2 \\
-& = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2 w^2 + \lambda||w||_2^2 && \text{(...using distributive property)} \\ 
-& = ||w||_2^2 \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2 + \lambda||w||_2^2 && \text{(...using $v*v = |v|^2$)} \\
-& = ||w||_2^2 (\sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2 + \lambda)
+& = \sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i - b_j)^\top w)^2 + \lambda \sum_{k=1}^{d} w_k^2 && \text{(...using distributive property)} \\ 
+\text{Calculating $f'(w)$,} \\
+f'(w) & = 2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w) (a_i^\top - b_j^\top) + \lambda 2w \\
 \end{align*}
-Let $\alpha = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2$, therefore \\
-\begin{align*}
-f(w) & = ||w||_2^2 (\alpha + \lambda) \\
-& = (\sum_{k=1}^{d} w_k^2)(\alpha + \lambda)
-\end{align*}
+
 Thus, the gradient $\nabla f(w)$ can be expressed as
 \begin{align*}
 \nabla f(w) & = (\frac{\partial f(w)}{\partial w_1}, ... \frac{\partial f(w)}{\partial w_d})^\top \\
-& = (2w_1(\alpha + \lambda), ... 2w_d (\alpha + \lambda)) && \text{where } \alpha = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2
+& = (2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w_1) (a_i^\top - b_j^\top) + \lambda 2w_1, \dots 2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w_d) (a_i^\top - b_j^\top) + \lambda 2w_d) \\ \\
 \end{align*}
 \newpage
 
@@ -180,7 +174,9 @@ There can be two different cases for each step, either the step is selected on t
 &= 2 * 2 * 2 \dots 1 \\
 & = 2^{n-1}
 \end{align*}
-Therefore, total ways are $2^{n-1}$.
+Therefore, total ways are $2^{n-1}$.\\
+\linebreak
+\textbf{Solution 2d.} 
 
 
 \end{document}
