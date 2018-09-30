@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\title{Homework 1}
+\author{Prabhjot Singh Rai}
+\maketitle
+
+\section{Optimization and probability}
+
+\textbf{Solution 1a:} In order to check whether the minima exists for the function, $f(\theta)$, we calculate $f''(\theta)$.
+\begin{equation*}
+\begin{split}
+\frac{df(\theta)}{d\theta} & = \sum_{i=1}^{n} w_i(\theta - x_i)\\
+g(\theta)& = \sum_{i=1}^{n} w_i \theta - \sum_{i=1}^{n} w_i x_i
+\end{split}
+\end{equation*}
+Differentiating $g(\theta)$, we get
+\begin{equation}
+\frac{dg(\theta)}{d\theta} = \sum_{i=1}^{n} w_i \\
+\end{equation}
+Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f''(\theta) > 0$, which shows that the graph of this quadratic function is concave up and minima exists at value of $\theta$ when $f'(\theta) = 0$.
+\begin{equation*}\
+\begin{split}
+\frac{df(\theta)}{d\theta} & =  \sum_{i=1}^{n} w_i(\theta - x_i)\\
+0 & = \sum_{i=1}^{n} w_i \theta - \sum_{i=1}^{n} w_i x_i\\
+\theta & = \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}
+\end{split}
+\end{equation*}
+Therefore, the value of $\theta$ which minimizes $f(\theta)$ is $ \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}$.
+If some of the $w_i$'s are negative, then from equation (1), it's not necessary that $f''(\theta)$ is always positive.If $f''(\theta)<0$, the function may not have any defined minima, since it will be concave downwards. And if a point of inflection exists ($f''(\theta) = 0$), then again, there would be local minima and maxima but no defined global minima for the function.
+
+\end{document}
