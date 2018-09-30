@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  30 SEP 2018 14:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  30 SEP 2018 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -102,47 +102,91 @@ Overfull \hbox (2.43333pt too wide) detected at line 29
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--36
-\OT1/cmr/m/n/10.95 fined global min-ima for the func-tion.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--36
+Underfull \hbox (badness 10000) in paragraph at lines 29--35
 
  []
 
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (2.43333pt too wide) detected at line 42
+Overfull \hbox (2.43333pt too wide) detected at line 41
  []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--46
+Underfull \hbox (badness 10000) in paragraph at lines 41--44
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--46
-\OT1/cmr/m/n/10.95 Evaluating $\OML/cmm/m/it/10.95 g\OT1/cmr/m/n/10.95 (\OML/cm
-m/m/it/10.95 x\OT1/cmr/m/n/10.95 )$,
+Overfull \hbox (2.43333pt too wide) detected at line 55
+ []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--46
+Overfull \hbox (2.43333pt too wide) detected at line 65
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--74
 
  []
 
-[2] (./assigments.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--74
+
+ []
+
+[2]
+Overfull \hbox (2.43333pt too wide) detected at line 80
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--83
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--102
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 107--109
+
+ []
+
+[4] (./assigments.aux) ) 
 Here is how much of TeX's memory you used:
- 847 strings out of 492649
- 9569 string characters out of 6129622
- 74304 words of memory out of 5000000
- 4786 multiletter control sequences out of 15000+600000
- 9402 words of font info for 34 fonts, out of 8000000 for 9000
+ 848 strings out of 492649
+ 9583 string characters out of 6129622
+ 78304 words of memory out of 5000000
+ 4787 multiletter control sequences out of 15000+600000
+ 9629 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,16n,21p,391b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,23n,21p,394b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
@@ -158,10 +202,10 @@ cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 r8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
 pfb>
-Output written on assigments.pdf (2 pages, 132940 bytes).
+Output written on assigments.pdf (4 pages, 143779 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 73 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
