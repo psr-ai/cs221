@@ -1,5 +1,8 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath}
+\usepackage{listings}
+
+\lstset{language=python}
 
 \begin{document}
 \title{Foundations}
@@ -115,4 +118,52 @@ Thus, the gradient $\nabla f(w)$ can be expressed as
 \nabla f(w) & = (\frac{\partial f(w)}{\partial w_1}, ... \frac{\partial f(w)}{\partial w_d})^\top \\
 & = (2w_1(\alpha + \lambda), ... 2w_d (\alpha + \lambda)) && \text{where } \alpha = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top - b_j^\top)^2
 \end{align*}
+\newpage
+
+\section{Complexity}
+
+\textbf{Solution 2a.} This problem can be thought of creating a rectangle inside a rectangle of width $m$ pixels and height $n$ pixels ($m = n$ for this problem, but we will use it later). Therefore, the number of points which can be selected to create a rectangle are $m+1$ and $n+1$. \\
+\linebreak
+Total number of points  = (Number of ways first point is selected) (Number of ways next point is selected on the remaining points on width) (Number of ways next point is selected on remaining points on height) / (Number of points of rectangle, since for each point, the remaining points are selected again)
+\begin{align*}
+\text{No of ways} &= \frac{{(m+1)(n+1)\choose 1} {m\choose 1}{n\choose 1}}{4} \\
+&= \frac{m(m+1)n(n+1)}{4}
+\end{align*}
+For the given problem, $m = n$. Therefore
+\begin{align*}
+\text{No of ways 1 rectange can be created} &= \frac{n^2(n+1)^2}{4}
+\end{align*}
+This way, the number of possible faces are \\
+\begin{align*}
+\text{No of ways 6 rectange can be created} &= (\frac{n^2(n+1)^2}{4})^6
+\end{align*}
+Therefore, asymptotic complexity for this function is $O(n^{24})$. \\
+\linebreak
+\textbf{Solution 2b.} Let $v(i, j)$ represent the cost at a particular point. Cost of touching the point $(i, j)$ can be defined as the sum of cost at $(i, j)$ and (cost of touching point at $(i-1, j)$ or cost of touching point at $(i, j-1)$). $$c(i, j) = v(i, j) + c(i-1, j) \textbf{ or } c(i, j) = v(i,j) + c(i, j-1)$$
+Minimum cost to reach point $(i, j)$ is can be defined as \\
+\begin{align*}
+c_{min}(i, j) = v(i, j) + \min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)
+\end{align*}
+where $\min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)$ is the minimum of the cost between reaching point $(i-1, j)$ and $(i, j-1)$. \\
+Let cost matrix be a matrix consisting of costs at all the points. Algorithm to compute this efficiently would be a recursive function min cost, defined as follows\\
+\begin{lstlisting}
+def min_cost(i, j):
+	if i = 0 and j = 0:
+		return cost_matrix[0][0]
+	else:
+		return cost_matrix[i][j] 
+				  + min(min_cost(i-1, j), min_cost(i, j-1))
+\end{lstlisting}
+The runtime of the function is $O(n^2)$.\\
+\linebreak
+\textbf{Solution 2c.} Total number of ways to reach to the top can be calculated by counting the number of ways the person can select a step on moving forward towards his way to the top, given that he has to land on the final step. \\
+\linebreak
+There can be two different cases for each step, either the step is selected on the way to the top or is skipped. \\
+\begin{align*}
+\text{Total ways} & = (\text{1st Selected or Skipped}) (\text{2nd Selected or Skipped}) \dots (\text{Last Selected}) \\ 
+&= 2 * 2 * 2 \dots 1 \\
+& = 2^{n-1}
+\end{align*}
+Therefore, total ways are $2^{n-1}$.
+
 \end{document}
