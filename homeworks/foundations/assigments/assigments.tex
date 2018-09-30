@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{listings}
 
@@ -145,14 +146,13 @@ Minimum cost to reach point $(i, j)$ is can be defined as \\
 c_{min}(i, j) = v(i, j) + \min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)
 \end{align*}
 where $\min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)$ is the minimum of the cost between reaching point $(i-1, j)$ and $(i, j-1)$. \\
-Let cost matrix be a matrix consisting of costs at all the points. Algorithm to compute this efficiently would be a recursive function min cost, defined as follows\\
+Let \lstinline{cost_matrix} be a matrix consisting of costs at all the points. Algorithm to compute this efficiently would be a recursive function \lstinline{min_cost}, defined as follows\\
 \begin{lstlisting}
 def min_cost(i, j):
-	if i = 0 and j = 0:
+	if i == 0 and j == 0:
 		return cost_matrix[0][0]
 	else:
-		return cost_matrix[i][j] 
-				  + min(min_cost(i-1, j), min_cost(i, j-1))
+		return cost_matrix[i][j] + min(min_cost(i-1, j), min_cost(i, j-1))
 \end{lstlisting}
 The runtime of the function is $O(n^2)$.\\
 \linebreak
@@ -165,5 +165,6 @@ There can be two different cases for each step, either the step is selected on t
 & = 2^{n-1}
 \end{align*}
 Therefore, total ways are $2^{n-1}$.
+
 
 \end{document}
