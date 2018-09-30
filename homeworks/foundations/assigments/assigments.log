@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  30 SEP 2018 13:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  30 SEP 2018 14:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -101,9 +101,39 @@ Overfull \hbox (2.43333pt too wide) detected at line 29
  []
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--36
+\OT1/cmr/m/n/10.95 fined global min-ima for the func-tion.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--36
+
+ []
+
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (2.43333pt too wide) detected at line 42
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--46
+\OT1/cmr/m/n/10.95 Evaluating $\OML/cmm/m/it/10.95 g\OT1/cmr/m/n/10.95 (\OML/cm
+m/m/it/10.95 x\OT1/cmr/m/n/10.95 )$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--46
+
+ []
+
 [2] (./assigments.aux) ) 
 Here is how much of TeX's memory you used:
  847 strings out of 492649
@@ -128,7 +158,7 @@ cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 r8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
 pfb>
-Output written on assigments.pdf (2 pages, 128692 bytes).
+Output written on assigments.pdf (2 pages, 132940 bytes).
 PDF statistics:
  67 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream

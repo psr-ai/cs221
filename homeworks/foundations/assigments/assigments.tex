@@ -29,5 +29,25 @@ Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f'
 \end{equation*}
 Therefore, the value of $\theta$ which minimizes $f(\theta)$ is $ \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}$.
 If some of the $w_i$'s are negative, then from equation (1), it's not necessary that $f''(\theta)$ is always positive.If $f''(\theta)<0$, the function may not have any defined minima, since it will be concave downwards. And if a point of inflection exists ($f''(\theta) = 0$), then again, there would be local minima and maxima but no defined global minima for the function.
+\linebreak
+\linebreak
+\textbf{Solution 1b.} Let $n$ vectors out of $x_i, .... x_d$ be negative where $n <= d$. Let sum of negative vectors be $-\beta$ and sum of positive vectors be $\alpha$, where $\alpha$ and $\beta$ are both positive numbers.
+Evaluating $f(x)$,
+\begin{equation*}\
+\begin{split}
+f(x) & = \sum_{i=1}^{d} max_{s\epsilon\{1,-1\}} sx_i \\
+& =  max_{s\epsilon\{1,-1\}} s(\alpha) + max_{s\epsilon\{1,-1\}} s(-\beta)\\
+& =  \alpha + \beta\\
+\end{split}
+\end{equation*}
+\linebreak
+Evaluating $g(x)$,
+\begin{equation*}\
+\begin{split}
+f(x) & = \sum_{i=1}^{d} max_{s\epsilon\{1,-1\}} sx_i \\
+& =  max_{s\epsilon\{1,-1\}} s(\alpha) + max_{s\epsilon\{1,-1\}} s(-\beta)\\
+& =  \alpha + \beta\\
+\end{split}
+\end{equation*}
 
 \end{document}
