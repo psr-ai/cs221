@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  1 OCT 2018 05:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  2 OCT 2018 01:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -191,91 +191,101 @@ LaTeX Font Info:    ... okay on input line 8.
 
 \c@lstlisting=\count111
 
-Overfull \hbox (2.43333pt too wide) detected at line 33
+! LaTeX Error: \begin{document} ended by \end{center}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.18 \end{center}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.18 \end{center}
+                 
+Things are pretty mixed up, but I think the worst is over.
+
+
+Overfull \hbox (2.43333pt too wide) detected at line 40
  []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--39
+Underfull \hbox (badness 10000) in paragraph at lines 40--46
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 43--46
-
- []
-
-
-Overfull \hbox (2.43333pt too wide) detected at line 57
- []
  []
 
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (2.43333pt too wide) detected at line 67
- []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--76
+Underfull \hbox (badness 10000) in paragraph at lines 50--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--76
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--76
-
- []
-
-
-Overfull \hbox (2.43333pt too wide) detected at line 82
+Overfull \hbox (2.43333pt too wide) detected at line 64
  []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--85
+Overfull \hbox (2.43333pt too wide) detected at line 74
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--85
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--94
+Underfull \hbox (badness 10000) in paragraph at lines 74--83
+
+ []
+
+
+Overfull \hbox (2.43333pt too wide) detected at line 89
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--92
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 99--104
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--111
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 118--121
+Underfull \hbox (badness 10000) in paragraph at lines 125--128
 
  []
 
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 124.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 128--130
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 132--135
-
- []
+(amsmath)                 on input line 131.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 135--137
@@ -287,41 +297,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--142
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--149
+
+ []
+
 [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 160.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 167.
 
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 160.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--170
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--170
+Underfull \hbox (badness 10000) in paragraph at lines 172--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--170
+Underfull \hbox (badness 10000) in paragraph at lines 172--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--178
+Underfull \hbox (badness 10000) in paragraph at lines 172--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--178
+Underfull \hbox (badness 10000) in paragraph at lines 181--185
 
  []
 
 
-Overfull \hbox (51.14627pt too wide) detected at line 184
+Underfull \hbox (badness 10000) in paragraph at lines 181--185
+
+ []
+
+
+Overfull \hbox (51.14627pt too wide) detected at line 191
 []
  []
 
@@ -350,7 +370,7 @@ m/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
 10.pfb>
-Output written on assigments.pdf (6 pages, 169936 bytes).
+Output written on assigments.pdf (6 pages, 170182 bytes).
 PDF statistics:
  83 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream

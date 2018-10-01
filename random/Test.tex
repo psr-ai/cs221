@@ -1,19 +1,28 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage[left=2cm, right=2cm, top=2cm]{geometry}
-\usepackage{amsmath}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
 \usepackage{listings}
-
 \lstset{language=python}
 
 \begin{document}
-\title{Foundations}
-\author{Prabhjot Singh Rai}
-\maketitle
+
+\begin{center}
+{\Large CS221 Fall 2018 Homework Foundations}
+
+\begin{tabular}{rl}
+SUNet ID: & prabhjot \\
+Name: & Prabhjot Singh Rai \\
+Collaborators: & Amey Naik, Abhishek Bharani
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
 
 
-\section{Optimization and probability}
-
-\textbf{Solution 1a:} In order to check whether the minima exists for the function, $f(\theta)$, we calculate $f''(\theta)$.
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item In order to check whether the minima exists for the function, $f(\theta)$, we calculate $f''(\theta)$.
 \begin{equation*}
 \begin{split}
 \frac{df(\theta)}{d\theta} & = \sum_{i=1}^{n} w_i(\theta - x_i)\\
@@ -35,7 +44,7 @@ Since it is given that $w_i, ...., w_n$ are positive real numbers, therefore $f'
 Therefore, the value of $\theta$ which minimizes $f(\theta)$ is $ \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}$.
 If some of the $w_i$'s are negative, then from equation (1), it's not necessary that $f''(\theta)$ is always positive.If $f''(\theta)<0$, the function will be a concave function and minima will not be defined. And if a point of inflection exists ($f''(\theta) = 0$), then the function would be a straight line and minima won't be defined. \\
 \linebreak
-\textbf{Solution 1b.} Let $n$ vectors out of $x_i, .... x_d$ be negative where $n <= d$. Let sum of negative vectors be $-\beta$ and sum of positive vectors be $\alpha$, where $\alpha$ and $\beta$ are both positive.
+\item Let $n$ vectors out of $x_i, .... x_d$ be negative where $n <= d$. Let sum of negative vectors be $-\beta$ and sum of positive vectors be $\alpha$, where $\alpha$ and $\beta$ are both positive.
 Evaluating $f(x)$,
 \begin{align*}
 f(x) & = \sum_{i=1}^{d} max_{s\epsilon\{1,-1\}} sx_i \\
@@ -68,7 +77,7 @@ f(x) - g(x) & = \begin{cases}
 \end{equation*}
 Therefore, if $\alpha$ and $\beta$ are non-zero, $f(x) > g(x)$, else $f(x) = g(x)$. Hence, for all \textbf{x}, $f(x) \geq g(x)$. \\
 \linebreak
-\textbf{Solution 1c.} Let $E(a, b)$ donate the expected number of points when we stop. Only cases to consider would be 1,2 and 6. Let's divide the sequences into 3 cases. \\
+\item Let $E(a, b)$ donate the expected number of points when we stop. Only cases to consider would be 1,2 and 6. Let's divide the sequences into 3 cases. \\
 One third times we get a 1 first, and then we stop. \\
 One third times we get a 2 first, and then we repeat. \\
 One third times we get a 6 first, and then we repeat. \\
@@ -82,7 +91,7 @@ E(x) & = b-a
 \end{split}
 \end{equation*}
 \linebreak
-\textbf{Solution 1d.} Since we know that value of p for which $log L(p) = 0$ must also satisfy $L(p) = 0$, checking the point where the slope of the function is zero  \\
+\item Since we know that value of p for which $log L(p) = 0$ must also satisfy $L(p) = 0$, checking the point where the slope of the function is zero  \\
 \begin{equation*}
 \begin{split}
 \log L(p) & = 4\log p + 3\log (1-p)\\
@@ -101,7 +110,7 @@ In order to check if it's a maxima or a minima at $ p = \frac{4}{7}$, let's chec
 Substituting $p= \frac{4}{7}$ we get an approximate value of $-0.238$, therefore, the function has a maxima at this point.\\
 Intuitively, the maximum probability would be when $p$ is equivalent to the number of times the desired result came up divided by the total number of events. \\
 \linebreak
-\textbf{Solution 1e.} Let's say that the $a_i = (a_{i1}, a_{i2}, \dots a_{id})^\top$ and $b_j = (b_{j1}, b_{j2}, \dots b_{jd})^\top$, then
+\item Let's say that the $a_i = (a_{i1}, a_{i2}, \dots a_{id})^\top$ and $b_j = (b_{j1}, b_{j2}, \dots b_{jd})^\top$, then
 \begin{align*}
 f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||_2^2 \\
 & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_{i1}w_1 + a_{i2}w_2 \dots a_{id}w_{id} - (b_{j1}w_1 + b_{j2}w_2 \dots b_{jd}w_{jd}))^2 + \lambda||w||_2^2
@@ -112,11 +121,11 @@ Thus, the gradient $\nabla f(w)$ can be expressed as
 \nabla f(w) & = (\frac{\partial f(w)}{\partial w_1}, ... \frac{\partial f(w)}{\partial w_d})^\top \\
 & = (2\sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w) (a_{i1} - b_{j1}) + 2\lambda w_1, \dots 2\sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w) (a_{id} - b_{jd}) + 2\lambda w_d)^\top \\
 \end{align*}
-\newpage
+\end{enumerate}
 
-\section{Complexity}
-
-\textbf{Solution 2a.} This problem can be thought of creating a rectangle inside a rectangle of width $m$ pixels and height $n$ pixels ($m = n$ for this problem, but we will use it later). Therefore, the number of points which can be selected to create a rectangle are $m+1$ and $n+1$. \\
+\section*{Problem 2}
+\begin{enumerate}[label=(\alph*)]
+\item This problem can be thought of creating a rectangle inside a rectangle of width $m$ pixels and height $n$ pixels ($m = n$ for this problem, but we will use it later). Therefore, the number of points which can be selected to create a rectangle are $m+1$ and $n+1$. \\
 \linebreak
 Total number of points  = (Number of ways first point is selected) (Number of ways next point is selected on the remaining points on width) (Number of ways next point is selected on remaining points on height) / (Number of points of rectangle, since for each point, the remaining points are selected again)
 \begin{align*}
@@ -133,7 +142,7 @@ This way, the number of possible faces are \\
 \end{align*}
 Therefore, asymptotic complexity for this function is $O(n^{24})$. \\
 \linebreak
-\textbf{Solution 2b.} Let $v(i, j)$ represent the cost at a particular point. Cost of touching the point $(i, j)$ can be defined as the sum of cost at $(i, j)$ and (cost of touching point at $(i-1, j)$ or cost of touching point at $(i, j-1)$). $$c(i, j) = v(i, j) + c(i-1, j) \textbf{ or } c(i, j) = v(i,j) + c(i, j-1)$$
+\item Let $v(i, j)$ represent the cost at a particular point. Cost of touching the point $(i, j)$ can be defined as the sum of cost at $(i, j)$ and (cost of touching point at $(i-1, j)$ or cost of touching point at $(i, j-1)$). $$c(i, j) = v(i, j) + c(i-1, j) \textbf{ or } c(i, j) = v(i,j) + c(i, j-1)$$
 Minimum cost to reach point $(i, j)$ is can be defined as \\
 \begin{align*}
 c_{min}(i, j) = v(i, j) + \min_{(i, j) \epsilon \{(i-1, j), (i, j-1)\}}c_{min}(i, j)
@@ -165,7 +174,7 @@ def min_cost(i, j, cost_matrix):
 \end{lstlisting}
 Since there are two nested loops for each dimension, the runtime of the function is $O(n^2)$.\\
 \linebreak
-\textbf{Solution 2c.} Total number of ways to reach to the top can be calculated by counting the number of ways the person can select a step on moving forward towards his way to the top, given that he has to land on the final step. \\
+\item Total number of ways to reach to the top can be calculated by counting the number of ways the person can select a step on moving forward towards his way to the top, given that he has to land on the final step. \\
 \linebreak
 There can be two different cases for each step, either the step is selected on the way to the top or is skipped. \\
 \begin{align*}
@@ -175,7 +184,7 @@ There can be two different cases for each step, either the step is selected on t
 \end{align*}
 Therefore, total ways are $2^{n-1}$.\\
 \linebreak
-\textbf{Solution 2d.} For the strategy, we would want to calculate constant values of matrices first, so that those can be easily replaced for any given vector. Simplifying the equation, \\
+\item For the strategy, we would want to calculate constant values of matrices first, so that those can be easily replaced for any given vector. Simplifying the equation, \\
 \begin{align*}
 f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||_2^2 \\
 & = \sum_i^n \sum_j^n (a_i^\top w - b_j^\top w) (a_i^\top w - b_j^\top w) + \lambda||w||_2^2 \\
@@ -186,5 +195,6 @@ f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||
 For the above equation, $a_i a_i^\top$ is a $d \times d$ matrix, and we repeat it over n terms and therefore it yields a complexity of $O(nd^2)$. \\
 Similarly, $b_j b_j^\top$ yields $d \times d$ and over n terms is $O(nd^2)$. Since both $a$ and $b$ are $d \times 1$ vectors, $a_i b_j^\top $ yields $d \times d$ again along with $b_j a_i^\top$ with complexity of $O(nd^2)$, since both repeat n times.  \\
 Therefore, now we have the constants calculated with $O(nd^2)$ and for calculating complexity for any vector $w$, we can compute it by multiplying it's transpose, a $1 times d$ vector, with constant matrix calculated earlier($d$ by $d$) which is further multiplied by the vector $w$ itself. Therefore, complexity to calculate for a given vector then will be $O(d^2)$.
+\end{enumerate}
 
 \end{document}
