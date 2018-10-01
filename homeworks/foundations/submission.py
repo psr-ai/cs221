@@ -129,21 +129,21 @@ def computeLongestPalindromeLength(text):
     You should first define a recurrence before you start coding.
     """
     # BEGIN_YOUR_CODE (our solution is 19 lines of code, but don't worry if you deviate from this)
-    def last_index(string, character): return len(string) - 1 - string[::-1].index(character)
+    cache = {}
 
-    def find_palindromes(string, side):
-        possibilities = []
-        for c in string:
-            if string.index(c) is not last_index(string, c):
-                sub_possibilities = find_palindromes(string[string.index(c) + 1: last_index(string, c)], side + c)
-                if len(sub_possibilities) == 0:
-                    possibilities.append(side + c + c + side[::-1])
-                else:
-                    possibilities += sub_possibilities
-                break
+    def longest_palindrome_length(input_string):
+        if input_string in cache:
+            return cache[input_string]
+        if len(input_string) == 0:
+            longest_length = 0
+        elif len(input_string) == 1:
+            longest_length = 1
+        else:
+            if input_string[0] is input_string[-1]:
+                longest_length = 2 + longest_palindrome_length(input_string[1:-1])
             else:
-                possibilities.append(side + c + side[::-1])
-        return possibilities
-    palindromes = find_palindromes(text, '')
-    return len(max(palindromes, key=len)) if len(palindromes) > 0 else 0
+                longest_length = max(longest_palindrome_length(input_string[1:]), longest_palindrome_length(input_string[:-1]))
+        cache[input_string] = longest_length
+        return longest_length
+    return longest_palindrome_length(text)
     # END_YOUR_CODE
