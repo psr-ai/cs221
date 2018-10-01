@@ -100,18 +100,16 @@ In order to check if it's a maxima or a minima at $ p = \frac{4}{7}$, let's chec
 Substituting $p= \frac{4}{7}$ we get an approximate value of $-0.238$, therefore, the function has a maxima at this point.\\
 Intuitively, the maximum probability would be when $p$ is equivalent to the number of times the desired result came up divided by the total number of events. \\
 \linebreak
-\textbf{Solution 1e.} \\
+\textbf{Solution 1e.} Let's say that the $a_i = (a_{i1}, a_{i2}, \dots a_{id})^\top$ and $b_j = (b_{j1}, b_{j2}, \dots b_{jd})^\top$, then
 \begin{align*}
 f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||_2^2 \\
-& = \sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i - b_j)^\top w)^2 + \lambda \sum_{k=1}^{d} w_k^2 && \text{(...using distributive property)} \\ 
-\text{Calculating $f'(w)$,} \\
-f'(w) & = 2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w) (a_i^\top - b_j^\top) + \lambda 2w \\
+& = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_{i1}w_1 + a_{i2}w_2 \dots a_{id}w_{id} - (b_{j1}w_1 + b_{j2}w_2 \dots b_{jd}w_{jd}))^2 + \lambda||w||_2^2
 \end{align*}
 
 Thus, the gradient $\nabla f(w)$ can be expressed as
 \begin{align*}
 \nabla f(w) & = (\frac{\partial f(w)}{\partial w_1}, ... \frac{\partial f(w)}{\partial w_d})^\top \\
-& = (2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w_1) (a_i^\top - b_j^\top) + \lambda 2w_1, \dots 2\sum_{i=1}^{n}\sum_{j=1}^{n} ((a_i^\top - b_j^\top)w_d) (a_i^\top - b_j^\top) + \lambda 2w_d) \\ \\
+& = (2\sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w) (a_{i1} - b_{j1}) + 2\lambda w_1, \dots 2\sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w) (a_{id} - b_{jd}) + 2\lambda w_d)^\top \\
 \end{align*}
 \newpage
 
@@ -176,7 +174,16 @@ There can be two different cases for each step, either the step is selected on t
 \end{align*}
 Therefore, total ways are $2^{n-1}$.\\
 \linebreak
-\textbf{Solution 2d.} 
-
+\textbf{Solution 2d.} For the strategy, we would want to calculate constant values of matrices first, so that those can be easily replaced for any given vector. Simplifying the equation, \\
+\begin{align*}
+f(w) & = \sum_{i=1}^{n}\sum_{j=1}^{n} (a_i^\top w - b_j^\top w)^2 + \lambda||w||_2^2 \\
+& = \sum_i^n \sum_j^n (a_i^\top w - b_j^\top w) (a_i^\top w - b_j^\top w) + \lambda||w||_2^2 \\
+& = \sum_i^n \sum_j^n (a_i^\top w - b_j^\top w)^\top (a_i^\top w - b_j^\top w) + \lambda||w||_2^2 && \text{...since for a scaler, $A = A^\top$} \\
+& = \sum_i^n \sum_j^n ( w^\top a_i - w^\top b_j ) (a_i^\top w - b_j^\top w) + \lambda||w||_2^2 \\
+& = \sum_i^n w^\top a_i a_i^\top w - \sum_i^n \sum_j^n w^\top a_i b_j^\top w - \sum_i^n \sum_j^n w^\top b_j a_i^\top w + \sum_j^n w^\top b_j b_j^\top w + \lambda||w||_2^2 \\
+\end{align*} 
+For the above equation, $a_i a_i^\top$ is a $d \times d$ matrix, and we repeat it over n terms and therefore it yields a complexity of $O(nd^2)$. \\
+Similarly, $b_j b_j^\top$ yields $d \times d$ and over n terms is $O(nd^2)$. Since both $a$ and $b$ are $d \times 1$ vectors, $a_i b_j^\top $ yields $d \times d$ again along with $b_j a_i^\top$ with complexity of $O(nd^2)$, since both repeat n times.  \\
+Therefore, now we have the constants calculated with $O(nd^2)$ and for calculating complexity for any vector $w$, we can compute it by multiplying it's transpose, a $1 times d$ vector, with constant matrix calculated earlier($d$ by $d$) which is further multiplied by the vector $w$ itself. Therefore, complexity to calculate for a given vector then will be $O(d^2)$.
 
 \end{document}
