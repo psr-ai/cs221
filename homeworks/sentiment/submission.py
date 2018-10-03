@@ -22,7 +22,10 @@ def extractWordFeatures(x):
     Example: "I am what I am" --> {'I': 2, 'am': 2, 'what': 1}
     """
     # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    output = {}
+    for word in x.split():
+        output[word] = output[word] + 1 if word in output else 1
+    return output
     # END_YOUR_CODE
 
 ############################################################
@@ -43,7 +46,16 @@ def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
     '''
     weights = {}  # feature => weight
     # BEGIN_YOUR_CODE (our solution is 12 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+
+    def scaler_product(d, x): return {k: v * x for k, v in d.items()}
+
+    def gradient_hinge_loss(phi_x, y, w): return scaler_product(phi_x, -y) if dotProduct(w, phi_x)*y < 1 else {}
+
+    for iteration in range(numIters):
+        for x, y in trainExamples:
+            phi_x = featureExtractor(x)
+            increment(weights, -eta, gradient_hinge_loss(phi_x, y, weights))
+
     # END_YOUR_CODE
     return weights
 
@@ -100,3 +112,10 @@ def kmeans(examples, K, maxIters):
     # BEGIN_YOUR_CODE (our solution is 32 lines of code, but don't worry if you deviate from this)
     raise Exception("Not implemented yet")
     # END_YOUR_CODE
+
+trainExamples = (("hello world", 1), ("goodnight moon", -1))
+testExamples = (("hello", 1), ("moon", -1))
+featureExtractor = extractWordFeatures
+numIters = 20
+eta = 0.01
+learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)

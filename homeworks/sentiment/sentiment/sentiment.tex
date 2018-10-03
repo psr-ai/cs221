@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+
+\begin{document}
+
+\begin{center}
+{\Large CS221 Fall 2015 Homework Sentiment]}
+
+\begin{tabular}{rl}
+SUNet ID: & prabhjot \\
+Name: & Prabhjot Singh Rai
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+  \item Mapping reviews into feature vectors as follows,
+\begin{align*}
+\phi_{x1} & = \{ pretty: 1, bad: 1 \}, y_1 = -1 \\
+\phi_{x2} & = \{ good: 1, plot: 1\}, y_2 = +1 \\
+\phi_{x3} & = \{ not:1, good: 1\}, y_3 = -1 \\
+\phi_{x4} & = \{ pretty: 1, scenery: 1 \}, y_4 = +1
+\end{align*}
+Recalling from the graph, gradient of hinge loss, for margin less than one, will be $-\phi_{(x)}y$ and $0$ for margin greater than one.
+\begin{align*}
+\nabla_w Loss_{hinge}(x, y, w) = \begin{cases}
+-\phi_{(x)}y & \text{when$(w.\phi)y <$ 1} \\
+0 & \text{when$(w.\phi)y >$ 1}
+\end{cases}
+\end{align*}
+Stochastic gradient descent is defined as
+$$ w \leftarrow w - \eta \nabla_w Loss_{hinge}(x, y, w) $$
+Initialising \textbf{w} = $[0, \dots 0]$, or \textbf{w} = $\{ pretty: 0, bad: 0 \dots scenery: 0\}$, and iterating over each feature vector to update w \\
+First iteration, $w.\phi_{x1}y = 0, \nabla Loss = -\phi_{(x)}y$
+\begin{align*}
+w &= w - \eta (\{pretty: -1, bad: -1\}) \\
+w &= \{ pretty: 0, bad: 0 \dots scenery: 0\} - \{pretty: -0.5, bad: -0.5\} \\
+w &= \{ pretty: 0.5, bad: 0.5 \}
+\end{align*}
+Second iteration, $w.\phi_{x2}y = 0, \nabla Loss = -\phi_{(x)}y$
+\begin{align*}
+w = w - 
+\end{align*} 
+  \item (your solution)
+\end{enumerate}
+
+\section*{Problem 2}
+
+\begin{enumerate}[label=(\alph*)]
+  \item (your solution)
+  \item (your solution)
+\end{enumerate}
+
+\end{document}
