@@ -51,7 +51,7 @@ def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
 
     def gradient_hinge_loss(phi_x, y, w): return scaler_product(phi_x, -y) if dotProduct(w, phi_x)*y < 1 else {}
 
-    for iteration in range(numIters):
+    for _ in range(numIters):
         for x, y in trainExamples:
             phi_x = featureExtractor(x)
             increment(weights, -eta, gradient_hinge_loss(phi_x, y, weights))
@@ -74,7 +74,8 @@ def generateDataset(numExamples, weights):
     # y should be 1 or -1 as classified by the weight vector.
     def generateExample():
         # BEGIN_YOUR_CODE (our solution is 2 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        phi = {k: random.randint(1, 10) for k, v in weights.iteritems() if 1 == random.randint(0, 1)}
+        y = 1 if dotProduct(phi, weights) >= 0 else -1
         # END_YOUR_CODE
         return (phi, y)
     return [generateExample() for _ in range(numExamples)]
@@ -113,9 +114,5 @@ def kmeans(examples, K, maxIters):
     raise Exception("Not implemented yet")
     # END_YOUR_CODE
 
-trainExamples = (("hello world", 1), ("goodnight moon", -1))
-testExamples = (("hello", 1), ("moon", -1))
-featureExtractor = extractWordFeatures
-numIters = 20
-eta = 0.01
-learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
+weights = {"hello":1, "world":1}
+print(generateDataset(5, weights))
