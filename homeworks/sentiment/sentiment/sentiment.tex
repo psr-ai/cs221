@@ -324,11 +324,28 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
 	Therefore, $\phi_{x4}$ gets assigned to $\mu_2$.
 	
 	$\phi_{x1}$ and $\phi_{x2}$ are assigned to $\mu_1$ and $\phi_{x3}$ and $\phi_{x4}$ are assigned to $\mu_2$, which is same as previous iteration. Hence $[z_1, z_2, z_3, z_4] = [1,1,2,2] $\\
-	
-	
-	
-	
 	\end{enumerate}
+	\item Let the points be $x_1, x_2 ... x_n$. As given, S is the set of tuples. Let's define them as $S \epsilon \{(x_{t_1}, x_{t_2}), (x_{t_3}, x_{t_4})...(x_{t_{2d-1}}, x_{t_{2d}})\}$, where d is the number of relations described in S, $x_{t_1}, x_{t_2}, ... x_{t_{2d}} \epsilon \{x_1, x_2 ... x_n\}$. \\ \\
+	As the first step, we can group the terms which should belong to same cluster together. Let $K'$ be the number of such clusters. Let's call it $S'$ and, $$S' = \{(x_{11}, x_{12}, x_{13} ... x_{1l_1}), (x_{21}, x_{22}, x_{23} ... x_{2l_2}), ... (x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})\}$$
+	where $l_1, l_2, ... l_{k'}$ are the length of the clusters 1 to $K'$. Also, as per the question, each element in $(x_{11}, x_{12}, x_{13} ... x_{1l_1})$ to $(x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})$ is unique within their own group and also belongs to only one cluster at a time. \\ \\
+	We can consider the centroid for each group of vectors to proceed for the clustering with unpaired/other paired group of vectors. Let $\{ \mu_{l1}^{k'}, \mu_{l2}^{k'}, ... \mu_{l_{K'}}^{k'} \}$ be the centroid of each cluster. \\
+	Therefore, the modified k-means algorithm that performs alternating minimization on the reconstruction loss:
+	\begin{align*}
+	\sum_{i=1}^n \mu_z
+	\end{align*}
+	 $\phi_{x_{i'}}$, where $x_{i'} \epsilon \{\mu_{l1}^{k'}, \mu_{l2}^{k'}, ... \mu_{l_{K'}}^{k'}\}$ or $x_{i'} \epsilon \{x_1, x_2, ... x_n\}$ where $x_n$ not in $\{x_{t_1}, x_{t_2}, ... x_{t_{2d}}\}$.
+	 
+	 \item The advantage of running K-means multiple times on the same dataset with the same K, but different random initializations is that K-means converges to local minima whereas we might miss the global minima. Random initializations help us decreasing probability of missing global minima.
+	 
+	 \item Yes, if we scale all dimensions in our initial centroids and data points by some factor, we are guaranteed to retrieve the same clusters after running K-means. The distances of centroids and points will be multiplied by the same term for all iterations for each point and centroid pair, therefore comparison for choosing the cluster centroid remains the same. \\
+	 If we scale only certain dimensions, then we are not guaranteed to retrieve the same clusters. Consider two dimensional example, $\phi (x) = [1,3]$. Let one of the centroids is $\mu_1 = [3,3]$ and other one be $\mu_2 = [1,-1]$. Suppose we scale y axis with $\lambda$. Then
+	 \begin{align*}
+	 |\phi_x - \mu_1|^2 &= 4 \\
+	 |\phi_x - \mu_2|^2 &= 4\lambda^2
+	 \end{align*}
+If $\lambda$ is > 1, $\phi_x$ belongs to $\mu_1$ but if $\lambda$ < 1, $\phi_x$ belongs to $\mu_2$.
+
+
 \end{enumerate}
 
  
