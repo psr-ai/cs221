@@ -175,10 +175,103 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
 	When n = 7, $Test Error = 0.270962296005$ \\
 	When n = 8, $Test Error = 0.292909397862$ \\
 	When n = 9, $Test Error = 0.308384918402$ \\
-	
+
 	When n=5, the test error is the minimum. Test error reflects how well our feature vector has defined features which eventually are used in classification. If we look at the weights data from the weights file when our feature extractor is word, maximum number of words which "matter"(having high positive or negative weights which will help increase the score) are:
-	\{1: 2.0, 2: 1.0, 3: 4.0, 4: 29.0, 5: 42.0, 6: 27.0, 7: 27.0, 8: 18.0, 9: 13.0, 10: 11.0, 11: 8.0, 12: 6.0, 13: 1.0, 14: 2.0\}
+	\{1: 2.0, 2: 1.0, 3: 4.0, 4: 29.0, 5: 42.0, 6: 27.0, 7: 27.0, 8: 18.0, 9: 13.0, 10: 11.0, 11: 8.0, 12: 6.0, 13: 1.0, 14: 2.0\} (for weights less than -0.5 and greater than +0.5) \\
+	
+	Therefore, having feature vectors with length 5 help to classify the sentiments better. \\
+	
+	A review such as "not good" will be better classified by n-gram model than word one. The reason is, while learning, it will take context of words into account as well and will encounter more examples having "notgo", "otgoo", "tgood" etc. as negatively classified than a word one. "not" and "good" can be present in both positive and negative review. For example, in the 3-b example, for word classifier, "not" has -0.14 and "good" has 0.29, therefore gets classified as positive, whereas in character 5-gram,\{ "notgo": -0.05, "otgoo": -0.02, "tgood": -0.07 \} gets classified as negative. 
+
 
 \end{enumerate}
+
+\section*{Problem 3}
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+\begin{align*}
+\phi_{x1} = [1,0] \\
+\phi_{x2} = [1,2] \\
+\phi_{x3} = [3,0] \\
+\phi_{x4} = [2,2] \\
+\end{align*}
+	\begin{enumerate}[label=(\arabic*)]
+	\item
+	\textbf{Iteration 1:}
+	$\mu_1 = [2,3]$ and $\mu_2 = [2,-1]$ \\
+	\begin{align*}
+	|\phi_{x1} - \mu_1|^2 &= 1^2 + 3^2 \\
+	&= 1 + 9 \\
+	&= 10 \\
+	|\phi_{x1} - \mu_2|^2 &= 1^2 + 1^2 = 2 \\
+	\end{align*}
+	Therefore, $\phi_{x1}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x2} - \mu_1|^2 &= 1^2 + 1^2 = 2 \\
+	|\phi_{x2} - \mu_2|^2 &= 1^2 + 3^2 = 10 \\
+	\end{align*}
+	Therefore, $\phi_{x2}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x3} - \mu_1|^2 &= 1^2 + 3^2 = 10 \\
+	|\phi_{x3} - \mu_2|^2 &= 1^2 + 1^2 = 2 \\
+	\end{align*}
+	Therefore, $\phi_{x3}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x4} - \mu_1|^2 &= 1^2 = 1 \\
+	|\phi_{x4} - \mu_2|^2 &= 3^2 = 9 \\
+	\end{align*}
+	Therefore, $\phi_{x4}$ gets assigned to $\mu_1$.
+	
+	$\phi_{x1}$ and $\phi_{x3}$ belong to $\mu_2$, $\phi_{x2}$ and $\phi_{x4}$ belong to $\mu_1$\\
+	\textbf{New Means:}
+	
+	\begin{align*}
+	\mu_1 = \frac{\phi_{x2} + \phi_{x4} }{2} &= [1.5, 2] \\
+	\mu_2 = \frac{\phi_{x1} + \phi_{x3} }{2} &= [2, 0]
+	\end{align*}
+	
+	\textbf{Iteration 2:}
+	$\mu_1 = [1.5,2]$ and $\mu_2 = [2,0]$ \\
+
+	\begin{align*}
+	|\phi_{x1} - \mu_1|^2 &= 0.5^2 + 2^2 = 4.25 \\
+	|\phi_{x1} - \mu_2|^2 &= 1^2 = 1 \\
+	\end{align*}
+	Therefore, $\phi_{x1}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x2} - \mu_1|^2 &= 0.5^2 = 0.25 \\
+	|\phi_{x2} - \mu_2|^2 &= 1^2 + 2^2 = 5 \\
+	\end{align*}
+	Therefore, $\phi_{x2}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x3} - \mu_1|^2 &= 1.5^2 = 2.25 \\
+	|\phi_{x3} - \mu_2|^2 &= 1^2 = 1 \\
+	\end{align*}
+	Therefore, $\phi_{x3}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x4} - \mu_1|^2 &= 0.5^2 = 0.25 \\
+	|\phi_{x4} - \mu_2|^2 &= 2^2 = 4 \\
+	\end{align*}
+	Therefore, $\phi_{x4}$ gets assigned to $\mu_1$.
+	$\phi_{x1}$ and $\phi_{x3}$ belong to $\mu_2$, $\phi_{x2}$ and $\phi_{x4}$ belong to $\mu_1$, which is same as previous iteration. Hence $[z_1, z_2, z_3, z_4] = [2,1,2,1] $\\
+	\item
+	\textbf{Iteration 1:}
+	$\mu_1 = [0,1]$ and $\mu_2 = [3,2]$ \\
+	\begin{align*}
+	|\phi_{x1} - \mu_1|^2 &= 1^2 + 1^2 = 2 \\
+	|\phi_{x1} - \mu_2|^2 &= 2^2 + 2^2 = 8 \\
+	\end{align*}
+	Therefore, $\phi_{x3}$ gets assigned to $\mu_1$.
+	
+	\end{enumerate}
+\end{enumerate}
+
  
 \end{document}
