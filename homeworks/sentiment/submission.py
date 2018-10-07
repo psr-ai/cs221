@@ -92,7 +92,12 @@ def extractCharacterFeatures(n):
     '''
     def extract(x):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        vector = {}
+        stripped = x.replace(" ", "")
+        for c in range(len(stripped) - n + 1):
+            gram = stripped[c: c + n]
+            vector[gram] = vector[gram] + 1 if gram in vector else 1
+        return vector
         # END_YOUR_CODE
     return extract
 
@@ -111,8 +116,41 @@ def kmeans(examples, K, maxIters):
             final reconstruction loss)
     '''
     # BEGIN_YOUR_CODE (our solution is 32 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
-    # END_YOUR_CODE
 
-weights = {"hello":1, "world":1}
-print(generateDataset(5, weights))
+    def mod_square(vector): return sum([v*v for k, v in vector.iteritems()])
+
+    def cluster_assignment_loss(mod_square_phi, mod_square_mu, dot_product):
+        return mod_square_phi + mod_square_mu - 2 * dot_product
+
+    def average_vector(vectors):
+        avg_vector = collections.defaultdict(float)
+        for vector in vectors:
+            for (key, value) in vector.iteritems():
+                avg_vector[key] += value
+        return dict({key: value/len(vectors) for key, value in avg_vector.iteritems()})
+
+    cluster_locations = random.sample(examples, K)
+    examples_mod_square = [mod_square(example) for example in examples]
+    last_assigned_examples = []
+
+    for _ in range(maxIters):
+        clusters_with_mod_square = [(v, mod_square(v)) for v in cluster_locations]
+
+        assigned_examples = [0] * len(examples)
+        for index, example in enumerate(examples):
+            losses = [cluster_assignment_loss(examples_mod_square[index], mod_square_mu, dotProduct(examples[index], c)) for (c, mod_square_mu) in clusters_with_mod_square]
+            assigned_examples[index] = losses.index(min(losses))
+
+        if assigned_examples == last_assigned_examples:
+            break
+        else:
+            last_assigned_examples = assigned_examples
+
+        clustered_vectors = [[] for _ in range(K)]
+        for vector_index, cluster_number in enumerate(assigned_examples):
+            clustered_vectors[cluster_number].append(examples[vector_index])
+
+        cluster_locations = [average_vector(v) for v in clustered_vectors]
+
+    return cluster_locations, last_assigned_examples, sum([cluster_assignment_loss(examples_mod_square[example_index], mod_square(cluster_locations[cluster_index]), dotProduct(examples[example_index], cluster_locations[cluster_index])) for example_index, cluster_index in enumerate(last_assigned_examples)])
+    # END_YOUR_CODE
