@@ -93,7 +93,7 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
   \item Substituting $y=1$ and arbitary $\phi_{(x)}$ in the above equation,
   \begin{align*}
   \nabla_w Loss &= 2 (p-1) p (1-p) \phi_{(x)} \\
-  &= -2 (p-1)^2 p \phi_{(x)}
+  &= -2 (p-1)^2 p \phi_{(x)} && \textbf{(...2)} \\
   \end{align*}
   In order to make the magnitude of the gradient of the loss arbitrarily small, we need to make the above equation close to zero. That can happen when p approaches 1 and p approaches zero. \\
   When p approaches 1: \\
@@ -112,6 +112,73 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
   w approaches $-\infty$.
   Therefore, for w approaching $\infty$ and $-\infty$, magnitude of the gradient of the loss is arbitrarily small(approaching zero).\\
   No, the magnitude of the gradient can never be zero.
-  
+  \item For largest magnitude of the gradient, in the equation \textbf{2} in \textbf{2c} above, we need to maximize $(p-1)^2p$. Differentiating and equating to zero.
+  \begin{align*}
+  2p(p-1) + (p-1)^2 &= 0 \\
+  2p^2 - 2p + p^2 + 1 -2p &= 0 \\
+  3p^2 -4p +1 &= 0 && \textbf{(...3)} \\
+  3p^2 -3p -p +1 &= 0 \\
+  (3p - 1) (p - 1) &= 0 \\
+  p &= 1, \frac{1}{3}
+  \end{align*}
+ To check if it's minima or maxima, we differentiate equation 3 and check signs \\
+ \begin{align*}
+ 6p - 4 \text{ is negative only when $p = \frac{1}{3}$ }
+ \end{align*}
+ Therefore, maximum ma of function $p(p-1)^2$ when p ranges from 0 to 1 is
+ \begin{align*}
+ p &= \frac{1}{3} \\
+ \end{align*}
+ Substituting value of p in equation \textbf{2} in \textbf{2c} above
+ \begin{align*}
+ \nabla_w Loss &= || 2 (\frac{2}{3})^2 \frac{1}{3} \phi_{(x)} || \\
+ &= || (\frac{2}{3})^3 \phi_{(x)} || \\
+ &= || \frac{8}{27} \phi{(x)} ||
+ \end{align*}
+ \item Yet to implement
+\end{enumerate} 
+\section*{Problem 3}
+\begin{enumerate}[label=(\alph*)]
+	\addtocounter{enumi}{3}
+	\item \mbox{}
+	\begin{enumerate}[label=(\arabic*)]
+		\item  
+		home alone goes hollywood , a funny premise until the kids start 			pulling off stunts not even steven spielberg would know how to 			do . besides , real movie producers aren't this nice . \\
+		Truth: -1, Prediction: 1 [WRONG] \\
+
+		This is predicted wrong because "funny" has a count of 1 with a 			heavy positive weight of 0.4, since with most of the movies, 					funny sounds positive but in the context, the review starts off as 			positive but the tone changes as the review proceeds to negative, 		which isn't given accurate weight to by the model.\\
+		\item 'it's painful to watch witherspoon's talents wasting away 				inside unnecessary films like legally blonde and sweet home 					abomination , i mean , alabama . ' \\
+		Truth: -1, Prediction: 1 [WRONG] \\
+		
+		In our weights, sweet has high positive weight of 0.55, whose score overshoots scores of other negative words. but is being used to describe the "home" and not the review in general.
+		\item patchy combination of soap opera , low-tech magic realism and , at times , ploddingly sociological commentary \\
+		Truth: -1, Prediction: 1 [WRONG] \\
+		
+		We see many negative words here, but their weights are zero, for example patchy, low-tech, ploddingly etc. That means our model hasn't seen such words in training, therefore based on other words classifies this as positive. \\
+		\item the best thing i can say about this film is that i can't wait to see what the director does next \\
+		Truth: 1, Prediction: -1 [WRONG] \\
+		
+		The words such as "does" and "film" have very high positive weights(0.6 and 0.36 to be precise), but in general have equal probability of coming in a positive or negative review. But in our training data, these words occur more frequently in positive than negative reviews, that's why they have high positive values.  Ignoring such stop words (words which do not tell about actual sentiment) can make the model better.
+		
+		\item even during the climactic hourlong cricket match , boredom never takes hold \\
+		Truth: 1, Prediction: -1 [WRONG] \\
+		
+		Words like "never", "boredom" etc increase negative sentiment a lot, but in context, the movie review says that negative doesn't happen. Since we aren't considering context through n-grams or some other technique, this is classified only on single word basis hence wrong.
+	\end{enumerate}
+	\addtocounter{enumi}{1}
+	\item When n = 1, $Test error = 0.478615644344$ \\
+	When n = 2, $Test Error = 0.419527293191$ \\
+	When n = 3, $Test Error = 0.318232976927$ \\
+	When n = 4, $Test Error = 0.283342712437$ \\
+	When n = 5, $Test Error = 0.270680922904$ \\
+	When n = 6, $Test Error = 0.271525042206$ \\
+	When n = 7, $Test Error = 0.270962296005$ \\
+	When n = 8, $Test Error = 0.292909397862$ \\
+	When n = 9, $Test Error = 0.308384918402$ \\
+	
+	When n=5, the test error is the minimum. Test error reflects how well our feature vector has defined features which eventually are used in classification. If we look at the weights data from the weights file when our feature extractor is word, maximum number of words which "matter"(having high positive or negative weights which will help increase the score) are:
+	\{1: 2.0, 2: 1.0, 3: 4.0, 4: 29.0, 5: 42.0, 6: 27.0, 7: 27.0, 8: 18.0, 9: 13.0, 10: 11.0, 11: 8.0, 12: 6.0, 13: 1.0, 14: 2.0\}
+
 \end{enumerate}
+ 
 \end{document}
