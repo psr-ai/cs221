@@ -186,7 +186,7 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
 
 \end{enumerate}
 
-\section*{Problem 3}
+\section*{Problem 4}
 
 \begin{enumerate}[label=(\alph*)]
 \item 
@@ -268,7 +268,65 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
 	|\phi_{x1} - \mu_1|^2 &= 1^2 + 1^2 = 2 \\
 	|\phi_{x1} - \mu_2|^2 &= 2^2 + 2^2 = 8 \\
 	\end{align*}
-	Therefore, $\phi_{x3}$ gets assigned to $\mu_1$.
+	Therefore, $\phi_{x1}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x2} - \mu_1|^2 &= 1^2 + 1^2 = 2 \\
+	|\phi_{x2} - \mu_2|^2 &= 2^2 = 4 \\
+	\end{align*}
+	Therefore, $\phi_{x2}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x3} - \mu_1|^2 &= 3^2 + 1^2 = 10 \\
+	|\phi_{x3} - \mu_2|^2 &= 2^2 = 4 \\
+	\end{align*}
+	Therefore, $\phi_{x3}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x4} - \mu_1|^2 &= 2^2 + 1^2 = 5 \\
+	|\phi_{x4} - \mu_2|^2 &= 1^2 = 1 \\
+	\end{align*}
+	Therefore, $\phi_{x4}$ gets assigned to $\mu_2$.
+	
+	$\phi_{x1}$ and $\phi_{x2}$ are assigned to $\mu_1$ and $\phi_{x3}$ and $\phi_{x4}$ are assigned to $\mu_2$.
+	
+	\textbf{New Means:}
+	\begin{align*}
+	\mu_1 = \frac{\phi_{x1} + \phi_{x2} }{2} &= [1, 1] \\
+	\mu_2 = \frac{\phi_{x3} + \phi_{x4} }{2} &= [2.5, 1]
+	\end{align*}
+	
+	\textbf{Iteration 2:}
+	$\mu_1 = [1, 1]$ and $\mu_2 = [2.5, 1]$ \\
+
+	\begin{align*}
+	|\phi_{x1} - \mu_1|^2 &= 1^2 = 1 \\
+	|\phi_{x1} - \mu_2|^2 &= 1.5^2 + 1^2 = 3.25 \\
+	\end{align*}
+	Therefore, $\phi_{x1}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x2} - \mu_1|^2 &= 1^2 = 1 \\
+	|\phi_{x2} - \mu_2|^2 &= 1.5^2 + 2^2 = 3.25 \\
+	\end{align*}
+	Therefore, $\phi_{x2}$ gets assigned to $\mu_1$.
+	
+	\begin{align*}
+	|\phi_{x3} - \mu_1|^2 &= 2^2 = 4 \\
+	|\phi_{x3} - \mu_2|^2 &= 0.5^2 + 1^2 = 1.25 \\
+	\end{align*}
+	Therefore, $\phi_{x3}$ gets assigned to $\mu_2$.
+	
+	\begin{align*}
+	|\phi_{x4} - \mu_1|^2 &= 1^2 + 1^2 = 2 \\
+	|\phi_{x4} - \mu_2|^2 &= 0.5^2 + 1^2 = 1.25 \\
+	\end{align*}
+	Therefore, $\phi_{x4}$ gets assigned to $\mu_2$.
+	
+	$\phi_{x1}$ and $\phi_{x2}$ are assigned to $\mu_1$ and $\phi_{x3}$ and $\phi_{x4}$ are assigned to $\mu_2$, which is same as previous iteration. Hence $[z_1, z_2, z_3, z_4] = [1,1,2,2] $\\
+	
+	
+	
 	
 	\end{enumerate}
 \end{enumerate}

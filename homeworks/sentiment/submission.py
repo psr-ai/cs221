@@ -57,11 +57,6 @@ def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
             increment(weights, -eta, gradient_hinge_loss(phi_x, y, weights))
 
     # END_YOUR_CODE
-    x = collections.defaultdict(float)
-    for (key, weight) in weights.iteritems():
-        if weight >= 0.5 or weight <= -0.5:
-            x[len(key)] += 1
-    print x
     return weights
 
 ############################################################
