@@ -56,6 +56,9 @@ def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
             phi_x = featureExtractor(x)
             increment(weights, -eta, gradient_hinge_loss(phi_x, y, weights))
 
+        predictor = lambda x: (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1)
+        print "train error = ", evaluatePredictor(trainExamples, predictor), " dev error = ", evaluatePredictor(testExamples, predictor)
+
     # END_YOUR_CODE
     return weights
 
