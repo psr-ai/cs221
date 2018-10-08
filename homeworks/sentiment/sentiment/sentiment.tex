@@ -135,7 +135,27 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
  &= || (\frac{2}{3})^3 \phi_{(x)} || \\
  &= || \frac{8}{27} \phi{(x)} ||
  \end{align*}
- \item Yet to implement
+ \item As we know that Loss is difference between the predicted value and actual value:
+ \begin{align*}
+ Loss_{w, x, y} &= Predicted Output - Actual \\
+ Loss_{w, x, y}&= \sigma(w\phi_{(x)}) - y
+ \end{align*}
+ Simplifying the loss equation for a given point,
+ \begin{align*}
+ Loss_{w, x, y}&= \sigma(w\phi_{(x)}) - y && \textbf{...(1)}\\
+ 0 &= \sigma(w\phi_{(x)}) - y \\
+ y &= \frac{1}{(1 + e^{-w\phi_{(x)}})} \\
+e^{-w\phi_{(x)}} &= \frac{1 - y}{y} \\
+-w\phi_{(x)} &= \ln \frac{1-y}{y} \\
+w\phi_{(x)} &= \ln \frac{y}{1 - y} \\
+w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
+ \end{align*}
+ The above equation is similar to linear predictor's loss, $w^*\phi_{(x)} - y'$. Since it's given that the loss is zero for the given equation 1, squared loss on every data point has to be zero. From the modified equation 2, least squares regression also yields zero loss on $D'$, which has data points $x, y'$. In this dataset, we compute $y'$ by\\
+ \begin{align*}
+ y' &= \ln \frac{y}{1-y} \\
+ &= \ln y - \ln(y - 1)
+ \end{align*}
+ The solution of the squared loss will yield vector w*, and since the total squared loss is zero, $D'$ should converge to a vector $w^*$.
 \end{enumerate} 
 \section*{Problem 3}
 \begin{enumerate}[label=(\alph*)]
