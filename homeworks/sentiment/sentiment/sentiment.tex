@@ -376,7 +376,7 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
 	
 	$$ \mu_k \leftarrow \frac{1}{|\{i':z = k\}| + \sum_{i':z = k} li'} \sum_{i':z_i'=k} \phi(x_i') + \sum_{i':z = k} \mu_{i'}^{k'} li' $$
 	
-	which is essentially the centroid of cluster formed by "feature vector for every $x_{i'}$ when $x_{i'}$ not in S and centroid of pre defined clusters multiplied by their lengths" divided by "sum of lengths of pre defined clusters and number of points  considered in $x_{i'}$.
+	which is essentially the centroid of cluster formed by "feature vector for every $x_{i'}$ when $x_{i'}$ not in S and centroid of pre defined clusters multiplied by their lengths" divided by "sum of lengths of pre defined clusters and number of points  considered in $x_{i'}$".
 	 
 	 \item The advantage of running K-means multiple times on the same dataset with the same K, but different random initializations is that K-means converges to local minima whereas we might miss the global minima. Random initializations help us decreasing probability of missing global minima.
 	 
