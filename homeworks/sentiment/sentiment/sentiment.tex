@@ -142,7 +142,7 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
  \end{align*}
  Simplifying the loss equation for a given point,
  \begin{align*}
- Loss_{w, x, y}&= \sigma(w\phi_{(x)}) - y && \textbf{...(1)}\\
+ Loss_{w, x, y}&=( \sigma(w\phi_{(x)}) - y)^2 && \textbf{...(1)}\\
  0 &= \sigma(w\phi_{(x)}) - y \\
  y &= \frac{1}{(1 + e^{-w\phi_{(x)}})} \\
 e^{-w\phi_{(x)}} &= \frac{1 - y}{y} \\
@@ -153,9 +153,13 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
  The above equation is similar to linear predictor's loss, $w^*\phi_{(x)} - y'$. Since it's given that the loss is zero for the given equation 1, squared loss on every data point has to be zero. From the modified equation 2, least squares regression also yields zero loss on $D'$, which has data points $x, y'$. In this dataset, we compute $y'$ by\\
  \begin{align*}
  y' &= \ln \frac{y}{1-y} \\
- &= \ln y - \ln(y - 1)
+ &= \ln y - \ln(1 - y)
  \end{align*}
- The solution of the squared loss will yield vector w*, and since the total squared loss is zero, $D'$ should converge to a vector $w^*$.
+ The solution of the squared loss will yield vector w*, and since the total squared loss is zero, $D'$ should converge to a vector $w^*$. \\
+ 
+ \textbf{Justification of $y' = \ln y - \ln(y-1)$} \\
+ As we can deduce from equation 1 that y can take a value between zero and 1 (since it's equal to a sigmoid), ln y - ln (y - 1) in the range of 0 to 1 can take up any value between $-\infty$ to $+\infty$. Since $\phi_(x)$ can take up any value, this range for $y'$ can easily compensate for any value of the dot product with $w$ to get a zero loss.
+ 
 \end{enumerate} 
 \section*{Problem 3}
 \begin{enumerate}[label=(\alph*)]
@@ -196,8 +200,8 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
 	When n = 8, $Test Error = 0.292909397862$ \\
 	When n = 9, $Test Error = 0.308384918402$ \\
 
-	When n=5, the test error is the minimum. Test error reflects how well our feature vector has defined features which eventually are used in classification. If we look at the weights data from the weights file when our feature extractor is word, maximum number of words which "matter"(having high positive or negative weights which will help increase the score) are:
-	\{1: 2.0, 2: 1.0, 3: 4.0, 4: 29.0, 5: 42.0, 6: 27.0, 7: 27.0, 8: 18.0, 9: 13.0, 10: 11.0, 11: 8.0, 12: 6.0, 13: 1.0, 14: 2.0\} (for weights less than -0.5 and greater than +0.5) \\
+	When n=5, the test error is the minimum. Test error reflects how well our feature vector has defined features which eventually are used in classification. If we look at the weights data from the weights file when our feature extractor is word, maximum number of words which "matter"(having high positive or negative weights which will help increase the score) are for word lengths 5. Here are the word lengths against their counts for weights less than $-0.5$ and greater than $+0.5$:
+	$$\{1: 2.0, 2: 1.0, 3: 4.0, 4: 29.0, 5: 42.0, 6: 27.0, 7: 27.0, 8: 18.0, 9: 13.0, 10: 11.0, 11: 8.0, 12: 6.0, 13: 1.0, 14: 2.0\} $$
 	
 	Therefore, having feature vectors with length 5 help to classify the sentiments better. \\
 	
@@ -345,31 +349,34 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
 	
 	$\phi_{x1}$ and $\phi_{x2}$ are assigned to $\mu_1$ and $\phi_{x3}$ and $\phi_{x4}$ are assigned to $\mu_2$, which is same as previous iteration. Hence $[z_1, z_2, z_3, z_4] = [1,1,2,2] $\\
 	\end{enumerate}
-	\item Let the points be $x_1, x_2 ... x_n$. As given, S is the set of tuples. Let's define them as $S \epsilon \{(x_{t_1}, x_{t_2}), (x_{t_3}, x_{t_4})...(x_{t_{2d-1}}, x_{t_{2d}})\}$, where d is the number of relations described in S, $x_{t_1}, x_{t_2}, ... x_{t_{2d}} \epsilon \{x_1, x_2 ... x_n\}$. \\ \\
-	As the first step, we can group the terms which should belong to same cluster together. Let $K'$ be the number of such clusters. Let's call it $S'$ and, $$S' = \{(x_{11}, x_{12}, x_{13} ... x_{1l_1}), (x_{21}, x_{22}, x_{23} ... x_{2l_2}), ... (x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})\}$$
-	where $l_1, l_2, ... l_{k'}$ are the length of the clusters 1 to $K'$. Also, as per the question, each element in $(x_{11}, x_{12}, x_{13} ... x_{1l_1})$ to $(x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})$ is unique within their own group and also belongs to only one cluster at a time. \\ \\
+	\item Let the points be $x_1, x_2 ... x_n$. As given, S is the set of tuples. Let's define them as $S \epsilon \{(x_{t_1}, x_{t_2}), (x_{t_3}, x_{t_4})...(x_{t_{2d-1}}, x_{t_{2d}})\}$, where d is the unique number of relations described in S, $x_{t_1}, x_{t_2}, ... x_{t_{2d}} \epsilon \{x_1, x_2 ... x_n\}$. Let $d'$ be the unique number of points in S. \\ \\
+	As the first step, we can group the terms which should belong to same cluster together. Let $K'$ be the number of such clusters. Let's call this set $S'$ and, $$S' = \{(x_{11}, x_{12}, x_{13} ... x_{1l_1}), (x_{21}, x_{22}, x_{23} ... x_{2l_2}), ... (x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})\}$$
+	where $l_1, l_2, ... l_{K'}$ are the length of the clusters 1 to $K'$. Also, as per the question, each element in $(x_{11}, x_{12}, x_{13} ... x_{1l_1})$ to $(x_{k'1}, x_{k'2}, x_{k'3} ... x_{k'l_{K'}})$ is unique within their own group and also belongs to only one cluster at a time. \\
 	We can consider the centroid for each group of vectors to proceed for the clustering with unpaired/other paired group of vectors. Let $\{ \mu_{l1}^{k'}, \mu_{l2}^{k'}, ... \mu_{l_{K'}}^{k'} \}$ be the centroid of each cluster. \\
-	Thus, in our modified algorithm, the feature vectors will be consisting of two sets, one being $\phi_{x_i'}$ for every $x_{i'} \epsilon \{x_1, x_2, ... x_n\} and x_{i'} not in S$ and other being centroids of points of each pre defined clusters, $\{ \mu_{l1}^{k'}, \mu_{l2}^{k'}, ... \mu_{lK'}^{k'} \}$. Total length of points will be $n - d + K'$ (Total points minus number of points in S, added to number of pre defined clusters).
+	Thus, in our modified algorithm, the feature vectors will be consisting of two sets, one being $\phi_{x_i'}$ for every $x_{i'} \epsilon \{x_1, x_2, ... x_n\}$ when $x_{i'}$ not in $S$ and other being centroids of points of each pre defined clusters, $\{ \mu_{1}^{k'}, \mu_{2}^{k'}, ... \mu_{K'}^{k'} \}$. Also, stating again, length of each cluster is assumed to be $l_1, l_2, ... l_{K'}$. \\ \\
 	
-	\textbf{For dividing the set of points to K clusters} \\
+	\textbf{For dividing the set of points to K clusters}  \\ \\
 	\textbf{Step 1} \\
+	Total length of points will be $n - d' + K'$ (Total points minus number of unique points in S, added to number of pre defined clusters). \\
 	Setting assignments $Z$ given $\mu$, where we initialise $\mu$ to a random value. \\
-	For each point $i' = 1, .... n - d$ \\
+	For each point $i' = 1, .... n - d'$ \\
 	Assign $i'$ to cluster with closest centroid:
 	\begin{align*}
 	Z_{i'} & \leftarrow arg min_{k=1, ... K} || \phi_{x_i'} - \mu_k ||
 	\end{align*}
-	For remaining cluster centroids, $i' = 1, ... K'$ \\
+	For remaining points which are centroids of points which should belong to same cluster, $i' = 1, ... K'$ \\
 	Assign $i'$ to cluster with closest centroid:
 	\begin{align*}
-	Z_{n-d+i'} & \leftarrow arg min_{k=1, ... K} || \mu_{li'}^{k'} - \mu_k ||
+	Z_{n-d'+i'} & \leftarrow arg min_{k=1, ... K} || \mu_{i'}^{k'} - \mu_k ||
 	\end{align*}
 	\\
 	\textbf{Step 2} \\
 	For each cluster $k = 1,...,K$: \\
 	Set $\mu_k$ to average of points assigned to cluster k: \\
 	
-	$$ \mu_k \leftarrow \frac{1}{|\{i:z = k\}|} \sum_{i:z_i=k} \phi(x_i)$$
+	$$ \mu_k \leftarrow \frac{1}{|\{i':z = k\}| + \sum_{i':z = k} li'} \sum_{i':z_i'=k} \phi(x_i') + \sum_{i':z = k} \mu_{i'}^{k'} li' $$
+	
+	which is essentially the centroid of cluster formed by "feature vector for every $x_{i'}$ when $x_{i'}$ not in S and centroid of pre defined clusters multiplied by their lengths" divided by "sum of lengths of pre defined clusters and number of points  considered in $x_{i'}$.
 	 
 	 \item The advantage of running K-means multiple times on the same dataset with the same K, but different random initializations is that K-means converges to local minima whereas we might miss the global minima. Random initializations help us decreasing probability of missing global minima.
 	 
