@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  9 OCT 2018 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  9 OCT 2018 22:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -411,7 +411,7 @@ r8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
 pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
 b>
-Output written on sentiment.pdf (12 pages, 154760 bytes).
+Output written on sentiment.pdf (12 pages, 154749 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
