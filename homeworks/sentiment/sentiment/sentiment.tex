@@ -158,7 +158,7 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
  The solution of the squared loss will yield vector w*, and since the total squared loss is zero, $D'$ should converge to a vector $w^*$. \\
  
  \textbf{Justification of $y' = \ln y - \ln(y-1)$} \\
- As we can deduce from equation 1 that y can take a value between zero and 1 (since it's equal to a sigmoid), ln y - ln (y - 1) in the range of 0 to 1 can take up any value between $-\infty$ to $+\infty$. Since $\phi_(x)$ can take up any value, this range for $y'$ can easily compensate for any value of the dot product with $w$ to get a zero loss.
+ The logistic regression (using the sigmoid function) basically describes the probability of the event Y happening ($y$ can vary between 0 and 1). Once converted to linear regression, $y$ is the ratio of probability of event Y happening to the probability of event Y not happening. This can take any value from $-\infty$ to $\infty$, hence justifying zero loss with a linear function $w\phi_x$.
  
 \end{enumerate} 
 \section*{Problem 3}
