@@ -156,7 +156,9 @@ w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
  From the modified equation 2, we can say that the  least squares regression also yields zero loss on $D'$, which has data points $x, y'$ and has a linear predictor. Therefore, $Loss_{w,x,y'} = 0$. \\
  
  \textbf{Justification of $y' = \ln y - \ln(y-1)$} \\
- Our new predictor function $w\phi_{(x)}$ can attain any value between $-\infty$ to $\infty$. If we check the graph for $y' = ln \frac{y}{y-1}$ it also can attain any value between $-\infty$ to $\infty$. Hence, we get zero loss for every point in $D'$.
+ Our new predictor function $w\phi_{(x)}$ can attain any value between $-\infty$ to $\infty$. If we check the graph for $y' = ln \frac{y}{y-1}$ it also can attain any value between $-\infty$ to $\infty$. Hence, we get zero loss for every point in $D'$. Also, $y'$ can be visualized as log of ratio of probability of event Y occurring to the probability of even Y not occurring, since $y$ in our original equation \textbf{(1)} varies between 0 and 1 and is the probability of event Y occurring.
+ 
+ $$ y' = ln \frac{P (Y = 1)}{P (Y = 0)} $$
  
 \end{enumerate} 
 \section*{Problem 3}
