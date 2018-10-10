@@ -135,14 +135,10 @@ Loss_{squared}(x, y, w) &= (f_w(x) - y)^2 \\
  &= || (\frac{2}{3})^3 \phi_{(x)} || \\
  &= || \frac{8}{27} \phi{(x)} ||
  \end{align*}
- \item As we know that Loss is difference between the predicted value and actual value:
+ \item 
+ Simplifying the loss squared equation for a given point,
  \begin{align*}
- Loss_{w, x, y} &= Predicted Output - Actual \\
- Loss_{w, x, y}&= \sigma(w\phi_{(x)}) - y
- \end{align*}
- Simplifying the loss equation for a given point,
- \begin{align*}
- Loss_{w, x, y}&=( \sigma(w\phi_{(x)}) - y)^2 && \textbf{...(1)}\\
+ Loss_{w, x, y}&=\sum_{x, y \epsilon D}( \sigma(w\phi_{(x)}) - y)^2 && \textbf{...(1)}\\
  0 &= \sigma(w\phi_{(x)}) - y \\
  y &= \frac{1}{(1 + e^{-w\phi_{(x)}})} \\
 e^{-w\phi_{(x)}} &= \frac{1 - y}{y} \\
@@ -150,15 +146,17 @@ e^{-w\phi_{(x)}} &= \frac{1 - y}{y} \\
 w\phi_{(x)} &= \ln \frac{y}{1 - y} \\
 w\phi_{(x)} - \ln \frac{y}{1-y} &= 0 && \textbf{(...(2))}
  \end{align*}
- The above equation is similar to linear predictor's loss, $w^*\phi_{(x)} - y'$. Since it's given that the loss is zero for the given equation 1, squared loss on every data point has to be zero. From the modified equation 2, least squares regression also yields zero loss on $D'$, which has data points $x, y'$. In this dataset, we compute $y'$ by\\
- \begin{align*}
+ The above equation is similar to linear predictor's loss, $w^*\phi_{(x)} - y'$, where the linear predictor is $w^*\phi_{(x)}$ ($w = w^*$), the loss being zero at every point $x, y'$, where $y'$ is transformed y.
+  \begin{align*}
  y' &= \ln \frac{y}{1-y} \\
  &= \ln y - \ln(1 - y)
  \end{align*}
- The solution of the squared loss will yield vector w*, and since the total squared loss is zero, $D'$ should converge to a vector $w^*$. \\
+  Total least squares loss can then be given by  
+	$$Loss_{w,x,y'} = \sum_{x, y' \epsilon D'} (w\phi_{x} - y')^2 $$ 
+ From the modified equation 2, we can say that the  least squares regression also yields zero loss on $D'$, which has data points $x, y'$ and has a linear predictor. Therefore, $Loss_{w,x,y'} = 0$. \\
  
  \textbf{Justification of $y' = \ln y - \ln(y-1)$} \\
- The logistic regression (using the sigmoid function) basically describes the probability of the event Y happening ($y$ can vary between 0 and 1). Once converted to linear regression, $y$ is the ratio of probability of event Y happening to the probability of event Y not happening. This can take any value from $-\infty$ to $\infty$, hence justifying zero loss with a linear function $w\phi_x$.
+ Our new predictor function $w\phi_{(x)}$ can attain any value between $-\infty$ to $\infty$. If we check the graph for $y' = ln \frac{y}{y-1}$ it also can attain any value between $-\infty$ to $\infty$. Hence, we get zero loss for every point in $D'$.
  
 \end{enumerate} 
 \section*{Problem 3}
