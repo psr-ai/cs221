@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+\begin{document}
+
+\begin{center}
+{\Large CS221 Fall 2018 Homework [Reconstruct]}
+
+\begin{tabular}{rl}
+SUNet ID: & prabhjot \\
+Name: & Prabhjot Singh Rai
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+  \item Assuming that the language model is a uni-gram model. Total cost assigned to words $[w_1, w_2 ... w_n]$ is defined as $\sum_{i}^n u(w_1)$, where \\
+  \begin{align*}
+  u(w) = c, & \text{if w in given corpus, $c > 0$} \\
+  \end{align*}
+    Greedy algorithm, as described in the problem, focuses on traversing in the tree, and stopping when it finds a solution(when all the words created by adding spaces are in the corpus). But it doesn't consider all the possible actions which may lead to an overall lowest cost for the segmentation. For example, running this algorithm on an input "antioxidantswerepresent" would lead to a total cost of $4c$ ("anti oxidants we represent"), whereas, the solution for lowest cost for segmentation is $3c$ ("antioxidants we represent" or "antioxidants were present").
+    
+    
+  \item (your solution)
+  
+  
+\end{enumerate}
+
+\section*{Problem 2}
+
+\begin{enumerate}[label=(\alph*)]
+  \item (your solution)
+  \item (your solution)
+\end{enumerate}
+
+\end{document}
