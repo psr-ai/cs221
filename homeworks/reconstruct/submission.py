@@ -17,7 +17,7 @@ class SegmentationProblem(util.SearchProblem):
 
     def isEnd(self, state):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-        return state == len(self.query) + 1
+        return state[0] == len(self.query)
         # END_YOUR_CODE
 
     def succAndCost(self, state):
@@ -40,7 +40,7 @@ def segmentWords(query, unigramCost):
     ucs.solve(SegmentationProblem(query, unigramCost))
 
     # BEGIN_YOUR_CODE (our solution is 10 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    return ucs.actions[-1] if ucs.actions and len(ucs.actions) > 0 else ''
     # END_YOUR_CODE
 
 ############################################################
