@@ -53,22 +53,38 @@ class VowelInsertionProblem(util.SearchProblem):
 
     def startState(self):
         # BEGIN_YOUR_CODE (our solution is 1 line of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        return 0, 0
         # END_YOUR_CODE
 
     def isEnd(self, state):
         # BEGIN_YOUR_CODE (our solution is 5 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        return state[0] == len(self.queryWords)
         # END_YOUR_CODE
 
     def succAndCost(self, state):
         # BEGIN_YOUR_CODE (our solution is 16 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        results = []
+        previous_word = None
+        if state == self.startState():
+            previous_word = wordsegUtil.SENTENCE_BEGIN
+        else:
+            previous_possible_fills = self.possibleFills(self.queryWords[state[0] - 1])
+            previous_word = list(previous_possible_fills)[state[1]] if previous_possible_fills and len(previous_possible_fills) > 0 else self.queryWords[state[0] - 1]
+
+        # previous_word = wordsegUtil.SENTENCE_BEGIN if state == self.startState() else list(self.possibleFills(self.queryWords[state[0] - 1]))[state[1]]
+        fills = self.possibleFills(self.queryWords[state[0]]) or [self.queryWords[state[0]]]
+        for index, possibleFill in enumerate(fills):
+            next_state = (state[0] + 1, index)
+            results.append((possibleFill, next_state, self.bigramCost(previous_word, possibleFill)))
+
+        return results
         # END_YOUR_CODE
 
 def insertVowels(queryWords, bigramCost, possibleFills):
     # BEGIN_YOUR_CODE (our solution is 3 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    ucs = util.UniformCostSearch(verbose=0)
+    ucs.solve(VowelInsertionProblem(queryWords, bigramCost, possibleFills))
+    return ' '.join(ucs.actions) if len(ucs.actions) > 0 else ''
     # END_YOUR_CODE
 
 ############################################################
