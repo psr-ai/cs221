@@ -12,22 +12,21 @@ class SegmentationProblem(util.SearchProblem):
 
     def startState(self):
         # BEGIN_YOUR_CODE (our solution is 3 lines of code, but don't worry if you deviate from this)
-        return 0, ''
+        return 0
         # END_YOUR_CODE
 
     def isEnd(self, state):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-        return state[0] == len(self.query)
+        return state == len(self.query)
         # END_YOUR_CODE
 
     def succAndCost(self, state):
         # BEGIN_YOUR_CODE (our solution is 12 lines of code, but don't worry if you deviate from this)
         paths = []
-        next_state = state[0] + 1
-        while next_state < len(self.query) + 1:
-            built_string = state[1] + self.query[state[0]: next_state]
-            built_string += ' ' if next_state != len(self.query) else ''
-            paths.append((built_string, (next_state, built_string), self.unigramCost(self.query[state[0]: next_state])))
+        next_state = state + 1
+        while next_state <= len(self.query):
+            action = self.query[state:next_state]
+            paths.append((action, next_state, self.unigramCost(self.query[state:next_state])))
             next_state += 1
         return paths
         # END_YOUR_CODE
@@ -40,7 +39,7 @@ def segmentWords(query, unigramCost):
     ucs.solve(SegmentationProblem(query, unigramCost))
 
     # BEGIN_YOUR_CODE (our solution is 10 lines of code, but don't worry if you deviate from this)
-    return ucs.actions[-1] if ucs.actions and len(ucs.actions) > 0 else ''
+    return ' '.join(ucs.actions)
     # END_YOUR_CODE
 
 ############################################################
