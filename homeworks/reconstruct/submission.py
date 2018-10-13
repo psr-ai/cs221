@@ -124,7 +124,7 @@ def segmentAndInsert(query, bigramCost, possibleFills):
         return ''
 
     # BEGIN_YOUR_CODE (our solution is 11 lines of code, but don't worry if you deviate from this)
-    ucs = util.UniformCostSearch(verbose=1)
+    ucs = util.UniformCostSearch(verbose=0)
     ucs.solve(JointSegmentationInsertionProblem(query, bigramCost, possibleFills))
     return ' '.join(ucs.actions) if len(ucs.actions) > 0 else ''
     # END_YOUR_CODE
