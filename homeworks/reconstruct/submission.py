@@ -71,7 +71,6 @@ class VowelInsertionProblem(util.SearchProblem):
             previous_possible_fills = self.possibleFills(self.queryWords[state[0] - 1])
             previous_word = list(previous_possible_fills)[state[1]] if previous_possible_fills and len(previous_possible_fills) > 0 else self.queryWords[state[0] - 1]
 
-        # previous_word = wordsegUtil.SENTENCE_BEGIN if state == self.startState() else list(self.possibleFills(self.queryWords[state[0] - 1]))[state[1]]
         fills = self.possibleFills(self.queryWords[state[0]]) or [self.queryWords[state[0]]]
         for index, possibleFill in enumerate(fills):
             next_state = (state[0] + 1, index)
@@ -98,17 +97,31 @@ class JointSegmentationInsertionProblem(util.SearchProblem):
 
     def startState(self):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        # (current_node, prev_node, possible_fill_no)
+        return 0, 0, 0
         # END_YOUR_CODE
 
     def isEnd(self, state):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        return state[0] == len(self.query)
         # END_YOUR_CODE
 
     def succAndCost(self, state):
         # BEGIN_YOUR_CODE (our solution is 23 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        results = []
+        if state[0] == state[1]:
+            current_word = wordsegUtil.SENTENCE_BEGIN
+        else:
+            possible_fills = self.possibleFills(self.query[state[1]: state[0]])
+            current_word = list(possible_fills)[state[2]]
+        new_state = [state[0] + 1, state[0], 0]
+        while new_state[0] <= len(self.query):
+            new_word = self.query[new_state[1]: new_state[0]]
+            for index, possibleFill in enumerate(self.possibleFills(new_word)):
+                new_state[2] = index
+                results.append((possibleFill, (new_state[0], new_state[1], new_state[2]), self.bigramCost(current_word, possibleFill)))
+            new_state[0] += 1
+        return results
         # END_YOUR_CODE
 
 def segmentAndInsert(query, bigramCost, possibleFills):
@@ -116,7 +129,9 @@ def segmentAndInsert(query, bigramCost, possibleFills):
         return ''
 
     # BEGIN_YOUR_CODE (our solution is 11 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    ucs = util.UniformCostSearch(verbose=0)
+    ucs.solve(JointSegmentationInsertionProblem(query, bigramCost, possibleFills))
+    return ' '.join(ucs.actions) if len(ucs.actions) > 0 else ''
     # END_YOUR_CODE
 
 ############################################################
