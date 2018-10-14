@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  13 OCT 2018 21:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  14 OCT 2018 10:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -235,13 +235,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (9.64983pt too wide) detected at line 48
-\OML/cmm/m/it/12 state \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 j \OT1/cmr/m/n/12 : 
-[]\OML/cmm/m/it/12 ; i \OT1/cmr/m/n/12 : []\OML/cmm/m/it/12 ; n \OT1/cmr/m/n/12
- : [])
- []
-
-
 Overfull \hbox (93.89052pt too wide) in paragraph at lines 56--57
 \OT1/cmr/m/n/12 all the pos-si-ble costs re-turned by $\OML/cmm/m/it/12 b\OT1/c
 mr/m/n/12 (\OML/cmm/m/it/12 w[]; w\OT1/cmr/m/n/12 )$, when $\OML/cmm/m/it/12 w[
@@ -263,27 +256,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--67
 
  []
 
-[2] [3] (./reconstruct.aux) ) 
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 68--70
+
+ []
+
+[3] (./reconstruct.aux) ) 
 Here is how much of TeX's memory you used:
- 2622 strings out of 492649
- 35986 string characters out of 6129622
+ 2627 strings out of 492649
+ 36039 string characters out of 6129622
  103491 words of memory out of 5000000
- 6471 multiletter control sequences out of 15000+600000
- 9536 words of font info for 37 fonts, out of 8000000 for 9000
+ 6474 multiletter control sequences out of 15000+600000
+ 10464 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,19n,27p,639b,366s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb>
-Output written on reconstruct.pdf (3 pages, 106382 bytes).
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb>
+Output written on reconstruct.pdf (3 pages, 109047 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream

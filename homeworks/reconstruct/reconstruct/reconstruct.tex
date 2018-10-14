@@ -45,12 +45,12 @@ that all of this is my own work.
 \section*{Problem 3}
 
 \begin{enumerate}[label=(\alph*)]
-	\item Since the cost function is a bi-gram model, our state should contain just enough information to create the current word, since this current word will be used along with possible vowel insertions to determine the next state. Therefore, the current state would have three elements, namely: $$ state = (j: \text{end index of query}, i: \text{initial index of query}, n: \text{index of possible vowel fills})$$ Using this state, we can get the current word by finding substring of query from start index to end index and then finding the $n^{th}$ index of this substring. \\
-	Start state would be where our start and end indexes of query are $0$ along with index of possible vowel fills. $$ startState = 0, 0, 0 $$ \\
-	Our actions would be words formed by insertions of both spaces and vowels, thus will be the next possible word that can be added after the current word. Cost at any point will be computed through bigram function which takes currentStateWord and nextStateWord as the input. \\
-	Finally, the end state would be when our end index has visited the end of the string, therefore:
+	\item Since the cost function is a bi-gram model, our state should contain just enough information to find the cost of going to the next state (here in cost of next possible fill given the previous fill). Therefore, it should contain the previous fill, and the begin index of the next string. $$state = \textbf{PREVIOUS WORD}, \textbf{BEGIN INDEX} $$ \\
+	Start state would be previous word as sentence begin word, and begin index of the next string to be zero . $$ startState = \textbf{SENTENCE BEGIN}, 0 $$ \\
+	Each of the actions would be the next word from the possible fills of vowels for the next substring. Cost at any point will be computed through bigram cost function which takes \textbf{PREVIOUS WORD} and next possible fill as the input. \\
+	Finally, the end state would be when our \textbf{BEGIN INDEX} has visited the end of the query string, therefore:
 	\begin{align*}
-	endFn(state) => state[0] == len(query)
+	endFn(state) => state[1] == len(query)
 	\end{align*}
 	\addtocounter{enumi}{1}
 	\item Since we need to define $u_b(w)$ as a cost function for the relaxed problem which is also a heuristic for the overall problem, it should return a cost less than or equal to the bi-gram cost function $b_(w', w)$. Therefore, for every input $w$, if $u_b$ returns the minimum value of all the possible costs returned by $b(w', w)$, when $w' \epsilon \text{all possible states/words that can be at current depth}$ and $w$ is the next word.
@@ -65,8 +65,8 @@ that all of this is my own work.
 	2. $h(s_{end}) = 0$
 	This is true since if we are already at the end node, there won't be any cost for the next state.
 	
-	\item No, it's the other way round. $A^*$ is a special case of UCS, where we add a bias(future) to the UCS cost function to force it to follow paths which have lower future costs, thereby increasing the chances of finding the lowest cost solution in lesser time. \\
-	 Yes, BFS is a special case of UCS as just like UCS, it tends to explore the states which take same costs to reach, but unlike UCS, BFS assumes that the cost for each action is the same for every state. UCS is more generic and is used where the cost of actions are not equal. Both assume that the costs are positive.
+	\item Yes, UCS is a special case of $A^*$ search. Since $A^*$ explores in the order of sum of past and future costs, and UCS explores states in the order of past costs, therefore when the future cost (or heuristic value) is zero, $A^*$ is same as UCS. \\ \\
+	 Yes, BFS is a special case of UCS as just like UCS, it tends to explore the states which take same costs to reach, but unlike UCS, BFS assumes that the cost for each action is the same for every state. Therefore, BFS is UCS with an assumption that all the costs are equal and positive. UCS is more generic and is used where the cost of actions are not equal. Both assume that the costs are positive.
 	
 	
 \end{enumerate}
