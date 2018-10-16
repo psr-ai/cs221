@@ -105,8 +105,8 @@ Any other bigram & 1000C                 \\
 	2. $h(s_{end}) = 0$ \\ \\
 	This is true since if we are already at the end node, $P_{rel}$ is zero.
 	
-	\item Yes, UCS is a special case of $A^*$ search. Since $A^*$ explores in the order of sum of past and future costs, and UCS explores states in the order of past costs, therefore when the future cost (or heuristic value) is zero, $A^*$ is same as UCS. \\ \\
-	 Yes, BFS is a special case of UCS as just like UCS, it tends to explore the states which take same costs to reach, but unlike UCS, BFS assumes that the cost for each action is the same for every state. Therefore, BFS is UCS with an assumption that all the costs are equal and positive. UCS is more generic and is used where the cost of actions are not equal. Both assume that the costs are positive.
+	\item Yes, UCS is a special case of $A^*$ search. Since $A^*$ explores in the order of sum of past and future costs, and UCS explores states in the order of past costs, therefore when the future cost (or heuristic value) is zero for every state, $A^*$ is same as UCS. \\ \\
+	 Yes, BFS is a special case of UCS as just like UCS, it tends to explore the states in the order of increasing costs, but unlike UCS, BFS assumes that the cost for each action is the same for every state. Therefore, BFS is UCS with an assumption that all the costs are equal and positive. UCS is more flexible and can be used where the cost of actions are not equal. Both assume that the costs are positive.
 	
 	
 \end{enumerate}
