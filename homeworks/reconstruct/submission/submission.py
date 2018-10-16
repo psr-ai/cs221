@@ -98,29 +98,24 @@ class JointSegmentationInsertionProblem(util.SearchProblem):
     def startState(self):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
         # (current_node, prev_node, possible_fill_no)
-        return 0, 0, 0
+        return wordsegUtil.SENTENCE_BEGIN, 0
         # END_YOUR_CODE
 
     def isEnd(self, state):
         # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-        return state[0] == len(self.query)
+        return state[1] == len(self.query)
         # END_YOUR_CODE
 
     def succAndCost(self, state):
         # BEGIN_YOUR_CODE (our solution is 23 lines of code, but don't worry if you deviate from this)
         results = []
-        if state[0] == state[1]:
-            current_word = wordsegUtil.SENTENCE_BEGIN
-        else:
-            possible_fills = self.possibleFills(self.query[state[1]: state[0]])
-            current_word = list(possible_fills)[state[2]]
-        new_state = [state[0] + 1, state[0], 0]
-        while new_state[0] <= len(self.query):
-            new_word = self.query[new_state[1]: new_state[0]]
-            for index, possibleFill in enumerate(self.possibleFills(new_word)):
-                new_state[2] = index
-                results.append((possibleFill, (new_state[0], new_state[1], new_state[2]), self.bigramCost(current_word, possibleFill)))
-            new_state[0] += 1
+        previous_word = state[0]
+        end_index = state[1] + 1
+        while end_index <= len(self.query):
+            next_word = self.query[state[1]: end_index]
+            for index, possibleFill in enumerate(self.possibleFills(next_word)):
+                results.append((possibleFill, (possibleFill, end_index), self.bigramCost(previous_word, possibleFill)))
+            end_index += 1
         return results
         # END_YOUR_CODE
 
