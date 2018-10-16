@@ -19,10 +19,10 @@ that all of this is my own work.
 \section*{Problem 1}
 
 \begin{enumerate}[label=(\alph*)]
-  \item Greedy algorithm, since it's inclined to make a choice that seems best for that particular moment, focuses on choosing the minimum cost path for the given model at the every state it visits. Since it does not consider future costs, therefore, the greedy algorithm is suboptimal for such problems. Consider a corpus "In the last test, antioxidants were found to be present. This result is anti intuitive, since for earlier cases, oxidants were not present". Assuming that the language model is a uni-gram model. Total cost assigned to words $[w_1, w_2 ... w_n]$ is defined as $\sum_{i}^n u(w_1)$, where \\
+  \item Greedy algorithm, since it's inclined to make a choice that seems best for that particular moment, focuses on choosing the minimum cost path for the given model at the every state it visits. Since it does not consider future costs, therefore, the greedy algorithm is suboptimal for such problems. Consider a corpus "In the last test, antioxidants were found to be present. This result is anti intuitive, since for earlier cases, oxidants were not present". Assuming that the language model is a uni-gram model. The cost assigned to words $[w_1, w_2 ... w_n]$ can be defined as the inversely proportional to the count of the word present in the corpus. \\
   \begin{align*}
   u(w) = \begin{cases} 
-  c, & \text{if w in given corpus, $c > 0$} \\
+  \frac{c}{\text{count of $w$ in corpus}}, & \text{if w in given corpus, $c > 0$} \\
   P, & \text{if w not given corpus, $P$ significantly larger than $c$}
   \end{cases}
   \end{align*}
@@ -33,12 +33,52 @@ that all of this is my own work.
 \section*{Problem 2}
 
 \begin{enumerate}[label=(\alph*)]
-  \item The approach of greedy algorithm is the same as described in 1a above, that it chooses a path which has minimum cost for that moment, and doesn't consider future costs. Consider a corpus "He booked ticket. He baked cookies. He baked sandwiches.". Let the possible insertions be defined as an object with key as query and value being the different possible words with vowels: \\
-  \begin{align*}
-  \text{possible insertions} = \{ h: ['he'], bkd: ['baked', 'booked'], cks: ['cookies'], ...\} 
-  \end{align*}
-  And let the bigram cost be defined as inverse of all the counts of different bigrams in the given text, and for those which do not exist, let's assume $\infty$. Let the input list be: $['h', 'bkd', 'cks']$. The different paths are: $['he', 'booked', 'cookies']$ and $['he', 'baked', 'cookies']$.
-  For the greedy algorithm, since the count of ["he", "booked"] is higher, the cost is lesser, therefore it takes this path. But this will cause the algorithm to add up infinitely large cost when evaluating  ["booked", "cookies"] bigram, since this doesn't exist in the bigrams for the above corpus. Whereas, an optimum solution would consider taking ['he', 'baked'], in order to reduce the future cost (['baked', 'cookies'] bigram exists in corpus). 
+  \item The approach of greedy algorithm that it chooses a path which has minimum cost for that node, and doesn't consider future costs while calculating the minimum cost to reach the end. Consider a corpus "He booked ticket. He baked cookies. He booked hotel. She baked cookies.". Let the possible insertions be defined as an object with key as query and value being the different possible words with vowels, and is depicted in \textbf{Table 1}. \\ \\
+\begin{table}
+\centering
+\caption{Table depicting possible insertions}
+\begin{tabular}{|ll|} 
+\hline
+\textbf{Word without vowel} & \textbf{Possible Insertions}  \\ 
+\hline
+h                           & he                            \\ 
+\hline
+bkd                         & baked, booked                 \\ 
+\hline
+cks                         & cookies                       \\ 
+\hline
+htl                         & hotel                         \\ 
+\hline
+sh                          & she                           \\
+\hline
+\end{tabular}
+\end{table}
+Let the bigram cost be defined as inverse of all the counts of different bigrams in the given text, and for those which do not exist, let's assume the cost to be way higher than $C$, example $1000C$ as depicted in \textbf{Table 2}. \\ \\
+\begin{table}
+\centering
+\caption{Table depicting bigram costs based on count}
+\begin{tabular}{|ll|} 
+\hline
+\textbf{Bigram}  & \textbf{Bigram Cost}  \\ 
+\hline
+he booked        & C                     \\ 
+\hline
+he baked         & 2C                    \\ 
+\hline
+booked ticket    & 2C                    \\ 
+\hline
+baked cookies    & C                     \\ 
+\hline
+booked hotel     & 2C                    \\ 
+\hline
+she baked        & 2C                    \\ 
+\hline
+Any other bigram & 1000C                 \\
+\hline
+\end{tabular}
+\end{table}  
+  Let the input list be: $['h', 'bkd', 'cks']$. The different paths are: $['he', 'booked', 'cookies']$ and $['he', 'baked', 'cookies']$. \\ \\
+  For the greedy algorithm, since the cost of ["he", "booked"]($C$) is lower than ["he", "baked"]($2C$), therefore the greedy algorithm chooses "he booked". But this will add up very high cost while evaluating  ["booked", "cookies"] bigram, since this doesn't exist in the bigrams for the above corpus which will be assigned a value of $1000C$. Overall cost of this path will be $1001C$. Whereas, an optimum solution would consider taking ['he', 'baked'] as the first choice even if it's costlier ($2C$) to minimise the overall cost, since the future cost of ['baked', 'cookies'] ($C$) is smaller than ['booked', 'cookies'].
 
 \end{enumerate}
 
@@ -53,17 +93,17 @@ that all of this is my own work.
 	endFn(state) => state[1] == len(query)
 	\end{align*}
 	\addtocounter{enumi}{1}
-	\item Since we need to define $u_b(w)$ as a cost function for the relaxed problem which is also a heuristic for the overall problem, it should return a cost less than or equal to the bi-gram cost function $b_(w', w)$. Therefore, for every input $w$, if $u_b$ returns the minimum value of all the possible costs returned by $b(w', w)$, when $w' \epsilon \text{all possible states/words that can be at current depth}$ and $w$ is the next word.
+	\item Since we need to define $u_b(w)$ as a cost function for the relaxed problem($P_{rel}$) which is also a heuristic for the overall problem, it should return a cost less than or equal to the bi-gram cost function $b(w', w)$. Therefore, for every input $w$, if $u_b$ returns the minimum value of all the possible costs returned by $b(w', w)$, when $w'$ belongs to all possible words(states) that can occur prior to the word and $w$ is the next word. Assuming that all the possible words occurring prior to the next word on any state won't be any word outside the given corpus, therefore
 	\begin{align*}
-	u_{b}^d(w) = min \{b(state_0, w), b(state_1, w) ... b(state_{d'}, w)\}
+	u_{b}(w) = min \{b(w'_1, w), b(w'_2, w) ... b(w'_n, w)\}
 	\end{align*}
-	where $state_0, state_1 .... state_{d'}$ are all the possible states at d, which is the "end index of the query string". \\ \\
-	Our state will only consist of end index of the query string, action will be next vowel inserted word, cost will be $u_{b}^d(action)$, start state will be 0 and end state would be when the end index is equal to the length of the query. \\
+	where $w'_1, w'_2 .... w'_n$ are distinct words in the given corpus.\\ \\
+	Our state will only consist of begin index for the next word, action will be next possible insertion for each combination of characters without spaces starting from the begin index, cost will be $u_{b}(action)$, start state will be 0 and end state would be when the begin index is equal to the length of the query. \\ \\
 	$h(s)$ consistency condition are two: \\ \\
-	1. $Cost(s,a) + h(Succ(s,a)) > h(s)$ \\
-	For this problem, $h(s)$ will have the lowest cost to reach the endpoint from any given state, since we are summing the minimum costs while taking actions. For the overall problem, the cost from this point can be minimum or can be more than that. Therefore the above inequality holds true. \\ \\
-	2. $h(s_{end}) = 0$
-	This is true since if we are already at the end node, there won't be any cost for the next state.
+	1. $Cost(s,a) + h(Succ(s,a)) - h(s) \geq 0$ or $Cost(s,a) + h(Succ(s,a)) \geq h(s)$ \\ \\
+	Since our heuristic is the relaxed problem defined above ($P_{rel}$), $h(s)$ depicts lowest cost to reach the endpoint from any given state $s$, since on every action, our cost is minimum of all the possible bigram costs at that state ($C_{rel} \leq C$). Therefore, actual cost of performing an action $a$, which is depicted as sum of the past cost ($Cost(s,a)$) and future cost ($h(Succ(s,a)$) will be greater than or equal to the heuristic at state $s$($h(s)$). \\ \\
+	2. $h(s_{end}) = 0$ \\ \\
+	This is true since if we are already at the end node, $P_{rel}$ is zero.
 	
 	\item Yes, UCS is a special case of $A^*$ search. Since $A^*$ explores in the order of sum of past and future costs, and UCS explores states in the order of past costs, therefore when the future cost (or heuristic value) is zero, $A^*$ is same as UCS. \\ \\
 	 Yes, BFS is a special case of UCS as just like UCS, it tends to explore the states which take same costs to reach, but unlike UCS, BFS assumes that the cost for each action is the same for every state. Therefore, BFS is UCS with an assumption that all the costs are equal and positive. UCS is more generic and is used where the cost of actions are not equal. Both assume that the costs are positive.
