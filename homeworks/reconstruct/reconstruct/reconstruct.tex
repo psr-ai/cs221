@@ -19,7 +19,7 @@ that all of this is my own work.
 \section*{Problem 1}
 
 \begin{enumerate}[label=(\alph*)]
-  \item Greedy algorithm, since it's inclined to make a choice that seems best for that particular moment, focuses on choosing the minimum cost path for the given model at the every state it visits. Since it does not consider future costs, therefore, the greedy algorithm is suboptimal for such problems. Consider a corpus "In the last test, antioxidants were found to be present. This result is anti intuitive, since for earlier cases, oxidants were not present". Assuming that the language model is a uni-gram model. The cost assigned to words $[w_1, w_2 ... w_n]$ can be defined as the inversely proportional to the count of the word present in the corpus. \\
+  \item Greedy algorithm, since it's inclined to make a choice that seems best for that particular moment, focuses on choosing the minimum cost path for the given model at the every state it visits. Since it does not consider future costs, therefore, the greedy algorithm is suboptimal for such problems. Consider a corpus "In the last test, antioxidants were found to be present. This result is anti intuitive, since for earlier cases, oxidants weren't there". Assuming that the language model is a uni-gram model. The cost assigned to words $[w_1, w_2 ... w_n]$ can be defined as the inversely proportional to the count of the word present in the corpus. \\
   \begin{align*}
   u(w) = \begin{cases} 
   \frac{c}{\text{count of $w$ in corpus}}, & \text{if w in given corpus, $c > 0$} \\
