@@ -101,7 +101,7 @@ Any other bigram & 1000C                 \\
 	Our state will only consist of begin index for the next word, action will be next possible insertion for each combination of characters without spaces starting from the begin index, cost will be $u_{b}(action)$, start state will be 0 and end state would be when the begin index is equal to the length of the query. \\ \\
 	$h(s)$ consistency condition are two: \\ \\
 	1. $Cost(s,a) + h(Succ(s,a)) - h(s) \geq 0$ or $Cost(s,a) + h(Succ(s,a)) \geq h(s)$ \\ \\
-	Since our heuristic is the relaxed problem defined above ($P_{rel}$), $h(s)$ depicts lowest cost to reach the endpoint from any given state $s$, since on every action, our cost is minimum of all the possible bigram costs at that state ($C_{rel} \leq C$). Therefore, actual cost of performing an action $a$, which is depicted as sum of the past cost ($Cost(s,a)$) and future cost ($h(Succ(s,a)$) will be greater than or equal to the heuristic at state $s$($h(s)$). \\ \\
+	Since our heuristic is the relaxed problem defined above ($P_{rel}$), $h(s)$ depicts lowest cost to reach the endpoint from any given state $s$, since on every action, our cost is minimum of all the possible bigram costs at that state ($C_{rel} \leq C$). Therefore, actual cost of performing an action $a$, which is depicted as sum of the past cost ($Cost(s,a)$) and future cost ($h(Succ(s,a)$) will be greater than or equal to the heuristic at state $s$, i.e. $h(s)$. \\ \\
 	2. $h(s_{end}) = 0$ \\ \\
 	This is true since if we are already at the end node, $P_{rel}$ is zero.
 	
