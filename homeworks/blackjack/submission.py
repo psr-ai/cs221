@@ -84,7 +84,47 @@ class BlackjackMDP(util.MDP):
     #   don't include that state in the list returned by succAndProbReward.
     def succAndProbReward(self, state, action):
         # BEGIN_YOUR_CODE (our solution is 53 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        if state[2] is None:
+            return []
+        total_remaining_cards = sum(i for i in state[2])
+        if total_remaining_cards == 0:
+            return (state[0], None, None), 1, state[0]
+        results = []
+
+        def card_drawing_probability(count_of_card): return float(count_of_card) / total_remaining_cards
+
+        def set_value_at_index(tup, i, value): return tup[:i] + (value, ) + tup[i + 1:]
+        if action == 'Take':
+            if state[1] is not None:
+                next_card_value_in_hand = state[0] + self.cardValues[state[1]]
+                if next_card_value_in_hand > self.threshold:
+                    results.append(((next_card_value_in_hand, None, None), 1, 0))
+                else:
+                    new_remaining_card_counts = set_value_at_index(state[2], state[1], state[2][state[1]] - 1)
+                    results.append(((next_card_value_in_hand, None, None), 1, next_card_value_in_hand)) if sum(i for i in new_remaining_card_counts) is 0 else results.append(((next_card_value_in_hand, None, new_remaining_card_counts), 1, 0))
+            else:
+                for index, card_count in enumerate(state[2]):
+                    if card_count is not 0:
+                        next_card_value_in_hand = state[0] + self.cardValues[index]
+                        if next_card_value_in_hand > self.threshold:
+                            results.append(((next_card_value_in_hand, None, None), card_drawing_probability(card_count), 0))
+                        else:
+                            new_remaining_card_counts = set_value_at_index(state[2], index, state[2][index] - 1)
+                            results.append(((next_card_value_in_hand, None, None), card_drawing_probability(card_count), next_card_value_in_hand)) if sum(i for i in new_remaining_card_counts) is 0 else results.append(((next_card_value_in_hand, None, new_remaining_card_counts), card_drawing_probability(card_count), 0))
+        elif action == 'Peek':
+            if state[1] is not None:
+                return []
+            else:
+                for index, card_count in enumerate(state[2]):
+                    if card_count is not 0:
+                        results.append(((state[0], index, state[2]), card_drawing_probability(card_count), -self.peekCost))
+        elif action == 'Quit':
+            if state[0] > self.threshold:
+                results.append(((state[0], None, None), 1, 0))
+            else:
+                results.append(((state[0], None, None), 1, state[0]))
+
+        return results
         # END_YOUR_CODE
 
     def discount(self):
