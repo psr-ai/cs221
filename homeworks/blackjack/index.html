@@ -102,8 +102,8 @@ Briefly explain an algorithm that will allow us to compute $V_\text{opt}$ for ea
 </li>
 
 <li class="writeup" id="2c">
-Suppose we have an MDP with states $\text{States}$ a discount factor $\gamma &lt; 1$,
-but we have an MDP solver that only can solve MDPs with discount $1$.
+Suppose we have an MDP with states $\text{States}$ and a discount factor $\gamma &lt; 1$,
+but we have an MDP solver that can only solve MDPs with discount factor of $1$.
 How can leverage the MDP solver to solve the original MDP?
 <p>
 Let us define a new MDP with states $\text{States}' = \text{States} \cup \{ o \}$,
@@ -112,7 +112,7 @@ but we need to keep the discount $\gamma' = 1$.
 Your job is to define new transition probabilities $T'(s, a, s')$ and rewards $\text{Reward}'(s, a, s')$
 in terms of the old MDP
 such that the optimal values $V_\text{opt}(s)$ for all $s \in \text{States}$
-are the equal under the original MDP and the new MDP.</p>
+are equal under the original MDP and the new MDP.</p>
 
 <p style="font-style: italic;">
     Hint: If you're not sure how to approach this problem, go back to Percy's notes from the first MDP lecture
@@ -127,7 +127,7 @@ are the equal under the original MDP and the new MDP.</p>
 <div class="problemTitle">Problem 3: Peeking Blackjack</div>
 
 <p>
-Now that we gotten a bit of practice with general-purpose MDP algorithms, let's use them to play (a modified version of) Blackjack.
+Now that we have gotten a bit of practice with general-purpose MDP algorithms, let's use them to play (a modified version of) Blackjack.
 For this problem, you will be creating an MDP to describe states, actions, and rewards in this game.
 </p>
 

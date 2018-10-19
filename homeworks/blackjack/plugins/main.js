@@ -76,6 +76,8 @@ function onLoad(assignmentId, ownerName, version) {
   ol.append($('<li>').addClass('code').addClass('template').append('This icon means you should write code in <code>submission.py</code>.'));
   header.append(ol);
 
+    header.append($('<p>').append("All written answers must be <b>in order</b> and <b>clearly and correctly labeled</b> to receive credit."));
+
   header.append($('<p>').append(
     'You should modify the code in <code>submission.py</code> between ' +
     '<pre># BEGIN_YOUR_CODE</pre> and <pre># END_YOUR_CODE</pre> ' +
