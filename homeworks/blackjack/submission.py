@@ -145,7 +145,7 @@ def peekingMDP():
     optimal action at least 10% of the time.
     """
     # BEGIN_YOUR_CODE (our solution is 2 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    return BlackjackMDP([3, 5, 10, 12], 1, 20, 1)
     # END_YOUR_CODE
 
 ############################################################
