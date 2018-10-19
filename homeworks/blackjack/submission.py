@@ -100,8 +100,7 @@ class BlackjackMDP(util.MDP):
                 if next_card_value_in_hand > self.threshold:
                     results.append(((next_card_value_in_hand, None, None), 1, 0))
                 else:
-                    new_remaining_card_counts = set_value_at_index(state[2], state[1], state[2][state[1]] - 1)
-                    results.append(((next_card_value_in_hand, None, None), 1, next_card_value_in_hand)) if sum(i for i in new_remaining_card_counts) is 0 else results.append(((next_card_value_in_hand, None, new_remaining_card_counts), 1, 0))
+                    results.append(((next_card_value_in_hand, None, set_value_at_index(state[2], state[1], state[2][state[1]] - 1)), 1, 0))
             else:
                 for index, card_count in enumerate(state[2]):
                     if card_count is not 0:
@@ -109,8 +108,7 @@ class BlackjackMDP(util.MDP):
                         if next_card_value_in_hand > self.threshold:
                             results.append(((next_card_value_in_hand, None, None), card_drawing_probability(card_count), 0))
                         else:
-                            new_remaining_card_counts = set_value_at_index(state[2], index, state[2][index] - 1)
-                            results.append(((next_card_value_in_hand, None, None), card_drawing_probability(card_count), next_card_value_in_hand)) if sum(i for i in new_remaining_card_counts) is 0 else results.append(((next_card_value_in_hand, None, new_remaining_card_counts), card_drawing_probability(card_count), 0))
+                            results.append(((next_card_value_in_hand, None, set_value_at_index(state[2], index, state[2][index] - 1)), card_drawing_probability(card_count), 0))
         elif action == 'Peek':
             if state[1] is not None:
                 return []
@@ -124,7 +122,15 @@ class BlackjackMDP(util.MDP):
             else:
                 results.append(((state[0], None, None), 1, state[0]))
 
-        return results
+        def end_if_no_remaining_cards(r):
+            new_state = r[0]
+            if new_state[2] is not None:
+                t_r_c = sum(i for i in new_state[2])
+                if t_r_c is 0:
+                    return (new_state[0], None, None), r[1], new_state[0]
+            return r
+
+        return map(end_if_no_remaining_cards, results)
         # END_YOUR_CODE
 
     def discount(self):
