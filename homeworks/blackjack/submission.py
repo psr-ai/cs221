@@ -282,5 +282,3 @@ def compare_changed_MDP(original_mdp, modified_mdp, featureExtractor):
     rewards_new = util.simulate(modified_mdp, QLearningAlgorithm(modified_mdp.actions, modified_mdp.discount(), featureExtractor, 0), 3000)
     print float(sum(r for r in rewards_new)) / len(rewards_new)
     # END_YOUR_CODE
-
-compare_changed_MDP(originalMDP, newThresholdMDP, identityFeatureExtractor)
