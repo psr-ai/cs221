@@ -197,7 +197,7 @@ class QLearningAlgorithm(util.RLAlgorithm):
         scale = self.getStepSize() * (self.getQ(state, action) - (reward + self.discount * v_opt))
         feature_vector = self.featureExtractor(state, action)
         for f, v in feature_vector:
-            self.weights[f] -= scale
+            self.weights[f] -= scale * v
         # END_YOUR_CODE
 
 # Return a single-element list containing a binary (indicator) feature
@@ -256,10 +256,10 @@ def blackjackFeatureExtractor(state, action):
     if counts is not None:
         features.append(((action, tuple(map(lambda t: 1 if t > 0 else 0, counts))), 1))
         for index, count in enumerate(counts):
-            features.append(((action, "card %s count" % index), count))
+            features.append(((action, "card %s" % index, "count %s" % count), 1))
     return features
     # END_YOUR_CODE
-# print blackjackFeatureExtractor((7, None, (0, 1)), 'Quit')
+
 ############################################################
 # Problem 4d: What happens when the MDP changes underneath you?!
 
