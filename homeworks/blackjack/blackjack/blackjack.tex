@@ -79,8 +79,66 @@ that all of this is my own work.
  	\item State $-2$, since it's an end state $V_{opt}^1(-2) = 0$
  \end{enumerate}
  Therefore,
- $$V_{opt} = \{ -2:0, -1: 15, 0: -5, 1: 26.5, 2:0 \}$$
-  \item (your solution)
+ $$V_{opt}^1 = \{ -2:0, -1: 15, 0: -5, 1: 26.5, 2:0 \}$$
+ \textbf{Iteration 3}
+ \begin{enumerate}
+ \item State $0$
+ \begin{enumerate}
+	\item Action $+1$
+	 \begin{align*}
+	 Q_{opt} &= 0.3 * [-5 + 26.5] + 0.7 * [-5 + 15] \\
+	 &= 6.45 + 7 \\
+	 &= 13.45
+	 \end{align*} 
+	 \item Action $-1$
+	 \begin{align*}
+	 Q_{opt} &= 0.8 * [-5 + 15] + 0.2 * [-5 + 26.5] \\
+	 &= 8 + 4.3 \\
+	 &= 12.3
+	 \end{align*}
+ \end{enumerate}
+ Therefore, $V_{opt}^2(0) = 13.45$
+ \item State $1$
+	\begin{enumerate}
+		\item Action $+1$ \\
+			\begin{align*}
+				Q_{opt} &= 0.3 * [100 + 0] + 0.7 * [-5 + -5] \\
+				&= 30 - 7 \\
+				&= 23
+			\end{align*}
+		\item Action $-1$ \\
+			\begin{align*}
+				Q_{opt} &= 0.8 * [-5 + -5] + 0.2 * [100 + 0] \\
+				&= -8 + 20 \\
+				&= 12
+			\end{align*}
+	\end{enumerate}
+	Therefore, $V_{opt}^2(1) = 23$
+\item State $-1$
+	\begin{enumerate}
+		\item Action $+1$
+			\begin{align*}
+				Q_{opt} &= 0.3 * [-5 + -5] + 0.7 * [20] \\
+				&= -3 + 14 \\
+				&= 9
+			\end{align*}
+		\item Action $-1$
+			\begin{align*}
+				Q_{opt} &= 0.8 * [20] + 0.2 * [-5 + -5] \\
+				&= 16 - 2 \\
+				&= 14
+			\end{align*}
+	\end{enumerate}
+	Therefore, $V_{opt}^2(-1) = 14$
+ \end{enumerate}
+ Therefore, $$V_{opt}^2 = \{ -2: 0, -1: 14, 0: 13.45, 1: 23, 2: 0\}$$
+  \item From the solution in $1a$, the different [Action, $Q_{opt}(s,a)$] after iteration 2 for
+  	\begin{enumerate}
+  		\item State $0$ = $[+1, 13.45] [-1, 12.3]$, therefore, $\pi_{opt}(0) = +1$
+  		\item State $1$ = $[+1, 23] [-1, 12]$, therefore, $\pi_{opt}(1) = +1$
+  		\item State $-1$ = $[+1, 9] [-1, 14]$, therefore, $\pi_{opt}(-1) = -1$
+  	\end{enumerate}
+  	Therefore, $$\pi_{opt}(s) = \{ -1: -1, 0: +1, 1: +1 \}$$
 \end{enumerate}
 
 \section*{Problem 2}

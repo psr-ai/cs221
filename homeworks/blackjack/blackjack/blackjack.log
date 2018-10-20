@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  20 OCT 2018 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  20 OCT 2018 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -254,30 +254,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--66
 
  []
 
-[2] (./blackjack.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+
+ []
+
+[3] [4] (./blackjack.aux) ) 
 Here is how much of TeX's memory you used:
  2622 strings out of 492649
  35980 string characters out of 6129622
- 103478 words of memory out of 5000000
+ 105478 words of memory out of 5000000
  6471 multiletter control sequences out of 15000+600000
  9843 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,19n,27p,276b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-8.pfb>
-Output written on blackjack.pdf (2 pages, 97272 bytes).
+ 41i,19n,27p,276b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb>
+Output written on blackjack.pdf (4 pages, 100355 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
