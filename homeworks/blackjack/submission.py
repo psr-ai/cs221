@@ -223,6 +223,14 @@ def simulate_QL_over_MDP(mdp, featureExtractor):
     # BEGIN_YOUR_CODE
     rl = QLearningAlgorithm(mdp.actions, mdp.discount(), featureExtractor)
     util.simulate(mdp, rl, 30000)
+    zero_weight_count = 0
+    total_weight_count = 0
+    print rl.weights
+    for key in rl.weights:
+        weight = rl.weights[key]
+        total_weight_count += 1
+        if abs(weight - 0.0) <= 0.00001: zero_weight_count += 1
+    print "Total Weights: %s, Zero Weights: %s" % (total_weight_count, zero_weight_count)
     rl.explorationProb = 0
     vi = ValueIteration()
     vi.solve(mdp)
@@ -230,10 +238,10 @@ def simulate_QL_over_MDP(mdp, featureExtractor):
     expected_result = 0
     for key in vi.pi:
         count += 1
-        print "State: %s, Value Iteration Policy: %s, RL Policy: %s" % (key, vi.pi[key], rl.getAction(key))
         if vi.pi[key] is rl.getAction(key):
             expected_result += 1
-    print "Performance %s" % (float(expected_result)/count)
+    print "total (state, action) pairs: %s" % (count*3)
+    print "Accuracy of MDP using the featureExtractor: %s" % (float(expected_result)/count * 100)
     # END_YOUR_CODE
 
 ############################################################
