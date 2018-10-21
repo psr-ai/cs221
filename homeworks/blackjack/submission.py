@@ -225,7 +225,6 @@ def simulate_QL_over_MDP(mdp, featureExtractor):
     util.simulate(mdp, rl, 30000)
     zero_weight_count = 0
     total_weight_count = 0
-    print rl.weights
     for key in rl.weights:
         weight = rl.weights[key]
         total_weight_count += 1
