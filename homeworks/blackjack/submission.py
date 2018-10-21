@@ -285,8 +285,8 @@ def compare_changed_MDP(original_mdp, modified_mdp, featureExtractor):
     # BEGIN_YOUR_CODE
     vi = ValueIteration()
     vi.solve(original_mdp)
-    rewards = util.simulate(modified_mdp, util.FixedRLAlgorithm(vi.pi))
-    print float(sum(r for r in rewards)) / len(rewards)
-    rewards_new = util.simulate(modified_mdp, QLearningAlgorithm(modified_mdp.actions, modified_mdp.discount(), featureExtractor, 0), 3000)
-    print float(sum(r for r in rewards_new)) / len(rewards_new)
+    rewards = util.simulate(modified_mdp, util.FixedRLAlgorithm(vi.pi), 10000)
+    print "Expected Reward on modified mdp using original mdp policy: %i" % (float(sum(r for r in rewards)) / len(rewards))
+    rewards_new = util.simulate(modified_mdp, QLearningAlgorithm(modified_mdp.actions, original_mdp.discount(), featureExtractor, 0.1), 10000)
+    print "Expected Reward on modified mdp using Q Learning: %i" % (float(sum(r for r in rewards_new)) / len(rewards_new))
     # END_YOUR_CODE
