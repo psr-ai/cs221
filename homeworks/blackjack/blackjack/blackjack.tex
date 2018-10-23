@@ -28,10 +28,10 @@ that all of this is my own work.
   \end{align*}
   where,
   $$Q_{opt}(s, a) = \sum_{s'} T(s, a, s')[\text{Reward}(s, a, s') + \gamma V_{opt}(s')]$$
-  \textbf{Iteration 1} \\
+  \textbf{Iteration 0} \\
   As per the question, $V$ is assigned values of $0$. Therefore,
   $$V_{opt} = \{-2: 0, -1: 0, 0: 0, 1: 0, 2: 0\}$$
- \textbf{Iteration 2}
+ \textbf{Iteration 1}
  \begin{enumerate}
  	\item State $0$ \\
  	\begin{enumerate}
@@ -80,7 +80,7 @@ that all of this is my own work.
  \end{enumerate}
  Therefore,
  $$V_{opt}^1 = \{ -2:0, -1: 15, 0: -5, 1: 26.5, 2:0 \}$$
- \textbf{Iteration 3}
+ \textbf{Iteration 2}
  \begin{enumerate}
  \item State $0$
  \begin{enumerate}
@@ -173,27 +173,18 @@ that all of this is my own work.
 	max_{\text{a } \epsilon \text{ actions}} Q'_{opt}(s, a) & \text{  otherwise} \\
 	\end{cases} \\
 	Q'_{opt} (s, a) &= \sum_{s'} T(s, a, s')[\text{Rewards} (s,a,s') + \gamma V'_{opt}(s')] \\
-	&= \sum_{s'} T(s, a, s')[\text{Rewards} (s, a, s') + \gamma[T(s', a, s'')[\text{Rewards} (s', a, s'') + \gamma V'_{opt}(s'')]]] \\
-	&= \sum_{s'} T(s, a, s')[\text{Rewards} (s, a, s') + [(\gamma)(T(s', a, s''))[\text{Rewards} (s', a, s'') + \gamma V'_{opt}(s'')]]]
+	&=\sum_{s'} \gamma T(s, a, s') [\frac{\text{Rewards} (s,a,s')}{\gamma} + V'_{opt}(s')] & \textbf{(...1)} \\
 	\end{align*}
-	Multiplying both sides by $\gamma$
+	The above equation looks similar to what the given MDP solver can compute, but since in the above equation, the probabilities do not sum to 1 but to $\gamma$, we need to insert a new state which sums the probabilities to 1. Therefore, we can think of adding extra transition to the list of transitions from a given chance node (or given state) to a new state $o$, such that it conforms to the modified above equation 1 and at the same time, is mathematically correct. As given in the question, we need to make sure that the optimal values $V_{opt}$ for all s $\epsilon$ States are equal under the original and the new MDP. Therefore, $V'_{opt}(s')$ should be equal to zero, which will be possible only when we transition to end state. Moreover, we can set the Reward to transition to this state as 0. Hence,
 	\begin{align*}
-	\gamma Q'_{opt} (s, a) &= \sum_{s'} (\gamma)(T(s, a, s'))[\text{Rewards} (s, a, s') + [(\gamma)(T(s', a, s''))[\text{Rewards} (s', a, s'') + \gamma V'_{opt}(s'')]]] \\
-	&= \sum_{s'} T'(s, a, s') [\text{Rewards} (s, a, s') + [(T'(s', a, s''))[\text{Rewards} (s', a, s'') + \gamma V'_{opt}(s'')]]]
+	Q'_{opt} (s, a) &= \sum_{s'} \gamma T(s, a, s') [\frac{\text{Rewards} (s,a,s')}{\gamma} + V'_{opt}(s')]  + (1-\gamma) [\text{Reward} (s, a, o) + V'_{opt}(o)] \\
 	\end{align*}
-	The above equation is equivalent to solving a different equation $\gamma V'_{opt} = V''_{opt}$, where
+	where Reward$(s,a,o) = 0$ and $V'_{opt} = 0$(since it's an end state).
+	Hence, in order to solve the new MDP with $\gamma$ using the MDP solver for $\gamma = 1$, we need to multiply all the transition probabilities with $\gamma$ and divide the given rewards by $\gamma$. \\
 	\begin{align*}
-	\gamma V'_{opt} \text{ or } V''_{opt} &= \begin{cases}
-	0 & \text{  if $isEnd$} \\
-	max_{\text{a } \epsilon \text{ actions}} \gamma Q'_{opt}(s, a) & \text{  otherwise} \\
-	\end{cases} \\
-	\gamma Q'_{opt} (s, a) &= \sum_{s'} T'(s, a, s') [\text{Rewards} (s, a, s') + V''_{opt}(s')]
-	\end{align*}
-	where,
-	\begin{align*}	
-	V''_{opt} &= V_{opt} \text{ when } T'(s, a, s') = \gamma T (s, a, s')
-	\end{align*}
-	Therefore, creating a different transition distribution by multiplying each transition probability by $\gamma$ with the given MDP solver, we get a value which when divided by $\gamma$ will give us the $V'_{opt}$ for every state.
+		T'(s,a,s') &= T(s,a,s') * \gamma \\
+		\text{Reward'} (s,a,s') &= \frac{\text{Reward} (s,a,s')}{\gamma}
+	\end{align*}	 
 \end{enumerate}
 
 \section*{Problem 3}
@@ -203,8 +194,13 @@ that all of this is my own work.
 	\item For small MDP and identity feature extractor, we observe high similarity in the Q-learning policy and value iteration policy. The actions are same in around $96\%$ of the cases.  But the accuracy when we use larger MDP and the identity feature extractor drastically decreases to around $68\%$. \\
 	The reason for lower performance on larger MDP is that when the number of states are higher and our feature extractor is keeps only (state, action) tuples as features, q-learning for given iterations cannot visit all the possible states in the given iterations and can't learn the right weights. This is the specific problem of generalization. For the small MDP, the total weights are equal to the number of (state, action) pairs(both 81) as the simulation for q learning can visit all the states in the given iterations and update the weights accordingly, hence we get higher accuracy. But for the larger MDP, the total number of (state,action) pairs possible are around 8235, whereas our total weights for the given iteration are around 2000. Therefore, the identity feature extraction based on state and action is not a good solution since it doesn't create generic features which can be applied even if the state is an unseen state, hence poor performance.
 	\addtocounter{enumi}{1}
-	\item When we simulate the blackjack game for the modified MDP of higher threshold using the optimum policy learnt through Value Iteration on original MDP of lower threshold, since the algorithm isn't incorporating any feedback(is a fixed algorithm on a given policy), it will play according to the old threshold of 10. And the expected reward will be the same as if it was playing the old game of threshold 10 and not 15. \\
-	Once we replace the learning algorithm to RL learning algorithm, it will start incorporating feedback from some random actions and some optimum actions, and use them improve it's feature weights. Since it will follow exploration and exploitation approach on a threshold of 15, we see higher expected reward.
+	\item Output from the code by running $4d-helper$:
+	
+	Expected Reward on modified mdp using original mdp policy: $6$ \\
+	Expected Reward on modified mdp using Q Learning: $10$ \\
+	
+	When we simulate the blackjack game for the modified MDP of higher threshold using the optimum policy learnt through Value Iteration on original MDP of lower threshold, since the algorithm isn't incorporating any feedback(is a fixed algorithm on a given policy), it will play according to the old threshold of 10. And the expected reward will be the same as if it was playing the old game of threshold 10 and not 15 (expected reward being around 6 in both cases). \\ \\
+	Once we replace the learning algorithm to RL learning algorithm, it will start incorporating feedback from some random actions and some optimum actions, and use them improve it's feature weights through learning from episodes on the actual threshold directly. Since it will follow exploration and exploitation approach on a threshold of 15, we see higher expected reward of around 10 in this case.
 \end{enumerate}
 
 \end{document}
