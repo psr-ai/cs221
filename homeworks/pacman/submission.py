@@ -177,7 +177,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
         return min(candidates)
 
     utility, action = recurse(gameState, self.depth, 0)
-    print("Utility", utility)
     return action
     # END_YOUR_CODE
 
@@ -199,7 +198,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       min_value = float('+inf')
       min_value_action = None
       for action in state.getLegalActions(agent_index):
-        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)
+        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)[0]
         if next_value < min_value:
           min_value = next_value
           min_value_action = action
@@ -213,7 +212,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       max_value = float('-inf')
       max_value_action = None
       for action in state.getLegalActions(agent_index):
-        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)
+        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)[0]
         if next_value > max_value:
           max_value = next_value
           max_value_action = action
@@ -227,7 +226,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       if gameState.isWin() or gameState.isLose() or len(state.getLegalActions(agent_index)) is 0:
         return gameState.getScore(), None
       if depth is 0:
-        return self.evaluationFunction(state)
+        return self.evaluationFunction(state), None
       next_depth = depth - 1 if agent_index == state.getNumAgents() - 1 else depth
       next_agent_index = 0 if agent_index == state.getNumAgents() - 1 else agent_index + 1
       if agent_index == self.index:
