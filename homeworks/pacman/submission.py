@@ -194,7 +194,48 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
     """
 
     # BEGIN_YOUR_CODE (our solution is 49 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    def min_fn(state, next_depth, agent_index, next_agent_index, alpha, beta):
+      min_value = float('+inf')
+      min_value_action = None
+      for action in state.getLegalActions(agent_index):
+        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)
+        if next_value < min_value:
+          min_value = next_value
+          min_value_action = action
+        if next_value <= alpha:
+          break
+        if next_value < beta:
+          beta = next_value
+      return min_value, min_value_action
+
+    def max_fn(state, next_depth, agent_index, next_agent_index, alpha, beta):
+      max_value = float('-inf')
+      max_value_action = None
+      for action in state.getLegalActions(agent_index):
+        next_value = recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index, alpha, beta)
+        if next_value > max_value:
+          max_value = next_value
+          max_value_action = action
+        if next_value >= beta:
+          break
+        if next_value > alpha:
+          alpha = next_value
+      return max_value, max_value_action
+
+    def recurse(state, depth, agent_index, alpha, beta):
+      if gameState.isWin() or gameState.isLose() or len(state.getLegalActions(agent_index)) is 0:
+        return gameState.getScore(), None
+      if depth is 0:
+        return self.evaluationFunction(state)
+      next_depth = depth - 1 if agent_index == state.getNumAgents() - 1 else depth
+      next_agent_index = 0 if agent_index == state.getNumAgents() - 1 else agent_index + 1
+      if agent_index == self.index:
+        return max_fn(state, next_depth, agent_index, next_agent_index, alpha, beta)
+      else:
+        return min_fn(state, next_depth, agent_index, next_agent_index, alpha, beta)
+
+    utility, action = recurse(gameState, self.depth, 0, float('-inf'), float('inf'))
+    return action
     # END_YOUR_CODE
 
 ######################################################################################
