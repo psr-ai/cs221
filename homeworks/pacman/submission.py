@@ -164,19 +164,20 @@ class MinimaxAgent(MultiAgentSearchAgent):
 
     # BEGIN_YOUR_CODE (our solution is 26 lines of code, but don't worry if you deviate from this)
     def recurse(state, depth, agent_index):
-      if gameState.isWin() or gameState.isLose() or len(state.getLegalActions(agent_index)) is 0:
-        return gameState.getScore(), None
+      if state.isWin() or state.isLose() or len(state.getLegalActions(agent_index)) is 0:
+        return state.getScore(), None
       if depth is 0:
-        return self.evaluationFunction(state)
+        return self.evaluationFunction(state), None
       next_depth = depth - 1 if agent_index == state.getNumAgents() - 1 else depth
       next_agent_index = 0 if agent_index == state.getNumAgents() - 1 else agent_index + 1
-      candidates = [(recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index), action) for action in state.getLegalActions(agent_index)]
+      candidates = [(recurse(state.generateSuccessor(agent_index, action), next_depth, next_agent_index)[0], action) for action in state.getLegalActions(agent_index)]
       if agent_index == self.index:
         return max(candidates)
       else:
         return min(candidates)
 
     utility, action = recurse(gameState, self.depth, 0)
+    print("Utility", utility)
     return action
     # END_YOUR_CODE
 
