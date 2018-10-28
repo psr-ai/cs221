@@ -283,7 +283,43 @@ def betterEvaluationFunction(currentGameState):
   """
 
   # BEGIN_YOUR_CODE (our solution is 26 lines of code, but don't worry if you deviate from this)
-  raise Exception("Not implemented yet")
+  if currentGameState.isLose():
+    return -float("inf")
+  elif currentGameState.isWin():
+    return float("inf")
+
+  current_pacman_position = currentGameState.getPacmanPosition()
+  currentScore = currentGameState.getScore()
+
+  food_list = currentGameState.getFood().asList()
+  closest_distance_from_food = min([util.manhattanDistance(current_pacman_position, food_position) for food_position in food_list])
+  number_of_capsules_left = len(currentGameState.getCapsules())
+  food_left = currentGameState.getNumFood()
+
+  active_ghosts = [ghost for ghost in currentGameState.getGhostStates() if not ghost.scaredTimer]
+  closest_ghost_active = currentGameState.getFood().width + currentGameState.getFood().height
+  if len(active_ghosts) > 0:
+    closest_ghost_active = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in active_ghosts])
+
+  scared_ghosts = [ghost for ghost in currentGameState.getGhostStates() if ghost.scaredTimer]
+  closest_ghost_scared = 0
+  if len(scared_ghosts) > 0:
+    closest_ghost_scared = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in scared_ghosts])
+
+  outputTable = [["dist to closest food", -1.5 * closest_distance_from_food],
+                 ["dist to closest active ghost", 2 * (1. / closest_ghost_active)],
+                 ["dist to closest scared ghost", 2 * closest_ghost_scared],
+                 ["number of capsules left", -3.5 * number_of_capsules_left],
+                 ["number of total foods left", 2 * (1. / food_left)]]
+
+  score = 1 * currentScore + \
+          -1.5 * closest_distance_from_food + \
+          2 * closest_ghost_active + \
+          -2 * closest_ghost_scared + \
+          -20 * number_of_capsules_left + \
+          -4 * food_left
+  return score
+
   # END_YOUR_CODE
 
 # Abbreviation
