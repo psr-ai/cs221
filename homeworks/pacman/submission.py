@@ -285,15 +285,11 @@ def betterEvaluationFunction(currentGameState):
   # BEGIN_YOUR_CODE (our solution is 26 lines of code, but don't worry if you deviate from this)
   if currentGameState.isLose():
     return -float("inf")
-  elif currentGameState.isWin():
-    return float("inf")
 
   current_pacman_position = currentGameState.getPacmanPosition()
-  currentScore = currentGameState.getScore()
-
   food_list = currentGameState.getFood().asList()
   closest_distance_from_food = min([util.manhattanDistance(current_pacman_position, food_position) for food_position in food_list])
-  number_of_capsules_left = len(currentGameState.getCapsules())
+  number_of_capsules_left = len(currentGameState.getCapsules()) or 0.1
   food_left = currentGameState.getNumFood()
 
   active_ghosts = [ghost for ghost in currentGameState.getGhostStates() if not ghost.scaredTimer]
@@ -302,16 +298,21 @@ def betterEvaluationFunction(currentGameState):
     closest_ghost_active = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in active_ghosts])
 
   scared_ghosts = [ghost for ghost in currentGameState.getGhostStates() if ghost.scaredTimer]
-  closest_ghost_scared = 0
+  closest_ghost_scared = float('inf')
   if len(scared_ghosts) > 0:
     closest_ghost_scared = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in scared_ghosts])
 
-  score = 1 * currentScore + \
-          4. / closest_distance_from_food + \
-          2 * closest_ghost_active + \
-          -2 * closest_ghost_scared + \
-          -20 * number_of_capsules_left + \
-          -4 * food_left
+  mobility = 0
+  if currentGameState.hasWall(current_pacman_position[0], current_pacman_position[1]):
+    mobility = -100
+
+  score = 1 * currentGameState.getScore() + \
+          10. / closest_distance_from_food + \
+          50. / closest_ghost_scared + \
+          1 * closest_ghost_active + \
+          20. / number_of_capsules_left + \
+          10. / food_left + \
+          mobility
   return score
   # END_YOUR_CODE
 
