@@ -306,20 +306,13 @@ def betterEvaluationFunction(currentGameState):
   if len(scared_ghosts) > 0:
     closest_ghost_scared = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in scared_ghosts])
 
-  outputTable = [["dist to closest food", -1.5 * closest_distance_from_food],
-                 ["dist to closest active ghost", 2 * (1. / closest_ghost_active)],
-                 ["dist to closest scared ghost", 2 * closest_ghost_scared],
-                 ["number of capsules left", -3.5 * number_of_capsules_left],
-                 ["number of total foods left", 2 * (1. / food_left)]]
-
   score = 1 * currentScore + \
-          -1.5 * closest_distance_from_food + \
+          4. / closest_distance_from_food + \
           2 * closest_ghost_active + \
           -2 * closest_ghost_scared + \
           -20 * number_of_capsules_left + \
           -4 * food_left
   return score
-
   # END_YOUR_CODE
 
 # Abbreviation
