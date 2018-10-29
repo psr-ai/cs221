@@ -292,11 +292,6 @@ def betterEvaluationFunction(currentGameState):
   number_of_capsules_left = len(currentGameState.getCapsules()) or 0.1
   food_left = currentGameState.getNumFood()
 
-  active_ghosts = [ghost for ghost in currentGameState.getGhostStates() if not ghost.scaredTimer]
-  closest_ghost_active = currentGameState.getFood().width + currentGameState.getFood().height
-  if len(active_ghosts) > 0:
-    closest_ghost_active = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in active_ghosts])
-
   scared_ghosts = [ghost for ghost in currentGameState.getGhostStates() if ghost.scaredTimer]
   closest_ghost_scared = float('inf')
   if len(scared_ghosts) > 0:
