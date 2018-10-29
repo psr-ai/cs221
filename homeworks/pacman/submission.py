@@ -302,17 +302,11 @@ def betterEvaluationFunction(currentGameState):
   if len(scared_ghosts) > 0:
     closest_ghost_scared = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in scared_ghosts])
 
-  mobility = 0
-  if currentGameState.hasWall(current_pacman_position[0], current_pacman_position[1]):
-    mobility = -100
-
   score = 1 * currentGameState.getScore() + \
           10. / closest_distance_from_food + \
-          50. / closest_ghost_scared + \
-          1 * closest_ghost_active + \
+          100. / closest_ghost_scared + \
           20. / number_of_capsules_left + \
-          10. / food_left + \
-          mobility
+          10. / food_left
   return score
   # END_YOUR_CODE
 
