@@ -51,7 +51,7 @@ that all of this is my own work.
   \end{cases}
   \end{align*}
     Where, Utility($s$) is the function which gives us the utility at state $s$, isEnd tells us if $s$ is an end state, Eval($s$) is the evaluation function for state $s$(an estimation for $V_{minmax}(s)$), Player($s$) returns whose turn it is. \\ \\
-  Here $agent_0$ is the pacman, thus it will be playing max over possible rewards from successor states, whereas $agent_1$ to $agent_n$ are the ghosts, which we know are following a random policy. \\ \\
+  Here $agent_0$ is the pacman, thus it will be playing max over possible rewards from successor states, whereas $agent_1$ to $agent_n$ are the ghosts, which we know are following the policy of taking a random decision. \\ \\
   Since a single depth consists of all the players making a move, we decrease the depth on last agent's/player's turn.
 \end{enumerate}
 
