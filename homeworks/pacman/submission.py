@@ -298,8 +298,8 @@ def betterEvaluationFunction(currentGameState):
     closest_ghost_scared = min([util.manhattanDistance(current_pacman_position, g.getPosition()) for g in scared_ghosts])
 
   score = 1 * currentGameState.getScore() + \
-          10. / closest_distance_from_food + \
-          100. / closest_ghost_scared + \
+          3. / closest_distance_from_food + \
+          200. / closest_ghost_scared + \
           20. / number_of_capsules_left + \
           10. / food_left
   return score
