@@ -277,7 +277,24 @@ class BacktrackingSearch():
 
 
         # BEGIN_YOUR_CODE (our solution is 20 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        neighbors = [(var, neighbor) for neighbor in self.csp.get_neighbor_vars(var)]
+        while len(neighbors) > 0:
+            var1, var2 = neighbors.pop(0)
+            domain_changed = False
+            index = 0
+            while index < len(self.domains[var2]):
+                val2 = self.domains[var2][index]
+                should_remove = True
+                for val1 in self.domains[var1]:
+                    if self.csp.binaryFactors[var1][var2][val1][val2] != 0:
+                        should_remove = False
+                if should_remove:
+                    self.domains[var2].remove(val2)
+                    domain_changed = True
+                else:
+                    index += 1
+            if domain_changed:
+                neighbors = neighbors + [(var2, neighbor) for neighbor in self.csp.get_neighbor_vars(var2)]
         # END_YOUR_CODE
 
 
