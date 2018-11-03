@@ -323,17 +323,15 @@ def get_sum_variable(csp, name, variables, maxSum):
     """
     # BEGIN_YOUR_CODE (our solution is 18 lines of code, but don't worry if you deviate from this)
     result = ('sum', name, 'aggregated')
-
-    def get_max_sum(t):
-        if t == 0:
-            return 0
-        return maxSum
+    csp.add_variable(result, range(0, maxSum + 1))
+    if len(variables) == 0:
+        csp.add_unary_factor(result, lambda val: 0)
+        return result
 
     def get_b_i(i): return ('sum', name, i, 0), ('sum', name, i, 1)
-    csp.add_variable(result, range(0, get_max_sum(len(variables)) + 1))
     for index, variable in enumerate(variables):
         B_i = get_b_i(index)
-        csp.add_variable(B_i, [(x, y) for y in range(0, get_max_sum(index + 1) + 1) for x in range(0, get_max_sum(index) + 1)])
+        csp.add_variable(B_i, [(x, y) for y in range(0, maxSum + 1) for x in range(0, maxSum + 1)])
         if index == 0:
             csp.add_unary_factor(B_i, lambda val: 1 if val[0] == 0 else 0)
         csp.add_binary_factor(B_i, variable, lambda b, val: 1 if b[0] + val == b[1] else 0)
