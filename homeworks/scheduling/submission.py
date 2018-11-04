@@ -325,19 +325,28 @@ def get_sum_variable(csp, name, variables, maxSum):
     result = ('sum', name, 'aggregated')
     csp.add_variable(result, range(0, maxSum + 1))
     if len(variables) == 0:
-        csp.add_unary_factor(result, lambda val: 0)
+        csp.add_unary_factor(result, lambda val: not val)
         return result
 
     def get_b_i(i): return ('sum', name, i, 0), ('sum', name, i, 1)
+    old_domain = None
     for index, variable in enumerate(variables):
         B_i = get_b_i(index)
-        csp.add_variable(B_i, [(x, y) for y in range(0, maxSum + 1) for x in range(0, maxSum + 1)])
         if index == 0:
-            csp.add_unary_factor(B_i, lambda val: 1 if val[0] == 0 else 0)
-        csp.add_binary_factor(B_i, variable, lambda b, val: 1 if b[0] + val == b[1] else 0)
+            csp.add_variable(B_i, [(0, t) for t in csp.values[variable]])
+            old_domain = csp.values[variable]
+        else:
+            new_domain = []
+            for t in old_domain:
+                for val in csp.values[variable]:
+                    if t + val not in new_domain and t + val <= maxSum:
+                        new_domain.append(t + val)
+            csp.add_variable(B_i, [(x, y) for x in old_domain for y in new_domain])
+            old_domain = new_domain
+        csp.add_binary_factor(B_i, variable, lambda b, val: b[0] + val == b[1])
         if index > 0:
-            csp.add_binary_factor(get_b_i(index - 1), B_i, lambda val1, val2: 1 if val2[0] == val1[1] else 0)
-    csp.add_binary_factor(B_i, result, lambda val1, val2: 1 if val1[1] == val2 else 0)
+            csp.add_binary_factor(get_b_i(index - 1), B_i, lambda val1, val2: val2[0] == val1[1])
+    csp.add_binary_factor(B_i, result, lambda val1, val2: val1[1] == val2)
     return result
 
     # END_YOUR_CODE
@@ -511,7 +520,18 @@ class SchedulingCSPConstructor():
         #         be enforced by the constraints added by add_quarter_constraints
 
         # BEGIN_YOUR_CODE (our solution is 16 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        for quarter in self.profile.quarters:
+            variables = []
+            for request in self.profile.requests:
+                for cid in request.cids:
+                    variable = (cid, quarter)
+                    variables.append(variable)
+                    domain = [0] + range(self.bulletin.courses[cid].minUnits, self.bulletin.courses[cid].maxUnits + 1)
+                    csp.add_variable(variable, domain)
+                    if not self.bulletin.courses[cid].is_offered_in(quarter):
+                        csp.add_unary_factor(variable, lambda val: 0)
+            sum_variable = get_sum_variable(csp, quarter, variables, self.profile.maxUnits + 1)
+            csp.add_unary_factor(sum_variable, lambda val: val in range(self.profile.minUnits, self.profile.maxUnits + 1))
         # END_YOUR_CODE
 
     def add_all_additional_constraints(self, csp):
@@ -524,3 +544,23 @@ class SchedulingCSPConstructor():
         self.add_request_weights(csp)
         self.add_prereq_constraints(csp)
         self.add_unit_constraints(csp)
+
+
+# bulletin = util.CourseBulletin('courses.json')
+# profile = util.Profile(bulletin, 'profile3b.txt')
+# cspConstructor = SchedulingCSPConstructor(bulletin, copy.deepcopy(profile))
+# csp = cspConstructor.get_basic_csp()
+#
+# csp.add_variable(('CS148', 'Aut2016'), [0, 3, 4])
+# csp.add_variable(('CS149', 'Aut2016'), [0, 3, 4])
+# csp.add_variable(('CS205A', 'Aut2016'), [0, 3])
+# csp.add_variable(('CS224N', 'Aut2016'), [0, 3, 4])
+# csp.add_variable(('CS228', 'Aut2016'), [0, 3, 4])
+# csp.add_variable(('CS229', 'Aut2016'), [0, 3, 4])
+# csp.add_variable(('CS246', 'Aut2016'), [0, 3, 4])
+#
+# sumVar = get_sum_variable(csp, 'Aut2016', [('CS229', 'Aut2016'), ('CS205A', 'Aut2016'), ('CS224N', 'Aut2016'), ('CS148', 'Aut2016'), ('CS228', 'Aut2016'), ('CS246', 'Aut2016'), ('CS149', 'Aut2016')], 7)
+# csp.add_unary_factor(sumVar, lambda n: n in [6])
+# sumSolver = BacktrackingSearch()
+# sumSolver.solve(csp)
+# print("optimal assignments", sumSolver.numOptimalAssignments)
