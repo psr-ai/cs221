@@ -529,9 +529,21 @@ class SchedulingCSPConstructor():
                     domain = [0] + range(self.bulletin.courses[cid].minUnits, self.bulletin.courses[cid].maxUnits + 1)
                     csp.add_variable(variable, domain)
                     if not self.bulletin.courses[cid].is_offered_in(quarter):
-                        csp.add_unary_factor(variable, lambda val: 0)
-            sum_variable = get_sum_variable(csp, quarter, variables, self.profile.maxUnits + 1)
+                        csp.add_unary_factor(variable, lambda val: not val)
+            for request in self.profile.requests:
+                for cid in request.cids:
+                    for cid_ in request.cids:
+                        if cid is cid_: continue
+                        csp.add_binary_factor((cid, quarter), (cid_, quarter), lambda v1, v2: not v1 or not v2)
+            sum_variable = get_sum_variable(csp, quarter, variables, self.profile.maxUnits)
             csp.add_unary_factor(sum_variable, lambda val: val in range(self.profile.minUnits, self.profile.maxUnits + 1))
+
+        for request in self.profile.requests:
+            for cid in request.cids:
+                for quarter1 in self.profile.quarters:
+                    for quarter2 in self.profile.quarters:
+                        if quarter1 is quarter2: continue
+                        csp.add_binary_factor((cid, quarter1), (cid, quarter2), lambda v1, v2: not v1 or not v2)
         # END_YOUR_CODE
 
     def add_all_additional_constraints(self, csp):
