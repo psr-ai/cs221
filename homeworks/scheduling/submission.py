@@ -529,13 +529,7 @@ class SchedulingCSPConstructor():
                     domain = [0] + range(self.bulletin.courses[cid].minUnits, self.bulletin.courses[cid].maxUnits + 1)
                     csp.add_variable(variable, domain)
                     csp.add_binary_factor((request, quarter), variable, lambda r_cid, credit: not credit if cid != r_cid else (credit in range(self.bulletin.courses[cid].minUnits, self.bulletin.courses[cid].maxUnits + 1)))
-                    # if not self.bulletin.courses[cid].is_offered_in(quarter):
-                    #     csp.add_unary_factor(variable, lambda val: not val)
-            # for request in self.profile.requests:
-            #     for cid in request.cids:
-            #         for cid_ in request.cids:
-            #             if cid is cid_: continue
-            #             csp.add_binary_factor((cid, quarter), (cid_, quarter), lambda v1, v2: not v1 or not v2)
+
             sum_variable = get_sum_variable(csp, quarter, variables, self.profile.maxUnits)
             csp.add_unary_factor(sum_variable, lambda val: val in range(self.profile.minUnits, self.profile.maxUnits + 1))
         # END_YOUR_CODE
@@ -550,23 +544,3 @@ class SchedulingCSPConstructor():
         self.add_request_weights(csp)
         self.add_prereq_constraints(csp)
         self.add_unit_constraints(csp)
-
-
-# bulletin = util.CourseBulletin('courses.json')
-# profile = util.Profile(bulletin, 'profile3b.txt')
-# cspConstructor = SchedulingCSPConstructor(bulletin, copy.deepcopy(profile))
-# csp = cspConstructor.get_basic_csp()
-#
-# csp.add_variable(('CS148', 'Aut2016'), [0, 3, 4])
-# csp.add_variable(('CS149', 'Aut2016'), [0, 3, 4])
-# csp.add_variable(('CS205A', 'Aut2016'), [0, 3])
-# csp.add_variable(('CS224N', 'Aut2016'), [0, 3, 4])
-# csp.add_variable(('CS228', 'Aut2016'), [0, 3, 4])
-# csp.add_variable(('CS229', 'Aut2016'), [0, 3, 4])
-# csp.add_variable(('CS246', 'Aut2016'), [0, 3, 4])
-#
-# sumVar = get_sum_variable(csp, 'Aut2016', [('CS229', 'Aut2016'), ('CS205A', 'Aut2016'), ('CS224N', 'Aut2016'), ('CS148', 'Aut2016'), ('CS228', 'Aut2016'), ('CS246', 'Aut2016'), ('CS149', 'Aut2016')], 7)
-# csp.add_unary_factor(sumVar, lambda n: n in [6])
-# sumSolver = BacktrackingSearch()
-# sumSolver.solve(csp)
-# print("optimal assignments", sumSolver.numOptimalAssignments)
