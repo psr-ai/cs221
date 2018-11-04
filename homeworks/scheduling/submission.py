@@ -325,7 +325,7 @@ def get_sum_variable(csp, name, variables, maxSum):
     result = ('sum', name, 'aggregated')
     csp.add_variable(result, range(0, maxSum + 1))
     if len(variables) == 0:
-        csp.add_unary_factor(result, lambda val: not val)
+        csp.add_unary_factor(result, lambda val: False)
         return result
 
     def get_b_i(i): return ('sum', name, i, 0), ('sum', name, i, 1)
