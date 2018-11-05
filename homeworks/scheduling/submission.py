@@ -544,3 +544,14 @@ class SchedulingCSPConstructor():
         self.add_request_weights(csp)
         self.add_prereq_constraints(csp)
         self.add_unit_constraints(csp)
+
+
+csp = util.CSP()
+csp.add_variable('X_1', [0, 1])
+csp.add_variable('X_3', [0, 1])
+csp.add_variable('X_2', [0, 1])
+csp.add_binary_factor('X_1', 'X_2', lambda v1, v2: v1 is not v2)
+csp.add_binary_factor('X_2', 'X_3', lambda v1, v2: v1 is not v2)
+
+sumSolver = BacktrackingSearch()
+sumSolver.solve(csp, ac3=True)
