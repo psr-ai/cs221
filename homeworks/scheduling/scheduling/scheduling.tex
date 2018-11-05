@@ -84,8 +84,18 @@ x1 & x2 & x3 & t1(x) & t2(x) & \textbf{Consistency}  \\
 \section*{Problem 2}
 
 \begin{enumerate}[label=(\alph*)]
-  \item (your solution)
-  \item (your solution)
+  \item \textbf{Reducing the CSP:} In order to reduce an N-ary CSP to unary or binary factors, we can think of introducing another set of variables ($B_1$, $B_2$, $B_3$ and $S$) called auxiliary variables to keep a track of total sum of variables $X_1$, $X_2$ and $X_3$ as we traverse in the graph.\\ \\
+  \textbf{Auxiliary variables introduction}: Following is the graphical representation of auxiliary variables $B_1$, $B_2$, $B_3$ and $S$ and given variables $X_1$, $X_2$ and $X_3$.
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2240.jpg}
+  \end{center}
+  \textbf{Domains}: $X_1$, $X_2$ and $X_3$ are the given variables with domains $\{0, 1, 2\}$ each. As discussed earlier, auxiliary variables $B_1$, $B_2$ and $B_3$ keep a track of the total sum. Therefore, these are two dimensional, one element carrying the total sum of previous auxiliary variable and other keeping a record after adding value of attached variable $X_i$. Both $B_n[0]$ and $B_n[1]$ will have a range from $0, 1, ... K$, where K being the maximum sum constraint. $S$ is the sum variable, having domain $0, 1, ... K$ \\ \\
+  \textbf{Constraints}: There are going to be unary and binary constraints as follows(referencing above image): \\ \\
+  $f_0$ states that $B_1[0]$ should be 0, since we start with sum = 0. Therefore, $f_0(B1) = B_1[0] == 0$ \\ \\
+  $f_1, f_3$ and $f_5$ make sure that adding $X_i$ to first coordinate of $B_i$ gives us second coordinate of $B_i$. Hence, $f_1(B_1, X_1) = B_1[0] + X_1 == B_1[1]$, similarly for $f_3(B_2, X_2) = B_2[0] + X_2 == B_2[1]$, and for $f_5(B_3, X_3) = B_3[0] + X_3 == B_3[1]$. \\ \\
+  $f_2$ and $f_4$ make sure that first index of $B_{i+1}$ is equal to last index of $B_{i}$. Hence, $f_2(B_2, B_1) = B_2[0] == B_1[1]$ and $f_4(B_3, B_2) = B_3[0] == B_2[1]$. \\ \\
+  $f_6$ maintains that last index of $B_3$ and the value of sum variable $S$ are equal. Therefore, $f_6(B_3, S) = B_3[1] == S$. \\ \\
+  This scheme works because it has added maximum value constraint over the sum of all three variables through auxiliary sum variable $S$, along with propagating sum of variables one by one from $X_1$ to $X_3$.
 \end{enumerate}
 
 \end{document}
