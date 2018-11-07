@@ -146,4 +146,51 @@ Aut2019 & 3     & CS224N
 \end{table}
 \end{enumerate}
 
+\section*{Problem 4}
+
+\begin{enumerate}[label=(\alph*)]
+\item If we were to include notable patterns as factors to CSP, the graph would look like the following:
+  \begin{center}
+  \includegraphics[scale=0.2]{IMG_2245.jpg}
+  \end{center}
+  where $X_1$, $X_2$ ... $X_n$ are variables, consecutive pairs connected by factors $f_1$, $f_2$ ... $f_{n-1}$. The notable patterns, when introduced as constraints, have arity based on the length of the pattern. For example, in the above image, one type of constraints are binary constraints($p_{21}$, $p_{22}$ ... $p_{2n-1}$) occurring over each consecutive pair, checking for existence of a sequence [x, y] being satisfied. Other type are ternary constraints occurring on all possible 3 consecutive variables($p_{31}$, $p_{32}$ ... $p_{3n-2}$). \\
+  In worst case scenario would be a notable pattern constraint expecting all variables to take a particular value (meaning having length equal to number of variables). Tree width in this case would be $n$, since variable elimination cannot be done with any of the variables as the pairs are connected via multiple constraints.
+  
+  \item Let $p_t$ be the factors introduced by notable patterns. These are N-ary constraints, added to all sequences of variables. They have arity based on the length of the pattern(described in 4a). The algorithm would be as follows: \\ \\
+  best\_weight = 0 \\
+  best\_assignment = \{\} \\
+  max\_weight\_assignment(x, f, n, Domains)
+  
+  \hspace{10mm}If x is complete assignment and $f \gamma^n$ is greater than best\_weight : 
+  
+  \hspace{20mm}best\_weight = $f \gamma^n$ and best\_assignment = x and return
+  
+  \hspace{10mm}Choose unassigned VARIABLE $X_i$ which has least consistent values
+  
+  \hspace{10mm}Order VALUES $Domain_i$ of chosen $X_i$ through least constrained value
+  
+  \hspace{10mm}For each value v in that order:
+  
+    \hspace{20mm}$\delta \leftarrow \pi_{f_j \epsilon D(x, X_i)} f_j(x \bigcup \{X_i: v\})$
+    
+    \hspace{20mm}If $\delta = 0$: continue
+    
+    \hspace{20mm}$N \leftarrow \sum_{p_t \epsilon D(x, X_i)} p_j(x \bigcup \{X_i: v\})$
+    
+    \hspace{20mm}Domains' $\leftarrow$ Domains via AC-2
+    
+    \hspace{20mm}max\_weight\_assignment($x \bigcup \{X_i: v\}, w\delta, n + N, Domains'$)
+    
+    max\_weight\_assignment(\{\}, 1, 0, \{ $X_1: [1,2...K]$, ..., $X_n: [1,2...K]$\})
+    \\ \\
+    The algorithm starts by checking if x(current assignment) is a complete assignment. If yes and the weight (which is $f \gamma^n$) is greater than best\_weight until that point, then it updates the current best\_weight and best\_assignment with $f\gamma^n$ and x respectively. Else, it continues and picks up an unassigned variable which has fewest consistent values(most constrained variable), and then picks up values based on least constrained value(order by least constrained value). Then for each value v it calculates the product of new factors $f_j$ which are dependent on the new assignment after $X_i = v$ is added to the existing assignment x. If $\delta = 0$, then we skip the current assignment else we continue and find out the value of N which is sum of the new notable pattern factors $p_j$ which are dependent on newly assigned variable. Furthermore, we update the domains via AC-3. And recursively call the max\_weight\_assignment function with new assignment, multiplying existing $f_i$ factors weight $f$ by $\delta$, add $N$ to observed sequences previously and with the updated domains via AC-3. The algorithm is initialised with empty assignment, 1 as factor weight of $f$, 0 as sum of notable patterns and original domain for every variable $X_i: [1,2...K]$. \\ \\
+    
+    Time complexity would be $O(K^n)$, since it can be visualised as a graph with depth $n$ and branching factor $K$. Space complexity would be $O(1)$ since we are not storing any variable with respect to the input size but just two constants, best\_weight and best\_assignment.
+    
+    
+    
+    
+
+\end{enumerate}
+
 \end{document}
