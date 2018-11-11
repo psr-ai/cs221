@@ -47,10 +47,10 @@ class ExactInference(object):
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
         def distance(p1, p2): return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
-        for col in range(self.belief.getNumCols()):
-            for row in range(self.belief.getNumRows()):
-                    conditional_probability = util.pdf(distance((util.colToX(col), util.rowToY(row)), (agentX, agentY)), Const.SONAR_STD, observedDist)
-                    self.belief.setProb(row, col, self.belief.getProb(row, col) * conditional_probability)
+        for i in range(self.belief.getNumCols()):
+            for j in range(self.belief.getNumRows()):
+                    emission_probability = util.pdf(distance((util.colToX(i), util.rowToY(j)), (agentX, agentY)), Const.SONAR_STD, observedDist)
+                    self.belief.setProb(j, i, self.belief.getProb(j, i) * emission_probability)
         self.belief.normalize()
         # END_YOUR_CODE
 
@@ -75,7 +75,13 @@ class ExactInference(object):
     def elapseTime(self):
         if self.skipElapse: return ### ONLY FOR THE GRADER TO USE IN Problem 2
         # BEGIN_YOUR_CODE (our solution is 7 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        old_probabilities = [row[:] for row in self.belief.grid]
+        for row in range(self.belief.getNumRows()):
+            for col in range(self.belief.getNumCols()):
+                self.belief.setProb(row, col, 0)  # if no value present in self.transProb, default probability to 0
+        for ([row, column], new_tile), value in self.transProb.items():
+            self.belief.addProb(new_tile[0], new_tile[1], value * old_probabilities[row][column])
+        self.belief.normalize()
         # END_YOUR_CODE
 
     # Function: Get Belief
