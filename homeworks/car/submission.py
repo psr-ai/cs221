@@ -46,7 +46,12 @@ class ExactInference(object):
 
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        def distance(p1, p2): return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+        for col in range(self.belief.getNumCols()):
+            for row in range(self.belief.getNumRows()):
+                    conditional_probability = util.pdf(distance((util.colToX(col), util.rowToY(row)), (agentX, agentY)), Const.SONAR_STD, observedDist)
+                    self.belief.setProb(row, col, self.belief.getProb(row, col) * conditional_probability)
+        self.belief.normalize()
         # END_YOUR_CODE
 
     ##################################################################################
