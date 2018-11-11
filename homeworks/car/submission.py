@@ -176,7 +176,19 @@ class ParticleFilter(object):
     ##################################################################################
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 22 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        def distance(p1, p2): return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+        # Re-weight: creating dictionary of form particle => new weights
+        new_particles = {}
+        for particle in self.particles:
+            row = particle[0]
+            col = particle[1]
+            mean = distance((util.colToX(col), util.rowToY(row)), (agentX, agentY))
+            new_particles[particle] = self.particles[particle] * util.pdf(mean, Const.SONAR_STD, observedDist)
+        # Re-sample: updating current particles dictionary with updated weight sampling
+        self.particles = collections.defaultdict(int)
+        for _ in range(self.NUM_PARTICLES):
+            new_particle = util.weightedRandomChoice(new_particles)
+            self.particles[new_particle] += 1
         # END_YOUR_CODE
 
         self.updateBelief()
