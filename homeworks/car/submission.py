@@ -218,7 +218,12 @@ class ParticleFilter(object):
     ##################################################################################
     def elapseTime(self):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        particles = collections.defaultdict(int)
+        for tile in self.particles:
+            for _ in range(self.particles[tile]):
+                particle = util.weightedRandomChoice(self.transProbDict[tile])
+                particles[particle] += 1
+        self.particles = particles
         # END_YOUR_CODE
 
     # Function: Get Belief
