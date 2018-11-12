@@ -226,8 +226,9 @@ class ParticleFilter(object):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
         particles = collections.defaultdict(int)
         for tile in self.particles:
+            transition_distribution = self.transProbDict[tile] if tile in self.transProbDict else None
             for _ in range(self.particles[tile]):
-                new_tile = util.weightedRandomChoice(self.transProbDict[tile])
+                new_tile = util.weightedRandomChoice(transition_distribution)
                 particles[new_tile] += 1
         self.particles = particles
         # END_YOUR_CODE
