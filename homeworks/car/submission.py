@@ -178,16 +178,22 @@ class ParticleFilter(object):
         # BEGIN_YOUR_CODE (our solution is 22 lines of code, but don't worry if you deviate from this)
         def distance(p1, p2): return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
         # Re-weight: creating dictionary of form particle => new weights
-        new_particles = {}
+        new_weight_distribution = {}
+        total = 0.0
         for particle in self.particles:
             row = particle[0]
             col = particle[1]
             mean = distance((util.colToX(col), util.rowToY(row)), (agentX, agentY))
-            new_particles[particle] = self.particles[particle] * util.pdf(mean, Const.SONAR_STD, observedDist)
+            new_weight = self.particles[particle] * util.pdf(mean, Const.SONAR_STD, observedDist)
+            new_weight_distribution[particle] = new_weight
+            total += new_weight
+        # normalizing
+        for particle in new_weight_distribution:
+            new_weight_distribution[particle] = new_weight_distribution[particle] / total
         # Re-sample: updating current particles dictionary with updated weight sampling
         self.particles = collections.defaultdict(int)
         for _ in range(self.NUM_PARTICLES):
-            new_particle = util.weightedRandomChoice(new_particles)
+            new_particle = util.weightedRandomChoice(new_weight_distribution)
             self.particles[new_particle] += 1
         # END_YOUR_CODE
 
