@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  13 NOV 2018 14:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  13 NOV 2018 14:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -252,21 +252,58 @@ File: IMG_2277.jpg Graphic file (type jpg)
 Package pdftex.def Info: IMG_2277.jpg  used on input line 42.
 (pdftex.def)             Requested size: 221.13907pt x 72.07347pt.
 [2 <./IMG_2278.jpg> <./IMG_2277.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 118--125
+<IMG_2279.jpg, id=21, 2863.69875pt x 3439.85126pt>
+File: IMG_2279.jpg Graphic file (type jpg)
+<use IMG_2279.jpg>
+Package pdftex.def Info: IMG_2279.jpg  used on input line 77.
+(pdftex.def)             Requested size: 286.38664pt x 344.00528pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 118--125
+<IMG_2280.jpg, id=22, 3948.7525pt x 1331.97626pt>
+File: IMG_2280.jpg Graphic file (type jpg)
+<use IMG_2280.jpg>
+Package pdftex.def Info: IMG_2280.jpg  used on input line 81.
+(pdftex.def)             Requested size: 394.89839pt x 133.20543pt.
+[3 <./IMG_2279.jpg>]
+<IMG_2281.jpg, id=26, 3339.47626pt x 1435.3625pt>
+File: IMG_2281.jpg Graphic file (type jpg)
+<use IMG_2281.jpg>
+Package pdftex.def Info: IMG_2281.jpg  used on input line 93.
+(pdftex.def)             Requested size: 333.9672pt x 143.54465pt.
+ [4 <./IMG_2280.jpg> <./IMG_2281.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-[3] [4] (./car.aux) ) 
+<IMG_2282.jpg, id=30, 3758.04pt x 1348.03625pt>
+File: IMG_2282.jpg Graphic file (type jpg)
+<use IMG_2282.jpg>
+Package pdftex.def Info: IMG_2282.jpg  used on input line 122.
+(pdftex.def)             Requested size: 375.82602pt x 134.81152pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+<IMG_2283.jpg, id=31, 4024.03375pt x 1256.695pt>
+File: IMG_2283.jpg Graphic file (type jpg)
+<use IMG_2283.jpg>
+Package pdftex.def Info: IMG_2283.jpg  used on input line 136.
+(pdftex.def)             Requested size: 402.42696pt x 125.67685pt.
+[5 <./IMG_2282.jpg> <./IMG_2283.jpg>]
+Overfull \hbox (10.98395pt too wide) detected at line 167
+[]
+ []
+
+[6] [7] (./car.aux) ) 
 Here is how much of TeX's memory you used:
- 2634 strings out of 492649
- 36125 string characters out of 6129622
+ 2659 strings out of 492649
+ 36520 string characters out of 6129622
  104478 words of memory out of 5000000
- 6480 multiletter control sequences out of 15000+600000
+ 6500 multiletter control sequences out of 15000+600000
  9198 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,10n,27p,472b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -281,10 +318,10 @@ cmr6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
 fb>
-Output written on car.pdf (4 pages, 1311404 bytes).
+Output written on car.pdf (7 pages, 5868614 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

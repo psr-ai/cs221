@@ -72,7 +72,14 @@ that all of this is my own work.
   \item 
   \textbf{Step1: Remove variables that are not ancestors} \\
   \textbf{Step2: Converting to factor graph} \\
+  Step 1 and step 2 are illustrated below:
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2279.jpg}
+  \end{center}
   \textbf{Step3: Conditioning on $D_3 = 1$} \\
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2280.jpg}
+  \end{center}
   Conditioning on variable $D_3$, and replacing it with a factor cond$_{D_3 = 1}(C_3)$, we get
   \begin{center}
   \begin{tabular}{ll}
@@ -81,7 +88,10 @@ that all of this is my own work.
   $1-\eta$               & 1       \\
   \end{tabular} \newline \\
   \end{center}
-  \textbf{Step4: Eliminating $C_3$} \\
+  \textbf{Step4: Eliminating $C_3$}
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2281.jpg}
+  \end{center}
   Defining function elim$_{C_3}(C_2)$ in order to eliminate node $C_3$ as
   \begin{align*}
   \text{elim}_{C_3}(C_2) = \sum_{C_3} \text{cond}_{D_3 = 1}(C_3) p(C_3/C_2)
@@ -106,24 +116,54 @@ that all of this is my own work.
   1  & $\epsilon \eta + (1- \eta) (1 - \epsilon)$ 
   \end{tabular}
   \end{center}
-  \textbf{Step5: Combining all factors of $C_2$} \\
-  The other distribution which depends on is $p(D_2 = 1 / C_2)$, which can be conditioned as cond$_{D_2 = 0}(C_2)$, given by:
+  
+  \textbf{Step5: Conditioning on $D_2 = 0$} \\
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2282.jpg}
+  \end{center}
+  Condition variable $D_2$ on value $D_2 = 0$, replacing it with a factor cond$_{D_2 = 0}(C_2)$, we get
   \begin{center}
   \begin{tabular}{ll}
-  $C_2$ & cond$_{D_2 = 0}(C_2)$                               \\
-  0  & $1 - \eta$   \\
-  1  & $\eta$ 
-  \end{tabular}
-  \end{center}
-  Multiplying elim$_{C_3}(C_2)$ and cond$_{D_2 = 0}(C_2)$: \\ \\
-  \begin{tabular}{ll}
-  $C_2$ & elim$_{C_3}(C_2)$                               \\
-  0  & $((1 - \epsilon) \eta + \eta (1- \epsilon)) (1 - \eta)$   \\
-  1  & $(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta$ 
+  cond$_{D_2 = 0}(C_2)$ & $C_2$  \\
+  $1-\eta$            & 0       \\
+  $\eta$               & 1       \\
   \end{tabular} \newline \\
+  \end{center}
+  
+  
+  \textbf{Step6: Eliminate $C_1$} \\
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2283.jpg}
+  \end{center}
+  \begin{align*}
+	elim_{C_1}(C_2) &= \sum_{C_1} p(C_1) p(C_2/C_1) \\
+	&= 0.5 \sum_{C_1} p(C_2/C_1)
+  \end{align*}
+  This is given from the below table:
+  \begin{center}
+  \begin{tabular}{ll}
+  elim$_{C_1}(C_2)$ & $C_2$  \\
+  $0.5(1-\epsilon + \epsilon) = 0.5$            & 0       \\
+  $0.5(\epsilon + 1-\epsilon) = 0.5$               & 1       \\
+  \end{tabular} \newline \\
+  \end{center}
+  
+  \textbf{Step7: Combining all factors of $C_2$} \\
+    Therefore, now that we know elim$_{C_1}(C_2)$, cond$_{D_2 = 0} (C_2)$ and elim$_{C_3}(C_1)$,
+  \begin{align*}
+  p(C_2/ D_2 = 0, D_3 = 1) &= \text{elim}_{C_1}(C_2) * \text{cond}_{D_2 = 0} (C_2) * \text{elim}_{C_3}(C_2)
+  \end{align*}
+  \begin{center}
+  \begin{tabular}{ll}
+  $p(C_2/ D_2 = 0, D_3 = 1)$ & $C_2$  \\
+  $0.5((1 - \epsilon) \eta + \eta (1- \epsilon)) (1 - \eta)$            & 0       \\
+  $0.5(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta$               & 1       \\
+  \end{tabular} \newline \\
+  \end{center}
   Therefore, 
   \begin{align*}
-  P(C_2 = 1/D_2 = 0, D_3 = 1) = \frac{(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta}{(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta + ((1 - \epsilon) \eta + \epsilon (1- \eta)) (1 - \eta)}
+  P(C_2 = 1/D_2 = 0, D_3 = 1) &= \frac{0.5 (\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta}{0.5(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta + 0.5 ((1 - \epsilon) \eta + \epsilon (1- \eta)) (1 - \eta)} \\
+  &= \frac{(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta}{(\epsilon \eta + (1- \eta) (1 - \epsilon)) \eta + ((1 - \epsilon) \eta + \epsilon (1- \eta)) (1 - \eta)}
   \end{align*}
   \item
   \begin{enumerate}[label=\roman*.]
