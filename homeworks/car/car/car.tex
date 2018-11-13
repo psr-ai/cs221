@@ -19,9 +19,16 @@ that all of this is my own work.
 
 \begin{enumerate}[label=(\alph*)]
   \item 
-  \textbf{Step1: Remove variables that are not ancestors} \\
-  \textbf{Step2: Converting to factor graph} \\
+  \textbf{Step 1: Remove variables that are not ancestors} \\
+  \textbf{Step 2: Converting to factor graph} \\
+  Step 1 and step 2 are shown in diagram below:
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2276}
+  \end{center}
   \textbf{Step3: Conditioning on $D_2 = 0$} \\
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2278.jpg}
+  \end{center}
   Condition variable $D_2$ on value $D_2 = 0$, replacing it with a factor cond$_{D_2 = 0}(C_2)$, we get
   \begin{center}
   \begin{tabular}{ll}
@@ -30,7 +37,38 @@ that all of this is my own work.
   $\eta$               & 1       \\
   \end{tabular} \newline \\
   \end{center}
-  Therefore, from the above table, $p(C_2 = 1/ D_2 = 0) = \eta$
+  \textbf{Step4: Eliminate $C_1$} \\
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2277.jpg}
+  \end{center}
+  \begin{align*}
+	elim_{C_1}(C_2) &= \sum_{C_1} p(C_1) p(C_2/C_1) \\
+	&= 0.5 \sum_{C_1} p(C_2/C_1)
+  \end{align*}
+  This is given from the below table:
+  \begin{center}
+  \begin{tabular}{ll}
+  elim$_{C_1}(C_2)$ & $C_2$  \\
+  $0.5(1-\epsilon + \epsilon) = 0.5$            & 0       \\
+  $0.5(\epsilon + 1-\epsilon) = 0.5$               & 1       \\
+  \end{tabular} \newline \\
+  \end{center}
+  Therefore, now that we know elim$_{C_1}(C_2)$ and cond$_{D_2 = 0} (C_2)$,
+  \begin{align*}
+  p(C_2/ D_2 = 0) &= \text{elim}_{C_1}(C_2) * \text{cond}_{D_2 = 0} (C_2)
+  \end{align*}
+  \begin{center}
+  \begin{tabular}{ll}
+  $p(C_2/ D_2 = 0)$ & $C_2$  \\
+  $0.5 (1-\eta)$            & 0       \\
+  $0.5 \eta$               & 1       \\
+  \end{tabular} \newline \\
+  \end{center}
+  Hence, the given query,
+  \begin{align*}
+  p(C_2 = 1/ D_2 = 0) &= \frac{0.5 \eta}{0.5 \eta + 0.5 (1-\eta)} \\
+  &= \eta
+  \end{align*}
   \item 
   \textbf{Step1: Remove variables that are not ancestors} \\
   \textbf{Step2: Converting to factor graph} \\
