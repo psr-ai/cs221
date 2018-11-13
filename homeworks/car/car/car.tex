@@ -179,10 +179,19 @@ that all of this is my own work.
   \end{enumerate}
 \end{enumerate}
 
-\section*{Problem 2}
+\section*{Problem 5}
 
 \begin{enumerate}[label=(\alph*)]
-  \item (your solution)
+  \item Simplifying the equation $P (C_{11}, C_{12} | E_1 = e_1)$ using the Bayes Theorem, we have
+  \begin{align*}
+  P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1 | C_{12}/E_1 = e_1) * P(C_{12}/E_1 = e_1)
+  \end{align*}
+  Since the location of both the cars are independent of each other ($C_{11}$ doesn't depend in any way on $C_{12}$ and vice versa), therefore, $C_{11}/E_1 = e_1$ and $C_{12}/E_1 = e_1$ are independent events.
+    \begin{align*}
+  P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1 | C_{12}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
+  &= P(C_{11}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
+  &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2)
+  \end{align*}
   \item (your solution)
 \end{enumerate}
 
