@@ -182,17 +182,29 @@ that all of this is my own work.
 \section*{Problem 5}
 
 \begin{enumerate}[label=(\alph*)]
-  \item Simplifying the equation $P (C_{11}, C_{12} | E_1 = e_1)$ using the Bayes Theorem, we have
+  \item Simplifying the equation $P (C_{11}, C_{12} | E_1)$ using the Bayes Theorem, we have
   \begin{align*}
-  P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1 | C_{12}/E_1 = e_1) * P(C_{12}/E_1 = e_1)
+  P (C_{11}, C_{12} | E_1) &= P(C_{11}/E_1| C_{12}/E_1) * P(C_{12}/E_1)
   \end{align*}
-  Since the location of both the cars are independent of each other ($C_{11}$ doesn't depend in any way on $C_{12}$ and vice versa), therefore, $C_{11}/E_1 = e_1$ and $C_{12}/E_1 = e_1$ are independent events.
+  Since the location of both the cars are independent of each other ($C_{11}$ doesn't depend in any way on $C_{12}$ and vice versa), therefore, $C_{11}/E_1$ and $C_{12}/E_1$ are independent events.
+  \begin{align*}
+  P (C_{11}, C_{12} | E_1) &= P(C_{11}/E_1) * P(C_{12}/E_1)
+  \end{align*}
+  For the given question, we have to compute $P(C_{11}, C_{12} / E_1 = e_1)$. This means we are given a permutation $e_1$ out of possible domain values of $E_1$, which means observed distance of car 1 is $e_{11}$ and observed distance of car 2 is $e_{12}$.
     \begin{align*}
-  P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1 | C_{12}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
-  &= P(C_{11}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
-  &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2)
+  P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
+  &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) * p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2)
   \end{align*}
-  \item (your solution)
+  \item As per the solution in 5a, the joint probability would be defined as
+  \begin{align*}
+  &P (C_{11} = c_{11}, C_{12} = c_{12} ... C_{1K} = c_{1k} | E_1 = e_1) \\ &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) * p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2) ... p(c_{1K}) p_N (e_{1K}, || a_1 - c_{1K} ||, \sigma^2) \\
+& \propto p(c_{1i})^K \prod_{j=1}^{K} p_N(e_{1j}, || a_1 - c_{1j} ||, \sigma^2)
+  \end{align*}
+  Since $e_1$ is a set of different readings $(e_{11}, e_{12} ... e_{1k})$ and any reading can be related to any one of the cars, therefore, in order to find the maximum value of the above equation, the minimum number of assignments to find maximum probability would be the total number of possible permutations of $(e_{11}, e_{12} ... e_{1k})$. For each permutation, we can compute the value of the above product and find out the permutation for which the product is the maximum. Therefore, permutations of $(e_{11}, e_{12} ... e_{1k})$ is: $e_{11}$ can be assigned in $k$ ways, $e_{12}$ can be assigned in $k-1$ ways and so on. Therefore, 
+  \begin{align*}
+  \textbf{Minimum assignments} &= k * (k-1) * (k-2) ... (2) (1) \\
+  &= k!
+\end{align*}
 \end{enumerate}
 
 \end{document}
