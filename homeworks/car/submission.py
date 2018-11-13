@@ -75,12 +75,12 @@ class ExactInference(object):
     def elapseTime(self):
         if self.skipElapse: return ### ONLY FOR THE GRADER TO USE IN Problem 2
         # BEGIN_YOUR_CODE (our solution is 7 lines of code, but don't worry if you deviate from this)
-        old_probabilities = [row[:] for row in self.belief.grid]
+        old_posterior = [row[:] for row in self.belief.grid]
         for row in range(self.belief.getNumRows()):
             for col in range(self.belief.getNumCols()):
                 self.belief.setProb(row, col, 0)  # if no value present in self.transProb, default probability to 0
         for ([row, column], new_tile), value in self.transProb.items():
-            self.belief.addProb(new_tile[0], new_tile[1], value * old_probabilities[row][column])
+            self.belief.addProb(new_tile[0], new_tile[1], value * old_posterior[row][column])
         self.belief.normalize()
         # END_YOUR_CODE
 
