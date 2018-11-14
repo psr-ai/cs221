@@ -205,6 +205,31 @@ that all of this is my own work.
   \textbf{Minimum assignments} &= k * (k-1) * (k-2) ... (2) (1) \\
   &= k!
 \end{align*}
+\item Converting to factor graph, it would look like the following for the posterior distribution over all K car locations at all T time steps conditioned on all sensor readings:
+  \begin{center}
+  \includegraphics[scale=0.1]{IMG_2298}
+  \end{center}
+  
+ \item In order to compute $p(c_{ti}/e_1, e_2, ... e_t)$, this would be a smoothening query in HMM. Domain of $C_{ti}$ would be the number of readings we get since those are exact values with equal probability of being assigned to $C_{ti}$, therefore has the domain $\{D_{t1}, D_{t2}, D_{t3} ... D_{tK}\}$. Following would be the lattice representation of this scenario:
+   \begin{center}
+  \includegraphics[scale=0.1]{IMG_2299}
+  \end{center}
+  We are interested in calculating the total number of paths which will pass through a particular value of $C_{ti}$, let's assume $D_{t1}$. This can be solved through Forward-Backward algorithm. \\ \\
+  \textbf{Forward}
+  \begin{align*}
+  F_i(h_i) &= \sum_{c_{(t-1)i}} F_{i-1}(c_{(t-1)i}) w(c_{(t-1)i}, c_{ti})
+  \end{align*}
+  \textbf{Backward}
+  \begin{align*}
+  B_i(h_i) &= \sum_{c_{(t+1)i}} B_{i+1}(c_{(t+1)i}) w(c_{ti}, c_{(t+1)i})
+  \end{align*}
+  Finally we define $S_{i}(c_{ti}) = F_i(h_i) B_i(h_i)$, since it would be the sum of weights of paths from start to end. Finally we would normalise over the sum of the weights of all the possible paths from start to end.
+  
+  The algorithm would be as follows: \\
+  Compute $F_1, F_2, F_3, ... F_t$ \\
+  Compute $B_t, B_{t-1} ... B_{1}$ \\
+  Compute $S_i$ for each $i$ and normalise.
+ 
 \end{enumerate}
 
 \end{document}
