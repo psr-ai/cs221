@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  15 NOV 2018 03:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  15 NOV 2018 03:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -309,7 +309,7 @@ File: IMG_2298.jpg Graphic file (type jpg)
 Package pdftex.def Info: IMG_2298.jpg  used on input line 210.
 (pdftex.def)             Requested size: 207.58766pt x 243.72478pt.
 [7]
-Overfull \hbox (6.13028pt too wide) in paragraph at lines 213--214
+Overfull \hbox (6.13028pt too wide) in paragraph at lines 214--215
 \OT1/cmr/m/n/12 equal prob-a-bil-ity of be-ing as-signed to $\OML/cmm/m/it/12 C
 []$\OT1/cmr/m/n/12 , there-fore has the do-main $\OMS/cmsy/m/n/12 f\OML/cmm/m/i
 t/12 D[]; D[]; D[]:::D[]\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 .
@@ -318,10 +318,10 @@ t/12 D[]; D[]; D[]:::D[]\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 .
 <IMG_2299.jpg, id=44, 3754.025pt x 1342.01375pt>
 File: IMG_2299.jpg Graphic file (type jpg)
 <use IMG_2299.jpg>
-Package pdftex.def Info: IMG_2299.jpg  used on input line 215.
+Package pdftex.def Info: IMG_2299.jpg  used on input line 216.
 (pdftex.def)             Requested size: 375.4245pt x 134.20923pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--219
+Underfull \hbox (badness 10000) in paragraph at lines 218--220
 
  []
 
@@ -347,7 +347,7 @@ nts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb>
-Output written on car.pdf (9 pages, 8439124 bytes).
+Output written on car.pdf (9 pages, 8440211 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
