@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  15 NOV 2018 03:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.27)  15 NOV 2018 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -299,58 +299,71 @@ Overfull \hbox (10.98395pt too wide) detected at line 167
  []
 
 [6]
-Overfull \hbox (33.30019pt too wide) detected at line 202
+<IMG_2302.jpg, id=39, 1809.76125pt x 2325.68875pt>
+File: IMG_2302.jpg Graphic file (type jpg)
+<use IMG_2302.jpg>
+Package pdftex.def Info: IMG_2302.jpg  used on input line 200.
+(pdftex.def)             Requested size: 180.98672pt x 232.5825pt.
+
+Overfull \hbox (33.30019pt too wide) detected at line 206
 []
  []
 
-<IMG_2298.jpg, id=39, 2075.755pt x 2437.105pt>
+[7 <./IMG_2302.jpg>]
+<IMG_2298.jpg, id=44, 3831.31375pt x 2838.605pt>
 File: IMG_2298.jpg Graphic file (type jpg)
 <use IMG_2298.jpg>
-Package pdftex.def Info: IMG_2298.jpg  used on input line 210.
-(pdftex.def)             Requested size: 207.58766pt x 243.72478pt.
-[7]
-Overfull \hbox (6.13028pt too wide) in paragraph at lines 214--215
+Package pdftex.def Info: IMG_2298.jpg  used on input line 214.
+(pdftex.def)             Requested size: 383.15382pt x 283.87712pt.
+
+Overfull \hbox (55.29956pt too wide) in paragraph at lines 216--217
+\OT1/cmr/m/n/12 Even when we start elim-i-nat-ing vari-ables along the $\OML/cm
+m/m/it/12 D[]; C[]; :::C[]; D[]; ::::D[]; C[]; :::C[]; D[]$\OT1/cmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (6.13028pt too wide) in paragraph at lines 217--218
 \OT1/cmr/m/n/12 equal prob-a-bil-ity of be-ing as-signed to $\OML/cmm/m/it/12 C
 []$\OT1/cmr/m/n/12 , there-fore has the do-main $\OMS/cmsy/m/n/12 f\OML/cmm/m/i
 t/12 D[]; D[]; D[]:::D[]\OMS/cmsy/m/n/12 g$\OT1/cmr/m/n/12 .
  []
 
-<IMG_2299.jpg, id=44, 3754.025pt x 1342.01375pt>
+<IMG_2299.jpg, id=45, 3754.025pt x 1342.01375pt>
 File: IMG_2299.jpg Graphic file (type jpg)
 <use IMG_2299.jpg>
-Package pdftex.def Info: IMG_2299.jpg  used on input line 216.
+Package pdftex.def Info: IMG_2299.jpg  used on input line 219.
 (pdftex.def)             Requested size: 375.4245pt x 134.20923pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 218--220
+[8 <./IMG_2298.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 221--223
 
  []
 
-[8 <./IMG_2298.jpg> <./IMG_2299.jpg>] [9] (./car.aux) ) 
+[9 <./IMG_2299.jpg>] (./car.aux) ) 
 Here is how much of TeX's memory you used:
- 2673 strings out of 492649
- 36716 string characters out of 6129622
+ 2678 strings out of 492649
+ 36795 string characters out of 6129622
  105478 words of memory out of 5000000
- 6510 multiletter control sequences out of 15000+600000
+ 6514 multiletter control sequences out of 15000+600000
  9819 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,10n,27p,685b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2018/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb>
-Output written on car.pdf (9 pages, 8440211 bytes).
+ 41i,10n,27p,666b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy8.pfb>
+Output written on car.pdf (9 pages, 10117391 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
+ 93 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

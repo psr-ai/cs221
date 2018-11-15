@@ -195,12 +195,16 @@ that all of this is my own work.
   P (C_{11}, C_{12} | E_1 = e_1) &= P(C_{11}/E_1 = e_1) * P(C_{12}/E_1 = e_1) \\
   &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) * p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2)
   \end{align*}
+  Here's what the Baysein Network would look like:
+     \begin{center}
+  \includegraphics[scale=0.1]{IMG_2302}
+  \end{center}
   \item As per the solution in 5a, the joint probability would be defined as
   \begin{align*}
   &P (C_{11} = c_{11}, C_{12} = c_{12} ... C_{1K} = c_{1k} | E_1 = e_1) \\ &\propto p(c_{11})p_N (e_{11}, || a_1 - c_{11} ||, \sigma^2) * p(c_{12})p_N (e_{12}, || a_1 - c_{12} ||, \sigma^2) ... p(c_{1K}) p_N (e_{1K}, || a_1 - c_{1K} ||, \sigma^2) \\
 & \propto p(c_{1i})^K \prod_{j=1}^{K} p_N(e_{1j}, || a_1 - c_{1j} ||, \sigma^2)
   \end{align*}
-  Since $e_1$($(e_{11}, e_{12} ... e_{1k})$) is one set of readings from the list of all readings in $E_1$, therefore, in order to find the maximum value of the above equation, the minimum number of assignments to find maximum probability would be the total number of possible permutations of different distances observed, namely $(D_{11}, D_{12} ... D_{1k})$ which are in $E_1$. For each permutation, we can compute the value of the above product and find out the permutation for which the product is the maximum. Therefore, permutations of $(D_{11}, D_{12} ... D_{1k})$ is: $D_{11}$ can be assigned in $k$ ways, $D_{12}$ can be assigned in $k-1$ ways and so on. Therefore, 
+  Since $e_1$($(e_{11}, e_{12} ... e_{1k})$) is one set of readings from the list of all readings in $E_1$, therefore, in order to find the maximum value of the above equation, the minimum number of assignments to find maximum probability would be the total number of possible permutations of different distances observed, namely $(D_{11}, D_{12} ... D_{1k})$. For each permutation, we can compute the value of the above product and find out the permutation for which the product is the maximum. Therefore, permutations of $(D_{11}, D_{12} ... D_{1k})$ is: $D_{11}$ can be assigned in $k$ ways, $D_{12}$ can be assigned in $k-1$ ways and so on. Therefore, 
   \begin{align*}
   \textbf{Minimum assignments} &= k * (k-1) * (k-2) ... (2) (1) \\
   &= k!
@@ -209,8 +213,7 @@ that all of this is my own work.
   \begin{center}
   \includegraphics[scale=0.1]{IMG_2298}
   \end{center}
-  There can be two possible tree widths depending on values of T and K. If K $>$ T, then tree width would be T, else if K $<$ T, then it would be K. Basically whichever value is smaller, would be the tree width based on best variable ordering. \\
-  If K is larger than T, then eliminating $c_{11}, c_{21} ... c_{T1}$, $c_{12}, c_{22} ... c_{T2}$ and so on would create K factors linked with all $E_1$ to $E_T$, which would give us the arity to be T. In the other case if T is larger than K, we would simply eliminate $E_1$ to $E_T$, getting factors with arity $K$.
+  Even when we start eliminating variables along the $D_{11}, C_{11}, ... C_{T1}, D_{T1}, .... D_{1K}, C_{1K}, ... C_{TK}, D_{TK}$, we will still have factors with maximum arity as $K$ which are connected with every $E_t$ where $t$ varies from $1$ to $T$. Therefore, the tree width of this factor graph is $K$.
  \item In order to compute $p(c_{ti}/e_1, e_2, ... e_t)$, this would be a smoothening query in HMM. Domain of $C_{ti}$ would be the number of readings we get since those are exact values with equal probability of being assigned to $C_{ti}$, therefore has the domain $\{D_{t1}, D_{t2}, D_{t3} ... D_{tK}\}$. Following would be the lattice representation of this scenario:
    \begin{center}
   \includegraphics[scale=0.1]{IMG_2299}
