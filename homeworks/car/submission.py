@@ -46,7 +46,12 @@ class ExactInference(object):
 
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        def distance(p1, p2): return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+        for i in range(self.belief.getNumCols()):
+            for j in range(self.belief.getNumRows()):
+                    emission_probability = util.pdf(distance((util.colToX(i), util.rowToY(j)), (agentX, agentY)), Const.SONAR_STD, observedDist)
+                    self.belief.setProb(j, i, self.belief.getProb(j, i) * emission_probability)
+        self.belief.normalize()
         # END_YOUR_CODE
 
     ##################################################################################
@@ -70,7 +75,13 @@ class ExactInference(object):
     def elapseTime(self):
         if self.skipElapse: return ### ONLY FOR THE GRADER TO USE IN Problem 2
         # BEGIN_YOUR_CODE (our solution is 7 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        old_posterior = [row[:] for row in self.belief.grid]
+        for row in range(self.belief.getNumRows()):
+            for col in range(self.belief.getNumCols()):
+                self.belief.setProb(row, col, 0)  # if no value present in self.transProb, default probability to 0
+        for ([row, column], new_tile), value in self.transProb.items():
+            self.belief.addProb(new_tile[0], new_tile[1], value * old_posterior[row][column])
+        self.belief.normalize()
         # END_YOUR_CODE
 
     # Function: Get Belief
@@ -165,7 +176,25 @@ class ParticleFilter(object):
     ##################################################################################
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 22 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        def distance(p1, p2): return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+        # Re-weight: creating dictionary of form particle => new weights
+        new_weight_distribution = {}
+        total = 0.0
+        for particle in self.particles:
+            row = particle[0]
+            col = particle[1]
+            mean = distance((util.colToX(col), util.rowToY(row)), (agentX, agentY))
+            new_weight = self.particles[particle] * util.pdf(mean, Const.SONAR_STD, observedDist)
+            new_weight_distribution[particle] = new_weight
+            total += new_weight
+        # normalizing
+        for particle in new_weight_distribution:
+            new_weight_distribution[particle] = new_weight_distribution[particle] / total
+        # Re-sample: updating current particles dictionary with updated weight sampling
+        self.particles = collections.defaultdict(int)
+        for _ in range(self.NUM_PARTICLES):
+            new_particle = util.weightedRandomChoice(new_weight_distribution)
+            self.particles[new_particle] += 1
         # END_YOUR_CODE
 
         self.updateBelief()
@@ -195,7 +224,13 @@ class ParticleFilter(object):
     ##################################################################################
     def elapseTime(self):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
-        raise Exception("Not implemented yet")
+        particles = collections.defaultdict(int)
+        for tile in self.particles:
+            transition_distribution = self.transProbDict[tile] if tile in self.transProbDict else None
+            for _ in range(self.particles[tile]):
+                new_tile = util.weightedRandomChoice(transition_distribution)
+                particles[new_tile] += 1
+        self.particles = particles
         # END_YOUR_CODE
 
     # Function: Get Belief
