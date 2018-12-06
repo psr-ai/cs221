@@ -1,0 +1,8 @@
+Guitar Chords Recognition (Renner Lucena)
+This project tries to recognise the guitar chords based on sound input, so that Renner does not have to scroll the screen manually while playing one. I found this particularly interesting as I myself am a guitar player and have faced similar situations. Moreover, there can be another use case where we can tune the guitar using this project too.
+
+AskMD - A Knowledge System (David J. Longo)
+This project talks about the application of Artificial Intelligence in the medical domain, particularly learning information from corpus and answering biological and clinical questions. I believe this project is really helpful moving forward, as this would help providing quick and real time diagnosis to patients.
+
+PUBG Finish Placement Prediction Challenge (Apoorv Chaudhary)
+Personally, being a frequent PUBG player pulled me towards this poster. Being able to predict what position I'll come in the next game seems very cool, particularly when playing with bunch of friends. I see that Apoorv is able to get a bery low mean absolute error and close to that of the leaderboard, which makes me believe that finish placements are predictable.
