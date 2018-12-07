@@ -165,7 +165,16 @@ def ints():
     formulas = []
     query = None
     # BEGIN_YOUR_CODE (our solution is 30 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+
+    def is_unique(variable_name, equation):
+        return Exists(variable_name, Forall('$t$', Equiv(equation('$t$'), Equals(variable_name, '$t$'))))
+
+    formulas.append(Forall('$x$', is_unique('$y$', lambda t: And(Successor('$x$', t), Not(Equals('$x$', t))))))
+    formulas.append(Forall('$x$', Xor(Odd('$x$'), Even('$x$'))))
+    formulas.append(Forall('$x$', Forall('$y$', Implies(And(Even('$x$'), Successor('$x$', '$y$')), Odd('$y$')))))
+    formulas.append(Forall('$x$', Forall('$y$', Implies(And(Odd('$x$'), Successor('$x$', '$y$')), Even('$y$')))))
+    formulas.append(Forall('$x$', Forall('$y$', Implies(Successor('$x$', '$y$'), Larger('$y$', '$x$')))))
+    formulas.append(Forall('$x$', Forall('$y$', Forall('$z$', Implies(And(Larger('$x$', '$y$'), Larger('$y$', '$z$')), Larger('$x$', '$z$'))))))
     # END_YOUR_CODE
     query = Forall('$x', Exists('$y', And(Even('$y'), Larger('$y', '$x'))))
     return (formulas, query)
