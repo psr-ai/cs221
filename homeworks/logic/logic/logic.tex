@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+
+\begin{document}
+
+\begin{center}
+{\Large CS221 Fall 2018 Homework [logic]}
+
+\begin{tabular}{rl}
+SUNet ID: & prabhjot \\
+Name: & Prabhjot Singh Rai
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Problem 4}
+
+\begin{enumerate}[label=(\alph*)]
+  \item In order to convert the knowledge base into conjunctive normal form (CNF), we can follow the following steps:
+  \begin{align*}
+  KB &= \{ (A \lor B ) \rightarrow C, A\} \\
+  &= \{ \neg (A \lor B) \lor C, A \ \} && \text{Eliminating Implications} \\
+  &= \{ (\neg A \land \neg B) \lor C, A \} && \text{Push $\neg$ inwards} \\
+  &= \{ ( \neg A \lor C ) \land ( \neg B \lor C ), A \} && \text{Distribute $\lor$ C} \\
+  &= \{ ( \neg A \lor C ) \land ( \neg B \lor C ), A, \neg A \lor C, \neg B \lor C \} && \text{If A $\land$ B is in the knowledge base, } \\
+  &   && \text{then we can derive both A and  B} \\
+  &= \{ ( \neg A \lor C ) \land ( \neg B \lor C ), A, A \rightarrow C, \neg B \lor C \} && \text{If A $\land$ B is in the knowledge base, } \\
+  \end{align*}
+  By Modus ponens inference rule, when we have $A$ and $A \rightarrow C$ in our knowledge base, we can derive the following:
+  \begin{align*}
+  \frac{A, A \rightarrow C}{C}
+  \end{align*}
+  Hence, C is derived:
+  \begin{align*}
+  &= \{ ( \neg A \lor C ) \land ( \neg B \lor C ), A, A \rightarrow C, \neg B \lor C, C \} &&
+  \end{align*}
+  \item The steps would be the following:
+  \begin{align*}
+  KB &= \{ A \lor B, B \rightarrow C, ( A \lor C) \rightarrow D \} \\
+  &= \{ A \lor B, \neg B \lor  C, \neg ( A \lor C) \lor D \} && \text{Eliminating Implications} \\
+  &= \{ A \lor B, \neg B \lor  C, ( \neg A \land \neg C) \lor D \} && \text{Push $\neg$ inwards} \\
+  &= \{ A \lor B, \neg B \lor  C, ( \neg A \lor D ) \land ( \neg C \lor D ) \} && \text{Distribute $\lor$ D} \\
+  &= \{ A \lor B, \neg B \lor  C, ( \neg A \lor D ) \land ( \neg C \lor D ), ( \neg A \lor D ), ( \neg C \lor D ) \} && \text{If A $\land$ B is in the knowledge base,} \\
+  &   && \text{then we can derive both A and  B} \\
+  \end{align*}
+  By resolution, we can use $A \lor B, \neg A \lor D$, we can derive $B \lor D$
+  \begin{align*}
+  \frac{A \lor B, \neg A \lor D}{B \lor D}
+  \end{align*}
+  Similarly, by resolution, we can use $\neg B \lor C, B \lor D$ to derive $C \lor D$
+  \begin{align*}
+    \frac{\neg B \lor C, B \lor D}{C \lor D}
+  \end{align*}
+  Hence, new knowledge base would be:
+  \begin{align*}
+  &= \{ A \lor B, \neg B \lor  C, ( \neg A \lor D ) \land ( \neg C \lor D ), ( \neg A \lor D ), ( \neg C \lor D ), B \lor D, C \lor D \}
+  \end{align*}
+  We can use resolution again on $\neg C \lor D $ and $C \lor D$ to derive $D$:
+  \begin{align*}
+  \frac{\neg C \lor D , C \lor D}{D}
+  \end{align*}
+  Final knowledge base:
+  \begin{align*}
+&= \{ A \lor B, \neg B \lor  C, ( \neg A \lor D ) \land ( \neg C \lor D ), ( \neg A \lor D ), ( \neg C \lor D ), B \lor D, C \lor D, D \}
+  \end{align*}
+  Hence, $D$ is derived.
+\end{enumerate}
+
+\section*{Problem 5}
+
+\begin{enumerate}[label=(\alph*)]
+  \addtocounter{enumi}{1}
+  \item According to constraint 1, constraint 3 and constraint 4, every number has one and only one successor, which is odd if number is even and is even if the number is odd. Therefore, the number of odd and even numbers should be equal in our model to satisfy both the constraints, hence for models having odd number of finite numbers the set of 7 constraints is not consistent. \\ \\
+  \textbf{For 2n integers, where n even integers and n odd integers:} \\
+  \begin{align*}
+  n_{e1}, n_{e2}, n_{e3} ... n_{en}, n_{o1}, n_{o2}, n_{o3} ... n_{on}
+  \end{align*}
+  Starting with finding successor of $n_{e1}$, let the successor be $n_{ok}$, where k is an integer from $1, 2, 3 ... n$. By constraint 5, $n_{ok}$ is larger than $n_{e1}$. \\
+  
+  Finding successor of $n_{ok}$, let the successor be $n_{el}$, where l is an integer from $1, 2, 3, ... n$. By constraint 5, $n_{el}$ is larger than $n_{ok}$. \\
+  
+  By constraint 6, $n_{el}$ is larger than $n_{e1}$. This means there exists an even number($n_{el}$) larger than $n_{e1}$. Further, there exists an odd number larger than $n_{el}$, let's assume $n_{op}$, and again by constraint 6, $n_{op}$ is larger than $n_{e1}$. (.... $1$) \\
+  
+  Since the number of odd and even numbers are same, and every number has to have a successor, every number will also be a successor of some number in the finite model. Therefore, there exists a number for which $n_{e1}$ is a successor. Let the number be $n_{ot}$, where t is some number from $1, 2, 3, ... n$ (t is one of the odd numbers out of the odd numbers in the finite model). (.... $2$) \\
+  
+  Since it is a finite model, there would exist an instance when $n_{op}$ is equal to $n_{ot}$ (p is equal to t). Therefore, from $1$, $n_{ot}$ is larger than $n_{e1}$. Also, from 2, successor of $n_{ot}$ is $n_{e1}$. Therefore, $n_{e1}$ is larger than $n_{ot}$. From constraint 6, $n_{e1}$ is larger than $n_{e1}$. But this contradicts our 7th constraint that a number is not larger than itself. Hence there exists no finite model for which the resulting set of constraints is consistent.
+\end{enumerate}
+
+\end{document}

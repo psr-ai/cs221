@@ -196,17 +196,18 @@ def createRule1():
     # Return a GrammarRule for 'every $Noun $Verb some $Noun'
     # Note: universal quantification should be outside existential quantification.
     # BEGIN_YOUR_CODE (our solution is 3 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    return GrammarRule('$Clause', ['every', '$Noun', '$Verb', 'some', '$Noun'], lambda args: Forall('$x', Implies(Atom(args[0].title(), args[1].lower(), '$x'), Atom(args[2].title(), '$x'))))
     # END_YOUR_CODE
 
 def createRule2():
     # Return a GrammarRule for 'there is some $Noun that every $Noun $Verb'
     # BEGIN_YOUR_CODE (our solution is 3 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    return GrammarRule('$Clause', ['there', 'is', 'some', '$Noun', 'that', 'every', '$Noun', '$Verb'], lambda args: Forall('$x', Implies(Atom(args[1].title(), args[2].lower(), '$x'), Exists('$y', Atom(args[0].title(), '$y')))))
     # END_YOUR_CODE
 
 def createRule3():
     # Return a GrammarRule for 'if a $Noun $Verb a $Noun then the former $Verb the latter'
     # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
-    raise Exception("Not implemented yet")
+    return GrammarRule('$Clause', ['if', 'a', '$Noun', '$Verb', 'a',
+                                   '$Noun', 'then', 'the', 'former', '$Verb','the', 'latter'], lambda args: Implies(Atom(args[0].title(), args[1].lower(), args[2].lower()), Atom(args[0].title(), args[3].lower(), args[2].lower())))
     # END_YOUR_CODE
